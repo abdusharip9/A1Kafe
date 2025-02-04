@@ -1,0 +1,27 @@
+#contact {
+	height: 600px;
+}
+.hide {
+	display: none;
+}
+.show {
+	display: block;
+}
+@media screen and (max-width: 576px) {
+	#alertStatus {
+		width: 90%;
+		right: none;
+	}
+	form label:focus {
+		font-size: 1px;
+	}
+	#topNav {
+		justify-content: space-evenly !important;
+	}
+	#navLogo {
+		display: none !important;
+	}
+}
+.text-align-center {
+	text-align: center;
+}

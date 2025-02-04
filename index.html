@@ -5,41 +5,31 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-	<link rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.0/font/bootstrap-icons.min.css"
-		integrity="sha512-rDTlSC+d3sQQeTwkSYI7grcqLTrDZjOEEddzt/7IRA+9Q7x1Zud4j++lH29VSlNrTI0RZ/9d45X6qrFK0RD94w=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="plugins/bootstrap-icons/bootstrap.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link href="plugins/fontawesome/css/fontawesome.css" rel="stylesheet" />
+	<link href="plugins/fontawesome/css/brands.css" rel="stylesheet" />
+	<link href="plugins/fontawesome/css/solid.css" rel="stylesheet" />
 
 </head>
 
 <body>
 	<div class="mt-2 hide" id="alertStatus" style="position: fixed; top: 10px; right: 20px; z-index: 50;">
 	</div>
-	<div class="container py-3">
+	<div class="container">
 		<!-- Header / Nav -->
-		<header
-			class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-			<div class="col-md-3 mb-2 mb-md-0">
-				<a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-					<img src="logo2.png" alt="A1TechGroup" width="100px">
-				</a>
-			</div>
+		<header id="home" class="d-flex sticky-top bg-white flex-wrap justify-content-center py-2 mb-2 border-bottom">
+			<a href="/" id="navLogo" class="d-flex align-items-center me-md-auto link-body-emphasis text-decoration-none">
+				<img src="img/logo2.png" alt="A1Tech" width="80px">
+			</a>
 
-			<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-				<li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
-				<li><a href="#" class="nav-link px-2">Features</a></li>
-				<li><a href="#" class="nav-link px-2">Pricing</a></li>
-				<li><a href="#" class="nav-link px-2">FAQs</a></li>
-				<li><a href="#" class="nav-link px-2">About</a></li>
+			<ul class="nav nav-pills d-flex align-items-center" id="topNav">
+				<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Asosiy</a></li>
+				<li class="nav-item"><a href="#about" class="nav-link">Xizmatlar</a></li>
+				<li class="nav-item"><a href="#pricing" class="nav-link">Tariflar</a></li>
+				<li class="nav-item"><a href="#contact" class="nav-link">Bog'lanish</a></li>
 			</ul>
-
-			<div class="col-md-3 text-end">
-				<button type="button" class="btn btn-outline-primary me-2">Login</button>
-				<button type="button" class="btn btn-primary">Sign-up</button>
-			</div>
 		</header>
 		<!--END Header / Nav -->
 
@@ -47,103 +37,117 @@
 		<main>
 			<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
 				<div class="col-12 col-sm-8 col-lg-6">
-					<img src="bootstrap-themes.png" class="d-block mx-lg-auto img-fluid" id="heroImg" alt="Bootstrap Themes"
-						width="700" height="500" loading="lazy">
+					<img src="img/hero.png" class="d-block mx-lg-auto img-fluid" id="heroImg" alt="Bootstrap Themes" width="700"
+						height="500" loading="lazy">
 				</div>
 				<div class="col-lg-6">
-					<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Responsive left-aligned hero with image</h1>
-					<p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most
-						popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system,
-						extensive prebuilt components, and powerful JavaScript plugins.</p>
+					<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Restoran va Kafelar uchun Avtomatlashtirilgan Tizim
+					</h1>
+					<p class="lead">Buyurtmalarni boshqarish, mijozlar statistikasi va moliyaviy hisobotlarni bir platformada
+						kuzatish imkoniyati. Biznesingizni yanada rivojlantiring!
+					</p>
 					<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-						<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Primary</button>
-						<button type="button" class="btn btn-outline-secondary btn-lg px-4">Default</button>
+						<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Buyurtma berish</button>
 					</div>
 				</div>
 			</div>
 			<!--End HERO Section -->
 
 			<!-- ABOUT -->
-			<div class="px-4 py-5" id="about">
-				<h2 class="pb-2 border-bottom">About Us</h2>
 
-				<div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
-					<div class="col d-flex flex-column align-items-start gap-2">
-						<h2 class="fw-bold text-body-emphasis">Left-aligned title explaining these awesome features</h2>
-						<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll add onto
-							it with another sentence and probably just keep going until we run out of words.</p>
-						<a href="#" class="btn btn-primary btn-lg">Primary button</a>
+			<div class="container my-5 py-5" id="about">
+				<h2 class="py-5 border-bottom text-center display-4 fw-normal">Bizning Xizmatlarimiz</h2>
+
+				<div class="row g-2 py-4 row-cols-1 row-cols-lg-3">
+					<div class="col d-flex align-items-start">
+						<div
+							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+							<i class="fa-solid fa-list"></i>
+						</div>
+						<div>
+							<h3 class="fs-2 text-body-emphasis">Menyular</h3>
+							<p>Menyularni boshqarish, yangilash va mijozlarga ko‘rsatiladigan taomlar ro‘yxatini yaratish.</p>
+						</div>
 					</div>
-
-					<div class="col">
-						<div class="row row-cols-1 row-cols-sm-2 g-4">
-							<div class="col d-flex flex-column gap-2">
-								<div
-									class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 w-25">
-									<i class="bi bi-gear fs-1"></i>
-								</div>
-								<h4 class="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
-								<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
-							</div>
-
-							<div class="col d-flex flex-column gap-2">
-								<div
-									class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 w-25">
-									<i class="bi bi-gear fs-1"></i>
-								</div>
-								<h4 class="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
-								<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
-							</div>
-
-							<div class="col d-flex flex-column gap-2">
-								<div
-									class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 w-25">
-									<i class="bi bi-gear fs-1"></i>
-								</div>
-								<h4 class="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
-								<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
-							</div>
-
-							<div class="col d-flex flex-column gap-2">
-								<div
-									class="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3 w-25">
-									<i class="bi bi-gear fs-1"></i>
-								</div>
-								<h4 class="fw-semibold mb-0 text-body-emphasis">Featured title</h4>
-								<p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.</p>
-							</div>
+					<div class="col d-flex align-items-start">
+						<div
+							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+							<i class="fa-solid fa-chart-pie"></i>
+						</div>
+						<div>
+							<h3 class="fs-2 text-body-emphasis">Hisobotlar</h3>
+							<p>Moliyaviy natijalarni ko‘rib chiqish va kunlik, haftalik, oylik hisobotlarni yaratish.</p>
+						</div>
+					</div>
+					<div class="col d-flex align-items-start">
+						<div
+							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+							<i class="fa-solid fa-boxes-packing"></i>
+						</div>
+						<div>
+							<h3 class="fs-2 text-body-emphasis">Sklad</h3>
+							<p>Ombor holatini kuzatib borish va mahsulotlar qoldig‘ini nazorat qilish.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+					<div class="col d-flex align-items-start">
+						<div
+							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+							<i class="fa-solid fa-receipt"></i>
+						</div>
+						<div>
+							<h3 class="fs-2 text-body-emphasis">Kassa</h3>
+							<p>To‘lovlar va tranzaksiyalarni boshqarish, real vaqt rejimida kassa holatini ko‘rish.</p>
+						</div>
+					</div>
+					<div class="col d-flex align-items-start">
+						<div
+							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+							<i class="fa-solid fa-sliders"></i>
+						</div>
+						<div>
+							<h3 class="fs-2 text-body-emphasis">Stollar boshqaruvi</h3>
+							<p>Stollarni boshqarish va mijozlar joylashuvini kuzatib borish.</p>
+						</div>
+					</div>
+					<div class="col d-flex align-items-start">
+						<div
+							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+							<i class="fa-solid fa-bookmark"></i>
+						</div>
+						<div>
+							<h3 class="fs-2 text-body-emphasis">Bronlash</h3>
+							<p>Mijozlar uchun oldindan joy band qilish va rezervatsiyalarni boshqarish.</p>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- End Of ABOUT -->
 
 
 
 			<!-- Pricing -->
-			<div id="pricing">
-				<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
-					<h1 class="display-4 fw-normal text-body-emphasis">Pricing</h1>
-					<p class="fs-5 text-body-secondary">Quickly build an effective pricing table for your potential customers with
-						this Bootstrap example. It’s built with default Bootstrap components and utilities with little
-						customization.
-					</p>
+			<div id="pricing" class="pt-5">
+				<div class="pricing-header p-5 pb-md-4 mx-auto text-center">
+					<h2 class="display-4 fw-normal">Xizmatlar narxlari</h2>
+					<p class="fs-5">Bizning xizmatlarimizga obuna bo‘ling va biznesingizni yanada samarali boshqaring!</p>
 				</div>
 				<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
 					<div class="col mb-2">
 						<div class="card mb-4 rounded-3 shadow-sm">
 							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">Free</h4>
+								<h4 class="my-0 fw-normal">Basic</h4>
 							</div>
 							<div class="card-body">
-								<h1 class="card-title pricing-card-title">$0<small class="text-body-secondary fw-light">/mo</small></h1>
+								<h1 class="card-title pricing-card-title">0 so'm<small class="text-body-secondary fw-light">/oy</small>
+								</h1>
 								<ul class="list-unstyled mt-3 mb-4">
-									<li>10 users included</li>
-									<li>2 GB of storage</li>
-									<li>Email support</li>
-									<li>Help center access</li>
+									<li><span class="glyphicon glyphicon-ok"></span> 5 ta stol boshqaruvi</li>
+									<li><span class="glyphicon glyphicon-ok"></span> Kassa nazorati</li>
+									<li><span class="glyphicon glyphicon-remove"></span> Hisobotlar yaratish</li>
+									<li><span class="glyphicon glyphicon-remove"></span> Bronzlash funksiyasi</li>
 								</ul>
-								<button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+								<button type="button" class="w-100 btn btn-lg btn-outline-primary">Ro‘yxatdan o‘tish</button>
 							</div>
 						</div>
 					</div>
@@ -153,118 +157,36 @@
 								<h4 class="my-0 fw-normal">Pro</h4>
 							</div>
 							<div class="card-body">
-								<h1 class="card-title pricing-card-title">$15<small class="text-body-secondary fw-light">/mo</small>
-								</h1>
+								<h1 class="card-title pricing-card-title">150,000 so'm<small
+										class="text-body-secondary fw-light">/oy</small></h1>
 								<ul class="list-unstyled mt-3 mb-4">
-									<li>20 users included</li>
-									<li>10 GB of storage</li>
-									<li>Priority email support</li>
-									<li>Help center access</li>
+									<li><span class="glyphicon glyphicon-ok"></span> 20 ta stol boshqaruvi</li>
+									<li><span class="glyphicon glyphicon-ok"></span> Kassa va bronlash funksiyasi</li>
+									<li><span class="glyphicon glyphicon-ok"></span> Oylik hisobotlar</li>
+									<li><span class="glyphicon glyphicon-remove"></span> Yillik hisobotlar</li>
 								</ul>
-								<button type="button" class="w-100 btn btn-lg btn-outline-primary">Get started</button>
+								<button type="button" class="w-100 btn btn-lg btn-outline-primary">Boshlash</button>
 							</div>
 						</div>
 					</div>
 					<div class="col mb-2">
 						<div class="card mb-4 rounded-3 shadow-sm">
 							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">Enterprise</h4>
+								<h4 class="my-0 fw-normal">Business</h4>
 							</div>
 							<div class="card-body">
-								<h1 class="card-title pricing-card-title">$29<small class="text-body-secondary fw-light">/mo</small>
-								</h1>
+								<h1 class="card-title pricing-card-title">300,000 so'm<small
+										class="text-body-secondary fw-light">/oy</small></h1>
 								<ul class="list-unstyled mt-3 mb-4">
-									<li>30 users included</li>
-									<li>15 GB of storage</li>
-									<li>Phone and email support</li>
-									<li>Help center access</li>
+									<li><span class="glyphicon glyphicon-ok"></span> Cheklanmagan stol boshqaruvi</li>
+									<li><span class="glyphicon glyphicon-ok"></span> To‘liq kassa va bron funksiyalari</li>
+									<li><span class="glyphicon glyphicon-ok"></span> Har xil turdagi hisobotlar</li>
+									<li><span class="glyphicon glyphicon-ok"></span> Foydalanuvchi qo‘llab-quvvatlash xizmati</li>
 								</ul>
-								<button type="button" class="w-100 btn btn-lg btn-outline-primary">Contact us</button>
+								<button type="button" class="w-100 btn btn-lg btn-outline-primary">Biz bilan bog‘laning</button>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<h2 class="display-6 text-center mb-4">Compare plans</h2>
-
-				<div class="table-responsive">
-					<table class="table text-center">
-						<thead>
-							<tr>
-								<th style="width: 34%;"></th>
-								<th style="width: 22%;">Free</th>
-								<th style="width: 22%;">Pro</th>
-								<th style="width: 22%;">Enterprise</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<th scope="row" class="text-start">Public</th>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-							</tr>
-							<tr>
-								<th scope="row" class="text-start">Private</th>
-								<td></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-							</tr>
-						</tbody>
-
-						<tbody>
-							<tr>
-								<th scope="row" class="text-start">Permissions</th>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-							</tr>
-							<tr>
-								<th scope="row" class="text-start">Sharing</th>
-								<td></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-							</tr>
-							<tr>
-								<th scope="row" class="text-start">Unlimited members</th>
-								<td></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-							</tr>
-							<tr>
-								<th scope="row" class="text-start">Extra security</th>
-								<td></td>
-								<td></td>
-								<td><svg class="bi" width="24" height="24">
-										<use xlink:href="#check"></use>
-									</svg></td>
-							</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 			<!-- Pricing End -->
@@ -272,13 +194,13 @@
 
 
 
+
 			<!-- Contact Us Section -->
 			<div class="row align-items-center g-lg-5 py-5" id="contact">
 				<div class="col-lg-7 text-center text-lg-start">
-					<h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Vertically centered hero sign-up </h1>
-					<p class="col-lg-10 fs-4">Below is an example built entirely with Bootstrap’s controls. Each
-						required group has a validation state that can be triggered by attempting to submit the without
-						completing it.</p>
+					<h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Biz bilan bog‘laning </h1>
+					<p class="col-lg-10 fs-4">Savollaringiz yoki hamkorlik takliflaringiz bo‘lsa, biz bilan bog‘laning. Sizning
+						fikringiz biz uchun muhim!</p>
 				</div>
 				<div class="col-md-10 mx-auto col-lg-5" id="forTransition">
 					<form action="#" id="messageForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
@@ -290,6 +212,10 @@
 							<input type="tel" name="phone" class="form-control" id="floatingPassword" placeholder="Telefon" required>
 							<label for="floatingPassword">Telefon</label>
 						</div>
+						<div class="mb-3">
+							<label for="exampleFormControlTextarea1" class="form-label">Izoh qoldirish</label>
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						</div>
 						<button id="submitBtn" class="w-100 btn btn-lg btn-primary" type="submit">Yuborish</button>
 					</form>
 				</div>
@@ -300,65 +226,59 @@
 
 	<!-- Footer -->
 	<footer class="px-5 py-4 bg-body-tertiary">
-		<div class="row">
+		<div class="row px-5">
 			<div class="col-md-4 mb-3">
 				<h5>Biz bilan bog'laning</h5>
 				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Urganch shahar, Al-Xorazmiy
+					<li class="nav-item mb-2"><a
+							href="https://www.google.com/maps/place/A1Tech+Group/@41.5692977,60.6311077,226m/data=!3m1!1e3!4m6!3m5!1s0x41dfced4daf5b20f:0x409a2b6d89618844!8m2!3d41.5699019!4d60.6315537!16s%2Fg%2F11c45ml9xz?hl=ru&entry=ttu&g_ep=EgoyMDI1MDEyOS4xIKXMDSoASAFQAw%3D%3D"
+							class="nav-link p-0 text-body-secondary">Urganch shahar, Al-Xorazmiy
 							ko'chasi, 108-uy
 						</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Tel: 62 228 80 80</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Sayt: A1TechGroup</a></li>
+					<li class="nav-item mb-2 p-0 text-body-secondary">Tel: 62 228 80
+						80</a></li>
+					<li class="nav-item mb-2"><a href="https://a1tech.uz/" class="nav-link p-0 text-body-secondary">Sayt:
+							A1TechGroup</a></li>
 				</ul>
 			</div>
 
 			<div class="col-md-4 mb-3">
 				<h5>Sahifalarimiz</h5>
 				<ul class="nav flex-column">
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Asosiy sahifa
+					<li class="nav-item mb-2"><a type="tel" href="#" class="nav-link p-0 text-body-secondary">Asosiy sahifa
 						</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Xizmatlar</a></li>
-					<li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Tariflar</a></li>
+					<li class="nav-item mb-2"><a href="#about" class="nav-link p-0 text-body-secondary">Xizmatlar</a></li>
+					<li class="nav-item mb-2"><a href="#pricing" class="nav-link p-0 text-body-secondary">Tariflar</a></li>
+					<li class="nav-item mb-2"><a href="#contact" class="nav-link p-0 text-body-secondary">Bog'lanish</a></li>
 				</ul>
 			</div>
-
 			<div class="col-md-4 mb-3">
-				<form>
-					<h5>Subscribe to our newsletter</h5>
-					<p>Monthly digest of what's new and exciting from us.</p>
-					<div class="d-flex flex-column flex-sm-row w-100 gap-2">
-						<label for="newsletter1" class="visually-hidden">Email address</label>
-						<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-						<button class="btn btn-primary" type="button">Subscribe</button>
-					</div>
-				</form>
+				<h5>Ijtimoiy tarmoqlarimiz</h5>
+				<ul class="list-unstyled mt-3 nav flex-column">
+					<li class="nav-item mb-2"><a class="nav-link p-0 text-body-secondary" href="#"><i
+								class="fa-brands fa-telegram"></i>&nbsp;Telegram</a>
+					</li>
+					<li class="nav-item mb-2"><a class="nav-link p-0 text-body-secondary" href="#"><i
+								class="fa-brands fa-instagram"></i>&nbsp;Instagram</a></li>
+					<li class="nav-item mb-2"><a class="nav-link p-0 text-body-secondary" href="#"><i
+								class="fa-solid fa-globe"></i>&nbsp;Web Sayt</a>
+					</li>
+				</ul>
 			</div>
 		</div>
 		<hr>
-		<div class="d-flex flex-column flex-sm-row justify-content-between py-2 my-2">
+		<div class="d-flex flex-column flex-sm-row justify-content-around py-2 my-2">
 			<p class="m-auto"><a href="https://a1tech.uz/" target="_blank"
-					class="link-underline text-decoration-none">Copyright © 2024
+					class="link-underline text-decoration-none">Copyright © 2025
 					A1Tech Group.</a></p>
-			<ul class="list-unstyled d-flex justify-content-center mt-3">
-				<li class="ms-3"><a class="link-body-emphasis fs-2" href="#"><i class="bi bi-telegram"></i></a></li>
-				<li class="ms-3"><a class="link-body-emphasis fs-2" href="#"><i class="bi bi-instagram"></i></a></li>
-				<li class="ms-3"><a class="link-body-emphasis fs-2" href="#"><i class="bi bi-telephone"></i></a></li>
-			</ul>
 		</div>
 	</footer>
+
 	<!-- END Footer -->
-
-
-
-
-
-	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-		integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-		crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-		integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-		crossorigin="anonymous"></script>
-	<script src="./script.js"></script>
+	</div>
+	<script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+	<script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+	<script src="js/script.js"></script>
 </body>
 
 </html>
