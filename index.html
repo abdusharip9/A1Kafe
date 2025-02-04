@@ -20,13 +20,13 @@
 	</div>
 	<div class="container">
 		<!-- Header / Nav -->
-		<header id="home" class="d-flex sticky-top bg-white flex-wrap justify-content-center py-2 mb-2 border-bottom">
+		<header class="d-flex sticky-top bg-white flex-wrap justify-content-center py-2 mb-2 border-bottom">
 			<a href="/" id="navLogo" class="d-flex align-items-center me-md-auto link-body-emphasis text-decoration-none">
 				<img src="img/logo2.png" alt="A1Tech" width="80px">
 			</a>
 
 			<ul class="nav nav-pills d-flex align-items-center" id="topNav">
-				<li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Asosiy</a></li>
+				<li class="nav-item"><a href="#home" class="nav-link active" aria-current="page">Asosiy</a></li>
 				<li class="nav-item"><a href="#about" class="nav-link">Xizmatlar</a></li>
 				<li class="nav-item"><a href="#pricing" class="nav-link">Tariflar</a></li>
 				<li class="nav-item"><a href="#contact" class="nav-link">Bog'lanish</a></li>
@@ -35,215 +35,214 @@
 		<!--END Header / Nav -->
 
 		<!-- HERO Section -->
-		<main>
-			<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-				<div class="col-12 col-sm-8 col-lg-6">
-					<img src="img/hero.png" class="d-block mx-lg-auto img-fluid" id="heroImg" alt="Bootstrap Themes" width="700"
-						height="500" loading="lazy">
+		<div class="row flex-lg-row-reverse align-items-center g-5 py-5 section" id="home">
+			<div class="col-12 col-sm-8 col-lg-6">
+				<img src="img/hero.png" class="d-block mx-lg-auto img-fluid" id="heroImg" alt="Bootstrap Themes" width="700"
+					height="500" loading="lazy">
+			</div>
+			<div class="col-lg-6">
+				<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Restoran va Kafelar uchun Avtomatlashtirilgan Tizim
+				</h1>
+				<p class="lead">Buyurtmalarni boshqarish, mijozlar statistikasi va moliyaviy hisobotlarni bir platformada
+					kuzatish imkoniyati. Biznesingizni yanada rivojlantiring!
+				</p>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+					<a href="#contact" class="btn btn-primary btn-lg px-4 me-md-2">Buyurtma berish</a>
 				</div>
-				<div class="col-lg-6">
-					<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Restoran va Kafelar uchun Avtomatlashtirilgan Tizim
-					</h1>
-					<p class="lead">Buyurtmalarni boshqarish, mijozlar statistikasi va moliyaviy hisobotlarni bir platformada
-						kuzatish imkoniyati. Biznesingizni yanada rivojlantiring!
-					</p>
-					<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-						<button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Buyurtma berish</button>
+			</div>
+		</div>
+		<!--End HERO Section -->
+
+		<!-- ABOUT -->
+
+		<div class="container section my-5 py-5" id="about">
+			<h2 class="py-5 border-bottom text-center display-4 fw-normal">Bizning Xizmatlarimiz</h2>
+
+			<div class="row g-2 py-4 row-cols-1 row-cols-lg-3">
+				<div class="col d-flex align-items-start">
+					<div
+						class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+						<i class="fa-solid fa-list"></i>
+					</div>
+					<div>
+						<h3 class="fs-2 text-body-emphasis">Menyular</h3>
+						<p>Menyularni boshqarish, yangilash va mijozlarga ko‘rsatiladigan taomlar ro‘yxatini yaratish.</p>
+					</div>
+				</div>
+				<div class="col d-flex align-items-start">
+					<div
+						class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+						<i class="fa-solid fa-chart-pie"></i>
+					</div>
+					<div>
+						<h3 class="fs-2 text-body-emphasis">Hisobotlar</h3>
+						<p>Moliyaviy natijalarni ko‘rib chiqish va kunlik, haftalik, oylik hisobotlarni yaratish.</p>
+					</div>
+				</div>
+				<div class="col d-flex align-items-start">
+					<div
+						class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+						<i class="fa-solid fa-boxes-packing"></i>
+					</div>
+					<div>
+						<h3 class="fs-2 text-body-emphasis">Sklad</h3>
+						<p>Ombor holatini kuzatib borish va mahsulotlar qoldig‘ini nazorat qilish.</p>
 					</div>
 				</div>
 			</div>
-			<!--End HERO Section -->
-
-			<!-- ABOUT -->
-
-			<div class="container my-5 py-5" id="about">
-				<h2 class="py-5 border-bottom text-center display-4 fw-normal">Bizning Xizmatlarimiz</h2>
-
-				<div class="row g-2 py-4 row-cols-1 row-cols-lg-3">
-					<div class="col d-flex align-items-start">
-						<div
-							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-							<i class="fa-solid fa-list"></i>
-						</div>
-						<div>
-							<h3 class="fs-2 text-body-emphasis">Menyular</h3>
-							<p>Menyularni boshqarish, yangilash va mijozlarga ko‘rsatiladigan taomlar ro‘yxatini yaratish.</p>
-						</div>
+			<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+				<div class="col d-flex align-items-start">
+					<div
+						class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+						<i class="fa-solid fa-receipt"></i>
 					</div>
-					<div class="col d-flex align-items-start">
-						<div
-							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-							<i class="fa-solid fa-chart-pie"></i>
-						</div>
-						<div>
-							<h3 class="fs-2 text-body-emphasis">Hisobotlar</h3>
-							<p>Moliyaviy natijalarni ko‘rib chiqish va kunlik, haftalik, oylik hisobotlarni yaratish.</p>
-						</div>
-					</div>
-					<div class="col d-flex align-items-start">
-						<div
-							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-							<i class="fa-solid fa-boxes-packing"></i>
-						</div>
-						<div>
-							<h3 class="fs-2 text-body-emphasis">Sklad</h3>
-							<p>Ombor holatini kuzatib borish va mahsulotlar qoldig‘ini nazorat qilish.</p>
-						</div>
+					<div>
+						<h3 class="fs-2 text-body-emphasis">Kassa</h3>
+						<p>To‘lovlar va tranzaksiyalarni boshqarish, real vaqt rejimida kassa holatini ko‘rish.</p>
 					</div>
 				</div>
-				<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-					<div class="col d-flex align-items-start">
-						<div
-							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-							<i class="fa-solid fa-receipt"></i>
-						</div>
-						<div>
-							<h3 class="fs-2 text-body-emphasis">Kassa</h3>
-							<p>To‘lovlar va tranzaksiyalarni boshqarish, real vaqt rejimida kassa holatini ko‘rish.</p>
-						</div>
+				<div class="col d-flex align-items-start">
+					<div
+						class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+						<i class="fa-solid fa-sliders"></i>
 					</div>
-					<div class="col d-flex align-items-start">
-						<div
-							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-							<i class="fa-solid fa-sliders"></i>
-						</div>
-						<div>
-							<h3 class="fs-2 text-body-emphasis">Stollar boshqaruvi</h3>
-							<p>Stollarni boshqarish va mijozlar joylashuvini kuzatib borish.</p>
-						</div>
+					<div>
+						<h3 class="fs-2 text-body-emphasis">Stollar boshqaruvi</h3>
+						<p>Stollarni boshqarish va mijozlar joylashuvini kuzatib borish.</p>
 					</div>
-					<div class="col d-flex align-items-start">
-						<div
-							class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-							<i class="fa-solid fa-bookmark"></i>
-						</div>
-						<div>
-							<h3 class="fs-2 text-body-emphasis">Bronlash</h3>
-							<p>Mijozlar uchun oldindan joy band qilish va rezervatsiyalarni boshqarish.</p>
-						</div>
+				</div>
+				<div class="col d-flex align-items-start">
+					<div
+						class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+						<i class="fa-solid fa-bookmark"></i>
+					</div>
+					<div>
+						<h3 class="fs-2 text-body-emphasis">Bronlash</h3>
+						<p>Mijozlar uchun oldindan joy band qilish va rezervatsiyalarni boshqarish.</p>
 					</div>
 				</div>
 			</div>
+		</div>
 
 
 
-			<!-- Pricing -->
-			<div id="pricing" class="pt-5">
-				<div class="pricing-header p-5 pb-md-4 mx-auto text-center">
-					<h2 class="display-4 fw-normal">Xizmatlar narxlari</h2>
-					<p class="fs-5">Bizning xizmatlarimizga obuna bo‘ling va biznesingizni yanada samarali boshqaring!</p>
+		<!-- Pricing -->
+		<div id="pricing" class="pt-5 section">
+			<div class="pricing-header p-5 pb-md-4 mx-auto text-center">
+				<h2 class="display-4 fw-normal">Xizmatlar narxlari</h2>
+				<p class="fs-5">Bizning xizmatlarimizga obuna bo‘ling va biznesingizni yanada samarali boshqaring!</p>
+			</div>
+			<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+				<div class="col mb-2">
+					<div class="card mb-4 rounded-3 shadow-sm">
+						<div class="card-header py-3">
+							<h4 class="my-0 fw-normal">Standart</h4>
+						</div>
+						<div class="card-body">
+							<h1 class="card-title pricing-card-title">100 000 so'm<small
+									class="text-body-secondary fw-light">/oy</small>
+							</h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Bronzlash xizmati <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Maxsulot Kirim Qilish <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Inventariya <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+							</ul>
+							<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
+								bog‘laning</a>
+						</div>
+					</div>
 				</div>
-				<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-					<div class="col mb-2">
-						<div class="card mb-4 rounded-3 shadow-sm">
-							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">Standart</h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title">100 000 so'm<small
-										class="text-body-secondary fw-light">/oy</small>
-								</h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Bronzlash xizmati <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Inventariya <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-								</ul>
-								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
-									bog‘laning</a>
-							</div>
+				<div class="col mb-2">
+					<div class="card mb-4 rounded-3 shadow-sm">
+						<div class="card-header py-3">
+							<h4 class="my-0 fw-normal">Pro</h4>
+						</div>
+						<div class="card-body">
+							<h1 class="card-title pricing-card-title">150,000 so'm<small
+									class="text-body-secondary fw-light">/oy</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+							</ul>
+							<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
+								bog‘laning</a>
 						</div>
 					</div>
-					<div class="col mb-2">
-						<div class="card mb-4 rounded-3 shadow-sm">
-							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">Pro</h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title">150,000 so'm<small
-										class="text-body-secondary fw-light">/oy</small></h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-								</ul>
-								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
-									bog‘laning</a>
-							</div>
+				</div>
+				<div class="col mb-2">
+					<div class="card mb-4 rounded-3 shadow-sm">
+						<div class="card-header py-3">
+							<h4 class="my-0 fw-normal">VIP</h4>
 						</div>
-					</div>
-					<div class="col mb-2">
-						<div class="card mb-4 rounded-3 shadow-sm">
-							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">VIP</h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title">300,000 so'm<small
-										class="text-body-secondary fw-light">/oy</small></h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Fiskal To'lov <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Xodimlar Xioboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kompleks Menu <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-								</ul>
-								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
-									bog‘laning</a>
-							</div>
+						<div class="card-body">
+							<h1 class="card-title pricing-card-title">300,000 so'm<small
+									class="text-body-secondary fw-light">/oy</small></h1>
+							<ul class="list-unstyled mt-3 mb-4">
+								<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Fiskal To'lov <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Xodimlar Xioboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								<li> Kompleks Menu <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+							</ul>
+							<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
+								bog‘laning</a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- Pricing End -->
+		</div>
+		<!-- Pricing End -->
 
 
 
 
 
-			<!-- Contact Us Section -->
-			<div class="row align-items-center g-lg-5 py-5" id="contact">
-				<div class="col-lg-7 text-center text-lg-start">
-					<h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Biz bilan bog‘laning </h1>
-					<p class="col-lg-10 fs-4">Savollaringiz yoki hamkorlik takliflaringiz bo‘lsa, biz bilan bog‘laning. Sizning
-						fikringiz biz uchun muhim!</p>
-				</div>
-				<div class="col-md-10 mx-auto col-lg-5" id="forTransition">
-					<form action="#" id="messageForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
-						<div class="form-floating mb-3">
-							<input name="name" type="text" class="form-control" id="floatingInput" placeholder="Name" required>
-							<label for="floatingInput">Name</label>
-						</div>
-						<div class="form-floating mb-3">
-							<input type="tel" name="phone" class="form-control" id="floatingPassword" placeholder="Telefon" required>
-							<label for="floatingPassword">Telefon</label>
-						</div>
-						<div class="mb-3">
-							<label for="comment" class="form-label">Izoh qoldirish</label>
-							<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
-						</div>
-						<button type="submit" id="submitBtn" class="w-100 btn btn-lg btn-primary">Yuborish</button>
-					</form>
-				</div>
+		<!-- Contact Us Section -->
+		<div class="row align-items-center g-lg-5 py-5 section" id="contact">
+			<div class="col-lg-7 text-center text-lg-start">
+				<h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3">Biz bilan bog‘laning </h1>
+				<p class="col-lg-10 fs-4">Savollaringiz yoki hamkorlik takliflaringiz bo‘lsa, biz bilan bog‘laning. Sizning
+					fikringiz biz uchun muhim!</p>
 			</div>
-		</main>
+			<div class="col-md-10 mx-auto col-lg-5" id="forTransition">
+				<form action="#" id="messageForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+					<div class="form-floating mb-3">
+						<input name="name" type="text" class="form-control" id="floatingInput" placeholder="Name" required>
+						<label for="floatingInput">Name</label>
+					</div>
+					<div class="form-floating mb-3">
+						<input type="tel" name="phone" class="form-control" id="floatingPassword" placeholder="Telefon" required>
+						<label for="floatingPassword">Telefon</label>
+					</div>
+					<div class="mb-3">
+						<label for="comment" class="form-label">Izoh qoldirish</label>
+						<textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+					</div>
+					<button type="submit" id="submitBtn" class="w-100 btn btn-lg btn-primary">Yuborish</button>
+				</form>
+			</div>
+		</div>
+
 		<!-- END Contact Us Section -->
 	</div>
 
