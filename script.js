@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			object[key] = value
 		})
 
-		fetch(`https://api.telegram.org/bo1t${telegramTokenBot}/sendMessage`, {
+		fetch(`https://api.telegram.org/bot${telegramTokenBot}/sendMessage`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
