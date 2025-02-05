@@ -18,9 +18,6 @@
 	#topNav {
 		justify-content: space-evenly !important;
 	}
-	#navLogo {
-		display: none !important;
-	}
 }
 .text-align-center {
 	text-align: center;
