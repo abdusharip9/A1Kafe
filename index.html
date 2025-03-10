@@ -6,11 +6,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>A1Kafe | A1Tech</title>
 	<link rel="stylesheet" href="/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="plugins/bootstrap-icons/bootstrap.min.css">
+	<link rel="stylesheet" href="/plugins/bootstrap-icons/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	<link href="plugins/fontawesome/css/fontawesome.css" rel="stylesheet" />
-	<link href="plugins/fontawesome/css/brands.css" rel="stylesheet" />
-	<link href="plugins/fontawesome/css/solid.css" rel="stylesheet" />
+	<link href="/plugins/fontawesome/css/fontawesome.css" rel="stylesheet" />
+	<link href="/plugins/fontawesome/css/brands.css" rel="stylesheet" />
+	<link href="/plugins/fontawesome/css/solid.css" rel="stylesheet" />
 	<link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
 
 </head>
@@ -21,16 +21,23 @@
 	<div class="container">
 		<!-- Header / Nav -->
 		<header class="d-flex sticky-top bg-white flex-wrap justify-content-center py-2 mb-2 border-bottom">
-			<a href="#" id="navLogo" class="d-flex align-items-center me-md-auto link-body-emphasis text-decoration-none">
-				<img src="img/logo2.png" alt="A1Tech" width="80px">
-			</a>
+			<div class="col-md-3 mb-2 mb-md-0">
+				<a href="#" id="navLogo" class="d-flex align-items-center me-md-auto link-body-emphasis text-decoration-none">
+					<img src="img/logo.png" alt="A1Tech" width="80px">
+				</a>
+			</div>
 
-			<ul class="nav nav-pills d-flex align-items-center" id="topNav">
-				<li class="nav-item"><a href="#home" class="nav-link active" aria-current="page">Asosiy</a></li>
-				<li class="nav-item"><a href="#about" class="nav-link">Xizmatlar</a></li>
-				<li class="nav-item"><a href="#pricing" class="nav-link">Tariflar</a></li>
-				<li class="nav-item"><a href="#contact" class="nav-link">Bog'lanish</a></li>
+			<ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0" id="topNav">
+				<li><a href="#home" class="nav-link px-2 link-secondary">Home</a></li>
+				<li><a href="#about" class="nav-link px-2">Xizmatlar</a></li>
+				<li><a href="#pricing" class="nav-link px-2">Tariflar</a></li>
+				<li><a href="#contact" class="nav-link px-2">Bog'lanish</a></li>
 			</ul>
+
+			<div class="col-md-3 text-end">
+				<a href="/login.html" class="btn btn-outline-primary me-2">Kirish</a>
+				<a href="/register.html" class="btn btn-primary">Ro'yhatdan o'tish</a>
+			</div>
 		</header>
 		<!--END Header / Nav -->
 

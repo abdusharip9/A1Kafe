@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	form.addEventListener('submit', event => {
 		event.preventDefault()
 
-		// Submit tugmani disabled qilish va "Yuborilmoqda..." textini ko'rsatish
+		
 		submitBtn.disabled = true
 		submitBtn.innerText = 'Yuborilmoqda...'
 
@@ -59,30 +59,29 @@ window.addEventListener('DOMContentLoaded', () => {
 	})
 })
 
-// for dinamic nav
 window.addEventListener('DOMContentLoaded', () => {
 	const navLinks = document.querySelectorAll('#topNav .nav-link')
 	const sections = document.querySelectorAll('.section')
 
-	// Nav link bosilganda faollikni yangilash
+	
 	navLinks.forEach(link => {
 		link.addEventListener('click', event => {
-			event.preventDefault() // Href linkga o'tmaslik uchun
-			const targetId = link.getAttribute('href').substring(1) // Id olish
+			event.preventDefault() 
+			const targetId = link.getAttribute('href').substring(1) 
 			const targetSection = document.getElementById(targetId)
 
-			// Sectionga scroll qilish
+			
 			targetSection.scrollIntoView({ behavior: 'smooth' })
 
-			// Har bir linkni faollikdan chiqarish
-			navLinks.forEach(link => link.classList.remove('active'))
+			
+			navLinks.forEach(link => link.classList.remove('link-secondary'))
 
-			// Tanlangan linkni faollashtirish
-			link.classList.add('active')
+			
+			link.classList.add('link-secondary')
 		})
 	})
 
-	// Scroll holatida faollikni yangilash
+	
 	const changeActiveLink = () => {
 		let currentSection = null
 		sections.forEach(section => {
@@ -98,14 +97,14 @@ window.addEventListener('DOMContentLoaded', () => {
 		if (currentSection) {
 			navLinks.forEach(link => {
 				if (link.getAttribute('href').substring(1) === currentSection.id) {
-					link.classList.add('active')
+					link.classList.add('link-secondary')
 				} else {
-					link.classList.remove('active')
+					link.classList.remove('link-secondary')
 				}
 			})
 		}
 	}
 
 	window.addEventListener('scroll', changeActiveLink)
-	changeActiveLink() // Boshlang'ich holatni to'g'rilash
+	changeActiveLink() 
 })

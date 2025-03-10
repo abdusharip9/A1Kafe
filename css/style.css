@@ -25,3 +25,19 @@
 .text-align-center {
 	text-align: center;
 }
+
+/* Register form */
+
+#loginForm {
+	background-color: #ffffff;
+	padding: 30px;
+	border-radius: 8px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+#loginForm > a {
+	display: inline-block;
+	width: 100%;
+}
+#loginForm img {
+	margin: 0 auto;
+}

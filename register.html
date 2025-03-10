@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A1Kafe | A1Tech</title>
+  <link rel="stylesheet" href="/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="plugins/bootstrap-icons/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="plugins/fontawesome/css/fontawesome.css" rel="stylesheet" />
+  <link href="plugins/fontawesome/css/brands.css" rel="stylesheet" />
+  <link href="plugins/fontawesome/css/solid.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
+  <style>
+    .error {
+      color: red;
+      font-size: 14px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body class="py-4 bg-body-tertiary">
+  <main class="form-signin p-5 m-auto w-50">
+    <form id="loginForm">
+      <a href="index.html" class="d-inline-flex justify-content-between">
+        <img class="mb-4 mx-auto" src="img/logo.png" alt="A1TechGroup" width="100">
+      </a>
+      <h1 class="h3 mb-3 fw-normal">Ro‘yxatdan o‘tish</h1>
+
+      <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+        <label for="email">Elektron pochta
+        </label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" name="password" class="form-control pass" id="password" placeholder="Parol yarating" required
+          min="4" max="30">
+        <label for="password">Parol yarating</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control pass" id="confirmPassword" placeholder="Parolni takrorlang" required
+          min="4" max="30">
+        <label for="confirmPassword">Parolni takrorlang</label>
+      </div>
+      <span id="error-message" class="error"></span><br><br>
+
+      <button class="btn btn-primary w-100 py-2" type="submit">Ro'yxatdan o'tish</button>
+
+      <div class="form-check p-0 my-3">
+        Allaqachon hisobingiz bormi? <a href="/login.html">Kirish</a>
+      </div>
+
+    </form>
+  </main>
+
+  <script>
+    function validatePassword() {
+      var password = document.getElementById("password").value
+      var confirmPassword = document.getElementById("confirmPassword").value
+      var errorMessage = document.getElementById("error-message")
+      var formButton = document.querySelector('#loginForm button')
+
+      if (password !== confirmPassword) {
+        errorMessage.textContent = "Parollar mos kelmadi!"
+        formButton.setAttribute("disabled", true)
+        return false
+      }
+      else if (password.length < 4) {
+        errorMessage.textContent = "Parol kamida 4 ta belgidan iborat bo‘lishi kerak!"
+        return false
+      }
+
+      else {
+        errorMessage.textContent = ""
+        formButton.removeAttribute('disabled')
+        return true
+      }
+    }
+
+    document.querySelectorAll('.pass').forEach((item) => {
+      item.addEventListener('input', validatePassword)
+    })
+
+
+    document.getElementById("loginForm").onsubmit = async function (event) {
+      event.preventDefault()
+
+      const email = document.getElementById("email").value
+      const password = document.getElementById("password").value
+
+      const response = await fetch("https://backend-app-5rtx.onrender.com/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        localStorage.setItem("token", data.token)
+        window.location.href = "/login.html"
+      } else {
+        alert("Xatolik: " + data.errors[0].msg)
+      }
+    };
+  </script>
+</body>
+
+</html>
