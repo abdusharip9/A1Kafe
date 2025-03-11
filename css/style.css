@@ -48,25 +48,43 @@
 }
 
 /* for loader btn */
-.loader {
-	display: none;
-	width: 15px;
-	height: 15px;
-	border: 2px solid #fff;
-	border-radius: 50%;
-	border-top: 2px solid transparent;
-	animation: spin 0.8s linear infinite;
+.containerBtn {
 	position: absolute;
-	right: 10px;
-	top: 50%;
-	transform: translateY(-50%);
+	top: 0;
+	left: 0;
+	right: 0;
 }
-
-@keyframes spin {
+.bar {
+	background-color: rgb(110, 175, 255);
+	min-width: 100%;
+	min-height: 5px;
+	position: relative;
+	overflow: hidden;
+}
+.bar::after {
+	content: '';
+	min-height: 5px;
+	position: absolute;
+	background: #fff;
+	transform: translateX(-100%);
+	animation: animate 2s infinite;
+}
+.bar::before {
+	content: '';
+	min-height: 5px;
+	position: absolute;
+	background: #fff;
+	transform: translateX(-100%);
+	animation: animate 2s infinite;
+	animation-delay: 1s;
+}
+@keyframes animate {
 	0% {
-		transform: rotate(0deg);
+		transform: translateX(-150%);
+		min-width: 100px;
 	}
 	100% {
-		transform: rotate(360deg);
+		transform: translateX(300%);
+		min-width: 400px;
 	}
 }

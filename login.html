@@ -34,7 +34,12 @@
         <label for="floatingPassword">Parol</label>
       </div>
 
-      <button class="btn btn-primary w-100 py-2" type="submit">Kirish</button>
+      <button class="btn btn-primary w-100 py-2" id="submitBtn" type="submit"
+        style="position: relative; overflow: hidden;">
+        <div class="containerBtn d-none">
+          <div class="bar"></div>
+        </div>Kirish
+      </button>
 
       <div class="form-check p-0 my-3">
         Sizda hisob yo'qmi? <a href="/register.html">Ro'yxatdan o'tish</a>
@@ -45,6 +50,10 @@
   <script>
     document.getElementById("loginForm").onsubmit = async function (event) {
       event.preventDefault()
+      const containerBtn = document.querySelector(".containerBtn")
+      const submitBtn = document.querySelector("#submitBtn")
+      containerBtn.classList.remove('d-none')
+      submitBtn.setAttribute('disabled', '')
 
       const email = document.getElementById("email").value
       const password = document.getElementById("password").value
@@ -58,6 +67,8 @@
       const data = await response.json()
 
       if (response.ok) {
+        containerBtn.classList.add('d-none')
+        submitBtn.removeAttribute('disabled')
         localStorage.setItem("token", data.token)
         window.location.href = "/admin-page.html"
       } else {
