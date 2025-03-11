@@ -1,114 +1,183 @@
 <!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A1Kafe | A1Tech</title>
-  <link rel="stylesheet" href="/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="plugins/bootstrap-icons/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link href="plugins/fontawesome/css/fontawesome.css" rel="stylesheet" />
-  <link href="plugins/fontawesome/css/brands.css" rel="stylesheet" />
-  <link href="plugins/fontawesome/css/solid.css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Boxicons CSS -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <title>Admin panel | A1Kafe</title>
   <link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
-
+  <link rel="stylesheet" href="css/admin-paga.css" />
 </head>
+<style>
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Butun ekranni egallaydi */
+  }
+
+  article {
+    text-align: center;
+  }
+</style>
 
 <body>
-  <main class="d-flex flex-nowrap">
-    <div class="sidebar">
-
-      <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-          <i class="fa-solid fa-list"></i>
-          <span class="fs-4">Shaxsiy Kabinet</span>
-        </a>
-        <hr>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <li class="nav-item">
-            <a href="#" class="nav-link active" aria-current="page">
-              <i class="fa-solid fa-list"></i>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link text-white">
-              <i class="fa-solid fa-list"></i>
-              Dashboard
-            </a>
-          </li>
-        </ul>
-        <hr>
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>mdo</strong>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
+  <!-- navbar -->
+  <nav class="navbar">
+    <div class="logo_item">
+      <i class="bx bx-menu" id="sidebarOpen"></i>
+      <img src="img/logo.PNG" width="25px" alt=""></i>Shaxsiy kabinet
+    </div>
+    <div class="search_bar">
+      <input type="text" placeholder="Search" />
+    </div>
+    <div class="navbar_content">
+      <i class="bi bi-grid"></i>
+      <i class='bx bx-sun' id="darkLight"></i>
+      <i class='bx bx-bell'></i>
+      <img src="img/user-icon.png" alt="" class="profile" />
+    </div>
+  </nav>
+  <!-- sidebar -->
+  <nav class="sidebar">
+    <div class="menu_content">
+      <ul class="menu_items">
+        <div class="menu_title menu_dahsboard"></div>
+        <!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+        <!-- start -->
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-home-alt"></i>
+            </span>
+            <span class="navlink">Home</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
           </ul>
+        </li>
+        <!-- end -->
+        <!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
+        <!-- start -->
+        <li class="item">
+          <div href="#" class="nav_link submenu_item">
+            <span class="navlink_icon">
+              <i class="bx bx-grid-alt"></i>
+            </span>
+            <span class="navlink">Overview</span>
+            <i class="bx bx-chevron-right arrow-left"></i>
+          </div>
+          <ul class="menu_items submenu">
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+            <a href="#" class="nav_link sublink">Nav Sub Link</a>
+          </ul>
+        </li>
+        <!-- end -->
+      </ul>
+      <ul class="menu_items">
+        <div class="menu_title menu_editor"></div>
+        <!-- duplicate these li tag if you want to add or remove navlink only -->
+        <!-- Start -->
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bxs-magic-wand"></i>
+            </span>
+            <span class="navlink">Magic build</span>
+          </a>
+        </li>
+        <!-- End -->
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-loader-circle"></i>
+            </span>
+            <span class="navlink">Filters</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-filter"></i>
+            </span>
+            <span class="navlink">Filter</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-cloud-upload"></i>
+            </span>
+            <span class="navlink">Upload new</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="menu_items">
+        <div class="menu_title menu_setting"></div>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-flag"></i>
+            </span>
+            <span class="navlink">Notice board</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-medal"></i>
+            </span>
+            <span class="navlink">Award</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-cog"></i>
+            </span>
+            <span class="navlink">Setting</span>
+          </a>
+        </li>
+        <li class="item">
+          <a href="#" class="nav_link">
+            <span class="navlink_icon">
+              <i class="bx bx-layer"></i>
+            </span>
+            <span class="navlink">Features</span>
+          </a>
+        </li>
+      </ul>
+      <!-- Sidebar Open / Close -->
+      <div class="bottom_content">
+        <div class="bottom expand_sidebar">
+          <span> Expand</span>
+          <i class='bx bx-log-in'></i>
+        </div>
+        <div class="bottom collapse_sidebar">
+          <span> Collapse</span>
+          <i class='bx bx-log-out'></i>
         </div>
       </div>
-
-      <div class="d-flex flex-column flex-shrink-0 text-bg-dark" style="width: 4.5rem; height: 100vh;">
-        <a href="/" class="d-block p-3 link-body-emphasis text-decoration-none" data-bs-toggle="tooltip"
-          data-bs-placement="right" data-bs-original-title="Icon-only">
-          <i class="fa-solid fa-list"></i>
-          <span class="visually-hidden">Icon-only</span>
-        </a>
-        <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
-          <li class="nav-item">
-            <a href="#" class="nav-link active py-3 border-bottom rounded-0" aria-current="page"
-              data-bs-toggle="tooltip" data-bs-placement="right" aria-label="Home" data-bs-original-title="Home">
-              <i class="fa-solid fa-list"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="nav-link py-3 border-bottom rounded-0" data-bs-toggle="tooltip" data-bs-placement="right"
-              aria-label="Dashboard" data-bs-original-title="Dashboard">
-              <i class="fa-solid fa-list"></i>
-            </a>
-          </li>
-        </ul>
-        <div class="dropdown border-top">
-          <a href="#"
-            class="d-flex align-items-center justify-content-center p-3 link-body-emphasis text-decoration-none dropdown-toggle"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="https://github.com/mdo.png" alt="mdo" width="24" height="24" class="rounded-circle">
-          </a>
-          <ul class="dropdown-menu text-small shadow">
-            <li><a class="dropdown-item" href="#">New project...</a></li>
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="#">Sign out</a></li>
-          </ul>
-        </div>
-      </div>
-
     </div>
-
-    <div class="m-5 p-5">
-      <h1 class="">Coming soon ...</h1>
-    </div>
+  </nav>
+  <main>
+    <article>
+      <h1>Admin Panel</h1>
+      <p>Coming soon ...</p>
+    </article>
   </main>
-
-
-  <script>
-
-  </script>
-
-
+  <!-- JavaScript -->
+  <script src="js/admin-page.js"></script>
 </body>
 
 </html>
