@@ -22,7 +22,7 @@
 </head>
 
 <body class="py-4 bg-body-tertiary">
-  <main class="form-signin p-5 m-auto w-50">
+  <main class="form-signin p-5 m-auto w-50" id="main">
     <form id="loginForm">
       <a href="index.html" class="d-inline-flex justify-content-between">
         <img class="mb-4 mx-auto" src="img/logo.png" alt="A1TechGroup" width="100">
@@ -46,7 +46,9 @@
       </div>
       <span id="error-message" class="error"></span><br><br>
 
-      <button class="btn btn-primary w-100 py-2" type="submit">Ro'yxatdan o'tish</button>
+      <button class="btn btn-primary w-100 py-2 btn-text" id="submitBtn" type="submit">Ro'yxatdan o'tish <span
+          class="loader"></span></button>
+
 
       <div class="form-check p-0 my-3">
         Allaqachon hisobingiz bormi? <a href="/login.html">Kirish</a>
@@ -87,6 +89,14 @@
     document.getElementById("loginForm").onsubmit = async function (event) {
       event.preventDefault()
 
+      const btn = this
+      const btnText = btn.querySelector(".btn-text")
+      const loader = btn.querySelector(".loader")
+      // Tugmani o‘chirib, loaderni ko‘rsatish
+      btn.disabled = true
+      loader.style.display = "inline-block"
+      btnText.textContent = "Yuborilmoqda..."
+
       const email = document.getElementById("email").value
       const password = document.getElementById("password").value
 
@@ -94,7 +104,19 @@
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
-      })
+      }).then(response => response.json())
+        .then(data => {
+          console.log(data)
+          btnText.textContent = "Ro‘yxatdan o‘tish"
+          loader.style.display = "none"
+          btn.disabled = false
+        })
+        .catch(error => {
+          console.error("Xatolik:", error)
+          btnText.textContent = "Xatolik! Qayta urinib ko‘ring"
+          loader.style.display = "none"
+          btn.disabled = false
+        })
 
       const data = await response.json()
 
@@ -102,7 +124,9 @@
         localStorage.setItem("token", data.token)
         window.location.href = "/login.html"
       } else {
-        alert("Xatolik: " + data.errors[0].msg)
+        console.log(data)
+
+        alert("Xatolik: " + data)
       }
     };
   </script>

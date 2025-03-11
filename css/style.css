@@ -21,6 +21,11 @@
 	#navLogo {
 		display: none !important;
 	}
+
+	#main {
+		width: 100% !important;
+		padding: 15px !important;
+	}
 }
 .text-align-center {
 	text-align: center;
@@ -40,4 +45,28 @@
 }
 #loginForm img {
 	margin: 0 auto;
+}
+
+/* for loader btn */
+.loader {
+	display: none;
+	width: 15px;
+	height: 15px;
+	border: 2px solid #fff;
+	border-radius: 50%;
+	border-top: 2px solid transparent;
+	animation: spin 0.8s linear infinite;
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
