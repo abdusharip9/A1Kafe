@@ -116,6 +116,9 @@
         data.errors.forEach((error) => {
           alert("Xatolik: " + error.msg)
         })
+        if (data.message) {
+          alert("Xatolik: " + data.message)
+        }
       }
       containerBtn.classList.add('d-none')
       submitBtn.removeAttribute('disabled')
