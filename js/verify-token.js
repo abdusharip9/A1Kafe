@@ -20,5 +20,5 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 	const data = await response.json()
 
-	document.querySelector('#email').innerText = data.email
+	document.querySelector('#email').innerText += 'Email: ' + data.email
 })

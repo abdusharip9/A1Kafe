@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- Coding by CodingNepal || www.codingnepalweb.com -->
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<!-- Boxicons CSS -->
+	<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+	<title>Admin panel | A1Kafe</title>
+	<link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/admin-paga.css" />
+</head>
+
+<body>
+	<!-- navbar -->
+	<nav class="my-navbar">
+		<div class="logo_item">
+			<i class="bx bx-menu" id="sidebarOpen"></i>
+			<img src="img/logo.PNG" id="logo" width="25px" alt=""></i>Shaxsiy kabinet
+		</div>
+		<div class="navbar_content">
+			<i class="bi bi-grid"></i>
+			<i class='bx bx-sun' id="darkLight"></i>
+			<i class='bx bx-bell'></i>
+			<img src="img/user-icon.png" alt="" class="profile" width="25px" />
+			<div class="menu">
+				<ul>
+					<li><a href="edit-profile.html"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
+					<li><a href="#"><i class="bx bxs-inbox"></i>&nbsp;Inbox</a></li>
+					<li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
+					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
+					<li><a href="#"><i class="bx bx-log-out"></i>&nbsp;Sign Out</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<main>
+		<!-- sidebar -->
+		<nav class="my-sidebar">
+			<div class="menu_content">
+				<ul class="menu_items">
+					<div class="menu_title menu_dahsboard"></div>
+					<!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
+					<!-- start -->
+					<li class="item">
+						<a href="admin-page.html" class="nav_link">
+							<span class="navlink_icon">
+								<i class="bx bx-home-alt"></i>
+							</span>
+							<span class="navlink">Bosh Sahifa</span>
+						</a>
+					</li>
+					<!-- end -->
+					<!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
+					<!-- start -->
+					<li class="item">
+						<a href="#" class="nav_link active">
+							<span class="navlink_icon">
+								<i class="bx bx-grid-alt"></i>
+							</span>
+							<span class="navlink">Tariflar</span>
+						</a>
+					</li>
+					<!-- end -->
+				</ul>
+				<!-- Sidebar Open / Close -->
+				<div class="bottom_content">
+					<div class="bottom expand_sidebar">
+						<span> Expand</span>
+						<i class='bx bx-log-in'></i>
+					</div>
+					<div class="bottom collapse_sidebar">
+						<span> Collapse</span>
+						<i class='bx bx-log-out'></i>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Article -->
+		<article id="admin" class="move-right my-article">
+			<h1>Admin Panel</h1>
+			<p>Coming soon ...</p>
+			<p id="email"></p>
+		</article>
+	</main>
+	<!-- JavaScript -->
+	<script src="js/verify-token.js"></script>
+	<script src="js/admin-page.js"></script>
+</body>
+
+</html>
