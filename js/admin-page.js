@@ -31,13 +31,12 @@ sidebar.addEventListener('mouseleave', () => {
 darkLight.addEventListener('click', () => {
 	body.classList.toggle('dark')
 	if (body.classList.contains('dark')) {
+		localStorage.setItem('theme', 'dark')
 		document.querySelector('html').setAttribute('data-bs-theme', 'dark')
-	} else {
-		document.querySelector('html').removeAttribute('data-bs-theme', 'dark')
-	}
-	if (body.classList.contains('dark')) {
 		darkLight.classList.replace('bx-sun', 'bx-moon')
 	} else {
+		localStorage.setItem('theme', 'white')
+		document.querySelector('html').removeAttribute('data-bs-theme', 'dark')
 		darkLight.classList.replace('bx-moon', 'bx-sun')
 	}
 })
@@ -68,5 +67,19 @@ profile.onclick = function (e) {
 document.addEventListener('click', e => {
 	if (!menu.contains(e.target) && e.target !== profile) {
 		menu.classList.remove('active')
+	}
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+	var a = document.querySelector('.dots-container')
+	a.style.display = 'none'
+
+	// for theme
+	if (localStorage.getItem('theme') == 'dark') {
+		body.classList.add('dark')
+		document.querySelector('html').setAttribute('data-bs-theme', 'dark')
+	} else if (localStorage.getItem('theme') == 'light') {
+		body.classList.remove('dark')
+		document.querySelector('html').removeAttribute('data-bs-theme', 'dark')
 	}
 })
