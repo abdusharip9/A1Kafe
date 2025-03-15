@@ -27,7 +27,7 @@ document
 		const token = localStorage.getItem('accessToken') // Tokenni localStorage dan olish
 
 		const response = await fetch(
-			`http://localhost:3000/api/auth/update-user/${id}`,
+			`https://backend-app-5rtx.onrender.com/api/auth/update-user/${id}`,
 			{
 				method: 'PUT',
 				headers: {
