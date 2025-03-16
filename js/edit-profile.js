@@ -45,7 +45,7 @@ document
 		submitBtn.setAttribute('disabled', '')
 
 		const response = await fetch(
-			`https://backend-app-5rtx.onrender.com/api/auth/update-user/${id}`,
+			`http://localhost:3000/api/auth/update-user/${id}`,
 			{
 				method: 'PUT',
 				headers: {
