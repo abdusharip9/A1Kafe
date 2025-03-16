@@ -7,34 +7,10 @@
 .show {
 	display: block;
 }
-@media screen and (max-width: 576px) {
-	#alertStatus {
-		width: 90%;
-		right: none;
-	}
-	form label:focus {
-		font-size: 1px;
-	}
-	#topNav {
-		justify-content: space-evenly !important;
-	}
-	#navLogo {
-		display: none !important;
-	}
-
-	#main {
-		width: 100% !important;
-		padding: 15px !important;
-	}
-}
-.text-align-center {
-	text-align: center;
-}
 
 /* Register form */
 
 #loginForm {
-	background-color: #ffffff;
 	padding: 30px;
 	border-radius: 8px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -86,5 +62,30 @@
 	100% {
 		transform: translateX(300%);
 		min-width: 400px;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	#alertStatus {
+		width: 90%;
+		right: none;
+	}
+	form label:focus {
+		font-size: 1px;
+	}
+	#topNav {
+		justify-content: space-evenly !important;
+	}
+	#navLogo {
+		display: none !important;
+	}
+}
+.text-align-center {
+	text-align: center;
+}
+@media screen and (max-width: 768px) {
+	#main {
+		width: 90% !important;
+		padding: 15px !important;
 	}
 }

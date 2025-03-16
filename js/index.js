@@ -25,13 +25,12 @@ const article = document.querySelector('article')
 sidebarOpen.addEventListener('click', () => sidebar.classList.toggle('close'))
 sidebarClose.addEventListener('click', () => {
 	sidebar.classList.add('close', 'hoverable')
+	article.classList.remove('move-right')
 })
 sidebarExpand.addEventListener('click', () => {
 	sidebar.classList.remove('close', 'hoverable')
-})
-if (sidebar.classList.contains) {
 	article.classList.add('move-right')
-}
+})
 sidebar.addEventListener('mouseenter', () => {
 	if (sidebar.classList.contains('hoverable')) {
 		sidebar.classList.remove('close')
@@ -56,16 +55,7 @@ darkLight.addEventListener('click', () => {
 		darkLight.classList.replace('bx-moon', 'bx-sun')
 	}
 })
-submenuItems.forEach((item, index) => {
-	item.addEventListener('click', () => {
-		item.classList.toggle('show_submenu')
-		submenuItems.forEach((item2, index2) => {
-			if (index !== index2) {
-				item2.classList.remove('show_submenu')
-			}
-		})
-	})
-})
+
 if (window.innerWidth < 768) {
 	sidebar.classList.add('close')
 } else {

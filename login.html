@@ -68,6 +68,7 @@
 
       if (response.ok) {
         localStorage.setItem("accessToken", data.data.accessToken)
+        localStorage.setItem("id", data.data.user.id)
         window.location.href = "/admin-page.html"
       } else {
         data.errors.forEach((error) => {

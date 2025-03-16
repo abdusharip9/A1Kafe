@@ -16,12 +16,12 @@ logoutBtn.addEventListener('click', logout)
 const id = localStorage.getItem('id')
 
 const userDataArr = [
-	userData.email || '',
-	userData.firstName || '',
-	userData.lastName || '',
-	userData.phone || '',
-	userData.adress || '',
-	userData.kafeName || '',
+	userData.userDto.email || '',
+	userData.userDto.firstName || '',
+	userData.userDto.lastName || '',
+	userData.userDto.phone || '',
+	userData.userDto.adress || '',
+	userData.userDto.kafeName || '',
 ]
 const inputValueArr = [email, firstName, lastName, phone, adress, kafeName]
 

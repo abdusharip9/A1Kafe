@@ -220,6 +220,11 @@ main {
 article #admin {
 	text-align: center;
 }
+@media screen and (max-width: 576px) {
+	.my-article {
+		margin-top: 100px;
+	}
+}
 @media screen and (max-width: 768px) {
 	#sidebarOpen {
 		font-size: 25px;
@@ -241,6 +246,7 @@ article #admin {
 		display: none;
 	}
 	.my-article {
+		margin-top: 100px;
 		padding-left: 20px !important;
 	}
 	.logo_item {
