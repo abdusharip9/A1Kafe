@@ -1,3 +1,4 @@
+import { logout } from './logout.js'
 import { verify } from './verify-token.js'
 
 const userData = await verify()
@@ -8,6 +9,9 @@ const lastName = document.querySelector('#lastName')
 const phone = document.querySelector('#phone')
 const adress = document.querySelector('#adress')
 const kafeName = document.querySelector('#kafeName')
+const logoutBtn = document.querySelector('#logoutBtn')
+
+logoutBtn.addEventListener('click', logout)
 
 const id = localStorage.getItem('id')
 

@@ -286,8 +286,14 @@ article #admin {
 .menu ul li:hover {
 	background: var(--blue-color);
 }
-
-.menu ul li a {
+.menu ul li button {
+	outline: none;
+	border: none;
+	background: transparent;
+	width: 100%;
+}
+.menu ul li a,
+button {
 	text-decoration: none;
 	color: var(--grey-color);
 	display: flex;
@@ -295,7 +301,8 @@ article #admin {
 	padding: 10px 15px;
 	gap: 5px;
 }
-.menu ul li a:hover {
+.menu ul li a:hover,
+button:hover {
 	color: var(--white-color);
 }
 .menu ul li a i {

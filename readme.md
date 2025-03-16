@@ -1,2 +1,2 @@
-local url = http://localhost:3000
+local url = https://backend-app-5rtx.onrender.com
 global url = https://backend-app-5rtx.onrender.com
