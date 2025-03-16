@@ -1,4 +1,4 @@
-import { verify } from './verify-token.js' // `.js` qo‘shish kerak
+import { verify } from './verify-token.js'
 
 const userData = await verify()
 
@@ -7,14 +7,27 @@ const firstName = document.querySelector('#firstName')
 const lastName = document.querySelector('#lastName')
 const phone = document.querySelector('#phone')
 const adress = document.querySelector('#adress')
+const kafeName = document.querySelector('#kafeName')
 
 const id = localStorage.getItem('id')
 
-email.value = userData.email
-firstName.value = userData.firstName
-lastName.value = userData.lastName
-phone.value = userData.phone
-adress.value = userData.adress
+const userDataArr = [
+	userData.email || '',
+	userData.firstName || '',
+	userData.lastName || '',
+	userData.phone || '',
+	userData.adress || '',
+	userData.kafeName || '',
+]
+const inputValueArr = [email, firstName, lastName, phone, adress, kafeName]
+
+userDataArr.forEach((item, index) => {
+	if (item !== '' || item !== null || item !== undefined || !item) {
+		inputValueArr[index].value = item
+	} else {
+		inputValueArr[index].value = ''
+	}
+})
 
 document
 	.getElementById('update-user-form')
@@ -26,8 +39,13 @@ document
 
 		const token = localStorage.getItem('accessToken') // Tokenni localStorage dan olish
 
+		const containerBtn = document.querySelector('.containerBtn')
+		const submitBtn = document.querySelector('#submitBtn')
+		containerBtn.classList.remove('d-none')
+		submitBtn.setAttribute('disabled', '')
+
 		const response = await fetch(
-			`https://backend-app-5rtx.onrender.com/api/auth/update-user/${id}`,
+			`http://localhost:3000/api/auth/update-user/${id}`,
 			{
 				method: 'PUT',
 				headers: {
@@ -40,4 +58,19 @@ document
 
 		const result = await response.json()
 		console.log(result) // Javobni ko‘rish
+
+		if (response.ok) {
+			if (result.message) {
+				alert(result.message)
+			}
+		} else {
+			result.errors.forEach(error => {
+				alert('Xatolik: ' + error.msg)
+			})
+			if (result.message) {
+				alert('Xatolik: ' + result.message)
+			}
+		}
+		containerBtn.classList.add('d-none')
+		submitBtn.removeAttribute('disabled')
 	})
