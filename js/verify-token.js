@@ -5,10 +5,13 @@ export async function verify() {
 		window.location.href = '/login.html' // Agar token bo‘lmasa, login sahifaga qaytarish
 	}
 
-	const response = await fetch('http://localhost:3000/api/auth/getUser', {
-		method: 'GET',
-		headers: { Authorization: `Bearer ${token}` },
-	})
+	const response = await fetch(
+		'https://backend-app-5rtx.onrender.com/api/auth/getUser',
+		{
+			method: 'GET',
+			headers: { Authorization: `Bearer ${token}` },
+		}
+	)
 
 	if (!response.ok) {
 		localStorage.removeItem('accessToken')
