@@ -88,4 +88,11 @@
 		width: 90% !important;
 		padding: 15px !important;
 	}
+	.header {
+		justify-content: space-around !important;
+	}
+	#nav-btns {
+		display: flex !important;
+		align-items: center !important;
+	}
 }

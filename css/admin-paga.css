@@ -212,17 +212,17 @@ body.dark {
 	display: none;
 }
 main {
-	display: flex;
+	padding-top: 100px;
+	/* display: flex;
 	justify-content: center;
-	align-items: center;
+	align-items: center; */
 	height: 100vh;
 }
-article #admin {
+.my-article #admin {
 	text-align: center;
 }
 @media screen and (max-width: 576px) {
 	.my-article {
-		margin-top: 100px;
 	}
 }
 @media screen and (max-width: 768px) {
@@ -246,7 +246,6 @@ article #admin {
 		display: none;
 	}
 	.my-article {
-		margin-top: 100px;
 		padding-left: 20px !important;
 	}
 	.logo_item {
@@ -319,13 +318,13 @@ button:hover {
 	color: var(--white-color);
 }
 /* article */
-article {
+.my-article {
 	color: var(--grey-color);
 	transition: all 0.5s ease;
 	padding-left: 100px;
 	padding-right: 20px;
 }
-article.move-right {
+.my-article.move-right {
 	padding-left: 280px;
 	padding-right: 20px;
 }

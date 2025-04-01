@@ -15,6 +15,7 @@
 </head>
 
 <body>
+
   <!-- Loader -->
   <section class="dots-container">
     <div class="dot"></div>
@@ -39,7 +40,7 @@
       <div class="menu">
         <ul>
           <li><a href="edit-profile.html"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
-          <li><a href="#"><i class="bx bxs-inbox"></i>&nbsp;Inbox</a></li>
+
           <li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
           <li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
           <li><button id="logoutBtn"><i class="bx bx-log-out"></i>&nbsp;Sign Out</button></li>
@@ -94,11 +95,13 @@
     <article id="admin" class="move-right my-article">
       <h1>Admin Panel</h1>
       <p>Coming soon ...</p>
+
     </article>
   </main>
   <!-- JavaScript -->
-  <script src="js/index.js"></script>
+  <script type="module" src="js/api-url.js"></script>
   <script type="module" src="js/verify-token.js"></script>
+  <script src="js/index.js"></script>
   <script type="module" src="js/logout.js"></script>
   <script type="module" src="js/admin-page.js"></script>
 </body>

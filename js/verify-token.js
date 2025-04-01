@@ -1,3 +1,5 @@
+import { API_URL } from './api-url.js'
+
 export async function verify() {
 	const token = localStorage.getItem('accessToken')
 	const id = localStorage.getItem('id')
@@ -6,13 +8,10 @@ export async function verify() {
 		window.location.href = '/login.html' // Agar token bo‘lmasa, login sahifaga qaytarish
 	}
 
-	const response = await fetch(
-		`https://backend-app-5rtx.onrender.com/api/auth/getUser/${id}`,
-		{
-			method: 'GET',
-			headers: { Authorization: `Bearer ${token}` },
-		}
-	)
+	const response = await fetch(`${API_URL}/api/auth/getUser/${id}`, {
+		method: 'GET',
+		headers: { Authorization: `Bearer ${token}` },
+	})
 
 	const data = await response.json()
 	console.log(data)
