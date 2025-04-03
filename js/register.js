@@ -44,11 +44,12 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 	})
 
 	const data = await response.json()
+	console.log(data)
 
 	if (response.ok) {
-		localStorage.setItem('token', response.token)
-		window.location.href = '/login.html'
-	} else {
+		localStorage.setItem('email', email)
+		window.location.href = '/view/activate/otp.html'
+	} else if (response.status === 400) {
 		data.errors.forEach(error => {
 			showAlert('Xatolik: ' + error.msg, 'danger', 300000)
 		})

@@ -3,52 +3,57 @@ import { API_URL } from './api-url.js'
 import { itemIteration } from './edit-profile.js'
 
 const id = localStorage.getItem('id')
+const token = localStorage.getItem('accessToken')
 
-document.getElementById('addKafe').addEventListener('submit', function (e) {
-	phoneAndKafe(e, 'kafeName', this, 'kafeNames')
-})
-document.getElementById('addPhone').addEventListener('submit', function (e) {
-	phoneAndKafe(e, 'phone', this, 'phones')
-})
+document
+	.getElementById('addKafe')
+	.addEventListener('submit', e => handleSubmit(e, 'kafeName', 'kafeNames'))
+document
+	.getElementById('addPhone')
+	.addEventListener('submit', e => handleSubmit(e, 'phone', 'phones'))
 
-async function phoneAndKafe(e, urlPice, formElement, listId) {
+async function handleSubmit(e, urlPiece, listId) {
 	e.preventDefault()
+	const formElement = e.target
 	const formData = new FormData(formElement)
 	formData.append('id', id)
-	const token = localStorage.getItem('accessToken')
-	const jsonData = Object.fromEntries(formData.entries())
 
-	const response = await fetch(
-		`${API_URL}/api/auth/update-user/add-${urlPice}/${id}`,
-		{
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify(jsonData),
-		}
-	)
-
-	const result = await response.json()
-	let newData = null
-	if (response.ok) {
-		if (result.newData.message) {
-			showAlert(result.newData.message, 'success', 3000)
-			if (result.newData.kafes) {
-				newData = result.newData.kafes
-			} else if (result.newData.phones || result.newData.phones == []) {
-				newData = result.newData.phones
+	try {
+		const response = await fetch(
+			`${API_URL}/api/auth/update-user/add-${urlPiece}/${id}`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify(Object.fromEntries(formData.entries())),
 			}
-			await itemIteration(listId, newData, id, API_URL, urlPice)
+		)
+
+		const result = await response.json()
+
+		if (!response.ok) {
+			throw result
 		}
-	} else if (result.errors) {
-		result.errors.forEach(error => {
-			showAlert('Xatolik: ' + error.msg, 'danger', 3000)
-		})
-		if (result.message) {
-			showAlert('Xatolik: ' + result.message, 'danger', 3000)
-		} else showAlert(result.message, 'danger', 3000)
-	} else showAlert('Xatolik: ' + result.message, 'danger', 3000)
-	formElement.reset()
+
+		if (result.newData?.message) {
+			showAlert(result.newData.message, 'success', 3000)
+			const newData = result.newData.kafes ?? result.newData.phones ?? []
+			await itemIteration(listId, newData, id, urlPiece)
+		}
+	} catch (error) {
+		if (error.errors) {
+			error.errors.forEach(err =>
+				showAlert('Xatolik: ' + err.msg, 'danger', 3000)
+			)
+		}
+		showAlert(
+			'Xatolik: ' + (error.message || 'Noma’lum xatolik'),
+			'danger',
+			3000
+		)
+	} finally {
+		formElement.reset()
+	}
 }
