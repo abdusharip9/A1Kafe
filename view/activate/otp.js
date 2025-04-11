@@ -94,7 +94,7 @@ document.getElementById('sendBtn').onclick = async function () {
 		localStorage.setItem('accessToken', data.data.accessToken)
 		localStorage.setItem('id', data.data.user.id)
 		window.location.href = '../../admin-page.html'
-	} else {
-		showAlert(`Notog'ri malumot`, 'danger', 3000)
+	} else if (response.status == 400) {
+		showAlert('Kod mos kelmadi', 'danger', 3000)
 	}
 }

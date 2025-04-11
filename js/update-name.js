@@ -10,7 +10,7 @@ function updateData(buttonId, inputId, postName) {
 	const token = localStorage.getItem('accessToken')
 
 	async function handleClick() {
-		const response = await fetch(`${API_URL}/api/auth/update-user/${id}`, {
+		const response = await fetch(`${API_URL}/api/crud/update-user/${id}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

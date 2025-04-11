@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	setTimeout(() => {
 		const loader = document.querySelector('.dots-container')
 		loader.style.display = 'none'
-	}, 1200)
+	}, 500)
 
 	// for theme
 	if (localStorage.getItem('theme') == 'dark') {
@@ -55,6 +55,17 @@ darkLight.addEventListener('click', () => {
 		darkLight.classList.replace('bx-moon', 'bx-sun')
 	}
 })
+
+submenuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    item.classList.toggle("show_submenu");
+    submenuItems.forEach((item2, index2) => {
+      if (index !== index2) {
+        item2.classList.remove("show_submenu");
+      }
+    });
+  });
+});
 
 if (window.innerWidth < 768) {
 	sidebar.classList.add('close')

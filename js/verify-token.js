@@ -8,7 +8,7 @@ export async function verify() {
 		window.location.href = '/login.html' // Agar token bo‘lmasa, login sahifaga qaytarish
 	}
 
-	const response = await fetch(`${API_URL}/api/auth/getUser/${id}`, {
+	const response = await fetch(`${API_URL}/api/crud/getUser/${id}`, {
 		method: 'GET',
 		headers: { Authorization: `Bearer ${token}` },
 	})

@@ -20,7 +20,7 @@ async function handleSubmit(e, urlPiece, listId) {
 
 	try {
 		const response = await fetch(
-			`${API_URL}/api/auth/update-user/add-${urlPiece}/${id}`,
+			`${API_URL}/api/crud/update-user/add-${urlPiece}/${id}`,
 			{
 				method: 'POST',
 				headers: {

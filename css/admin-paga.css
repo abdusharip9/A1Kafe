@@ -171,6 +171,34 @@ body.dark {
 	background-color: var(--blue-color);
 	color: var(--white-color);
 }
+/* nav links sidebar*/
+
+.submenu_item {
+  cursor: pointer;
+}
+.submenu {
+  display: none;
+}
+.submenu_item .arrow-left {
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  margin-right: auto;
+}
+.sidebar.close .submenu {
+  display: none;
+}
+.show_submenu ~ .submenu {
+  display: block;
+}
+.show_submenu .arrow-left {
+  transform: rotate(90deg);
+}
+.submenu .sublink {
+  padding: 15px 15px 15px 52px;
+}
+
+/*  */
 .bottom_content {
 	position: fixed;
 	bottom: 60px;

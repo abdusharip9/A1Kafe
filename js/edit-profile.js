@@ -32,7 +32,7 @@ userDataArr.forEach((item, index) => {
 async function deleteUserData(id, itemData, urlType) {
 	try {
 		const response = await fetch(
-			`${API_URL}/api/auth/update-user/delete-${urlType}/${id}`,
+			`${API_URL}/api/crud/update-user/delete-${urlType}/${id}`,
 			{
 				method: 'POST',
 				headers: {
@@ -47,7 +47,7 @@ async function deleteUserData(id, itemData, urlType) {
 		if (!response.ok) throw new Error(data.message || 'Noma’lum xatolik')
 
 		const updatedData =
-			data.newData?.phones || data.newData?.updatedUser?.name || []
+			data.newData?.phones || data.newData?.kafes || []
 		await itemIteration(
 			urlType === 'phone' ? 'phones' : 'kafeNames',
 			updatedData,
@@ -65,6 +65,8 @@ export async function itemIteration(listId, dataList, id, urlType) {
 	const listElement = document.getElementById(listId)
 	listElement.innerHTML = ''
 
+	console.log(dataList);
+
 	dataList.forEach((item, index) => {
 		const listItem = document.createElement('li')
 		listItem.className =
@@ -75,60 +77,12 @@ export async function itemIteration(listId, dataList, id, urlType) {
 				<span>${item}</span>
 			</div>
 			<div class="d-inline-block">
-			${
-				urlType === 'phone'
-					? `
-						<button type="button" class='btn btn-danger ${urlType}' data-name="${item}" title="Delete">
-							<i class="bx bx-trash"></i>
-						</button>
-						`
-					: ''
-			}
-				${
-					urlType === 'kafeName'
-						? `
-							<button type="button" class='btn btn-danger ${urlType}' data-name="${item}" title="Delete">
-								<i class="bx bx-trash"></i>
-							</button>
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kafe${index}">
-								<i class="bx bx-play"></i> Ochish
-							</button>`
-						: ''
-				}
+				<button type="button" class='btn btn-danger ${urlType}' data-name="${item}" title="Delete">
+					<i class="bx bx-trash"></i>
+				</button>
 			</div>
 		`
 		listElement.appendChild(listItem)
-
-		if (urlType === 'kafeName') {
-			const modalContainer = document.querySelector('.maodals')
-			const modalElement = document.createElement('div')
-			modalElement.className = 'modal fade'
-			modalElement.id = `kafe${index}`
-			modalElement.innerHTML = `
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5">${item} haqida</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-						</div>
-						<div class="modal-body">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">Email: ${userData.userDto.email}</li>
-								<li class="list-group-item">Ism: ${userData.userDto.firstName}</li>
-								<li class="list-group-item">Familya: ${userData.userDto.lastName}</li>
-								<li class="list-group-item">Kafe nomi: ${item}</li>
-								<li class="list-group-item">Telefon raqam: ${userData.userDto.phone[index]}</li>
-							</ul>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
-							<a href="http://172.20.169.105:8080/A1Kafe_war/main.do?action=add_web_use&login=${userData.userDto.email}&password=1212&telNumber=${userData.userDto.phone[index]}&lastName=${userData.userDto.lastName}&tarifId=3&firstName=${userData.userDto.firstName}" class="btn btn-primary">Ochish</a>
-						</div>
-					</div>
-				</div>
-			`
-			modalContainer.appendChild(modalElement)
-		}
 	})
 
 	document.querySelectorAll(`.${urlType}`).forEach(btn => {
