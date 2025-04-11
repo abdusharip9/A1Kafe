@@ -145,11 +145,18 @@ kafesArr.forEach((item, index)=>{
 
 		// btnArr[index].append(a)
 
-		const response = await fetch(`http://172.20.169.105:8080/A1Kafe_war/main.do?action=add_web_use&name=${data.firstName}%20${data.lastName}&login=${emailSplit}&password=1111&kafeId=${data.kafe_id}&tarifId=${data.tarif_id}`, {
+		const response = await fetch(`http://172.20.169.105:8080/A1Kafe_war/login.do?mode=add_web_user`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
+			body: JSON.stringify({ 
+				name: `${data.firstName}%20${data.lastName}`,
+				login: emailSplit,
+				password: '1111',
+				kafeId: data.kafe_id,
+				tarifId: data.tarif_id,
+			}),
 		});
 		const data1 = await response.json()
 		console.log(data1);
