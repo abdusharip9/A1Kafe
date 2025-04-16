@@ -11,9 +11,26 @@
 	<link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
 	<link rel="stylesheet" href="/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/admin-paga.css" />
+	<link rel="stylesheet" href="/css/alert.css">
+	<style>
+		.kafeRound {
+			border-radius: 50%;
+			padding: 15px;
+			border: 2px solid;
+		}
+
+		.account {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			position: relative;
+		}
+	</style>
 </head>
 
 <body>
+	<div id="alert-container"></div>
+
 	<!-- Loader -->
 	<section class="dots-container">
 		<div class="dot"></div>
@@ -23,22 +40,39 @@
 		<div class="dot"></div>
 	</section>
 
-
 	<!-- navbar -->
 	<nav class="my-navbar">
 		<div class="logo_item">
 			<i class="bx bx-menu" id="sidebarOpen"></i>
-			<img src="img/logo.PNG" id="logo" width="25px" alt=""></i>Shaxsiy kabinet
+			<img src="img/logo.PNG" style="object-fit: contain;" id="logo" width="40px" alt=""></i>Shaxsiy kabinet
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Kafe
+			</button>
+			<ul class="dropdown-menu dropdown-menu-dark">
+				<li><a class="dropdown-item active" href="#">Kafe 1</a></li>
+				<li><a class="dropdown-item" href="#">Another action</a></li>
+				<li><a class="dropdown-item" href="#">Something else here</a></li>
+				<li>
+					<hr class="dropdown-divider">
+				</li>
+				<li><a class="dropdown-item" href="#">Demo Kafe</a></li>
+			</ul>
 		</div>
 		<div class="navbar_content">
-			<i class="bi bi-grid"></i>
-			<i class='bx bx-sun' id="darkLight"></i>
-			<i class='bx bx-bell'></i>
 			<img src="img/user-icon.png" alt="" class="profile" width="25px" />
 			<div class="menu">
 				<ul>
 					<li><a href="edit-profile.html"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
 					<li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
+					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
+					<li><a href="#"><i class='bx bx-bell'></i></i>&nbsp;Notifications</a></li>
+					<li>
+						<button class='bx bx-sun text-start' id="darkLight">
+							<span>Theme</span>
+						</button>
+					</li>
 					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
 					<li><button id="logoutBtn"><i class="bx bx-log-out"></i>&nbsp;Sign Out</button></li>
 				</ul>
@@ -73,18 +107,12 @@
 						</a>
 					</li>
 					<li class="item">
-						<div href="#" class="nav_link submenu_item">
+						<a href="#" class="nav_link">
 							<span class="navlink_icon">
-								<i class="bx bx-home-alt"></i>
+								<i class="bx bx-store"></i>
 							</span>
 							<span class="navlink">Kafelar</span>
-							<i class="bx bx-chevron-right arrow-left"></i>
-						</div>
-						<!-- 
-						<ul class="menu_items submenu kafesList">
-
-						</ul> -->
-
+						</a>
 					</li>
 					<!-- end -->
 				</ul>
@@ -105,8 +133,29 @@
 		<!-- Article -->
 		<article id="admin" class="move-right my-article">
 			<h1>Kafelar</h1>
-			<ul class="list-group col-md-8" id="kafeList">
-			</ul>
+
+			<label class="form-label text-secondary mb-3">
+				Kafe yoki Restaraningiz nomlari takrorlanmas bo'lishi kerak.
+			</label>
+			<div class="col-sm-6">
+				<form id="addKafe">
+					<div class="input-group mb-3">
+						<input type="text" class="form-control" id="kafeName" name="kafeName"
+							placeholder="Kafe yoki Restaraningiz nomi" aria-label="Kafe yoki Restaraningiz nomi"
+							aria-describedby="basic-addon4" required>
+						<button type="submit" class="btn btn-primary input-group-text" id="basic-addon4">Qo'shish</button>
+					</div>
+				</form>
+
+				<ul class="list-group mt-3" id="kafeNames">
+				</ul>
+				<ul class="list-group mt-3" id="kafeList">
+				</ul>
+			</div>
+
+			<div id="cards">
+
+			</div>
 
 		</article>
 		<div class="maodals">
@@ -117,8 +166,10 @@
 	<script type="module" src="js/verify-token.js"></script>
 	<script type="module" src="js/logout.js"></script>
 	<script type="module" src="js/kafelar.js"></script>
+	<script type="module" src="js/add-kafe.js"></script>
 	<script src="js/index.js"></script>
-	<script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+	<script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

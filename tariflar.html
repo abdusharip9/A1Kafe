@@ -23,24 +23,41 @@
 		<div class="dot"></div>
 	</section>
 
-
 	<!-- navbar -->
 	<nav class="my-navbar">
 		<div class="logo_item">
 			<i class="bx bx-menu" id="sidebarOpen"></i>
-			<img src="img/logo.PNG" id="logo" width="25px" alt=""></i>Shaxsiy kabinet
+			<img src="img/logo.PNG" style="object-fit: contain;" id="logo" width="40px" alt=""></i>Shaxsiy kabinet
+		</div>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				Kafe
+			</button>
+			<ul class="dropdown-menu dropdown-menu-dark">
+				<li><a class="dropdown-item active" href="#">Kafe 1</a></li>
+				<li><a class="dropdown-item" href="#">Another action</a></li>
+				<li><a class="dropdown-item" href="#">Something else here</a></li>
+				<li>
+					<hr class="dropdown-divider">
+				</li>
+				<li><a class="dropdown-item" href="#">Demo Kafe</a></li>
+			</ul>
 		</div>
 		<div class="navbar_content">
-			<i class="bi bi-grid"></i>
-			<i class='bx bx-sun' id="darkLight"></i>
-			<i class='bx bx-bell'></i>
 			<img src="img/user-icon.png" alt="" class="profile" width="25px" />
 			<div class="menu">
 				<ul>
 					<li><a href="edit-profile.html"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
 					<li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
 					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
-					<li><a href="#"><i class="bx bx-log-out"></i>&nbsp;Sign Out</a></li>
+					<li><a href="#"><i class='bx bx-bell'></i></i>&nbsp;Notifications</a></li>
+					<li>
+						<button class='bx bx-sun text-start' id="darkLight">
+							<span>Theme</span>
+						</button>
+					</li>
+					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
+					<li><button id="logoutBtn"><i class="bx bx-log-out"></i>&nbsp;Sign Out</button></li>
 				</ul>
 			</div>
 		</div>
@@ -98,8 +115,90 @@
 
 		<!-- Article -->
 		<article id="admin" class="move-right my-article">
-			<h1>Tariflar</h1>
-			<p>Coming soon ...</p>
+			<div id="pricing" class="section">
+				<div class="pricing-header p-5 pb-md-4 mx-auto text-center">
+					<h2 class="display-4 fw-normal">Xizmatlar narxlari</h2>
+					<p class="fs-5">Bizning xizmatlarimizga obuna bo‘ling va biznesingizni yanada samarali boshqaring!</p>
+				</div>
+				<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+					<div class="col mb-2">
+						<div class="card mb-4 rounded-3 shadow-sm">
+							<div class="card-header py-3">
+								<h4 class="my-0 fw-normal">Standart</h4>
+							</div>
+							<div class="card-body">
+								<h1 class="card-title pricing-card-title">100 000 so'm<small
+										class="text-body-secondary fw-light">/oy</small>
+								</h1>
+								<ul class="list-unstyled mt-3 mb-4">
+									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Bronzlash xizmati <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Inventariya <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								</ul>
+								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
+									bog‘laning</a>
+							</div>
+						</div>
+					</div>
+					<div class="col mb-2">
+						<div class="card mb-4 rounded-3 shadow-sm">
+							<div class="card-header py-3">
+								<h4 class="my-0 fw-normal">Pro</h4>
+							</div>
+							<div class="card-body">
+								<h1 class="card-title pricing-card-title">150,000 so'm<small
+										class="text-body-secondary fw-light">/oy</small></h1>
+								<ul class="list-unstyled mt-3 mb-4">
+									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+									<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
+								</ul>
+								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
+									bog‘laning</a>
+							</div>
+						</div>
+					</div>
+					<div class="col mb-2">
+						<div class="card mb-4 rounded-3 shadow-sm">
+							<div class="card-header py-3">
+								<h4 class="my-0 fw-normal">VIP</h4>
+							</div>
+							<div class="card-body">
+								<h1 class="card-title pricing-card-title">300,000 so'm<small
+										class="text-body-secondary fw-light">/oy</small></h1>
+								<ul class="list-unstyled mt-3 mb-4">
+									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Fiskal To'lov <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Xodimlar Xioboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+									<li> Kompleks Menu <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
+								</ul>
+								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
+									bog‘laning</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</article>
 	</main>
 	<!-- JavaScript -->
@@ -107,6 +206,8 @@
 	<script type="module" src="js/verify-token.js"></script>
 	<script type="module" src="js/logout.js"></script>
 	<script src="js/index.js"></script>
+	<script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

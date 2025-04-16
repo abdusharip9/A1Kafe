@@ -1,5 +1,7 @@
 import { showAlert } from '../components/alert.js'
+import { Loading } from '../components/loading.js'
 import { API_URL } from './api-url.js'
+
 
 const id = localStorage.getItem('id')
 
@@ -8,8 +10,12 @@ function updateData(buttonId, inputId, postName) {
 	const button = document.getElementById(buttonId)
 	const input = document.getElementById(inputId)
 	const token = localStorage.getItem('accessToken')
+	
+	let loading = new Loading(buttonId, 'Yuborilmoqda', 'Yangilash')
 
 	async function handleClick() {
+		loading.bigLoading()
+
 		const response = await fetch(`${API_URL}/api/crud/update-user/${id}`, {
 			method: 'POST',
 			headers: {
@@ -20,6 +26,7 @@ function updateData(buttonId, inputId, postName) {
 		})
 		const result = await response.json()
 		console.log(result)
+		loading.removeLoading()
 		showAlert(result.message, 'success', 3000)
 	}
 
@@ -28,3 +35,4 @@ function updateData(buttonId, inputId, postName) {
 
 updateData('updateFirstName', 'firstName', 'firstName')
 updateData('updateLastName', 'lastName', 'lastName')
+updateData('updatePhone', 'phone', 'phone')

@@ -27,20 +27,39 @@
   </section>
 
   <!-- navbar -->
+  <!-- navbar -->
   <nav class="my-navbar">
     <div class="logo_item">
       <i class="bx bx-menu" id="sidebarOpen"></i>
-      <img src="img/logo.PNG" id="logo" width="25px" alt=""></i>Shaxsiy kabinet
+      <img src="img/logo.PNG" style="object-fit: contain;" id="logo" width="40px" alt=""></i>Shaxsiy kabinet
+    </div>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Kafe
+      </button>
+      <ul class="dropdown-menu dropdown-menu-dark">
+        <li><a class="dropdown-item active" href="#">Kafe 1</a></li>
+        <li><a class="dropdown-item" href="#">Another action</a></li>
+        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" href="#">Demo Kafe</a></li>
+      </ul>
     </div>
     <div class="navbar_content">
-      <i class="bi bi-grid"></i>
-      <i class='bx bx-sun' id="darkLight"></i>
-      <i class='bx bx-bell'></i>
       <img src="img/user-icon.png" alt="" class="profile" width="25px" />
       <div class="menu">
         <ul>
-          <li><a href="#"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
+          <li><a href="edit-profile.html"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
           <li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
+          <li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
+          <li><a href="#"><i class='bx bx-bell'></i></i>&nbsp;Notifications</a></li>
+          <li>
+            <button class='bx bx-sun text-start' id="darkLight">
+              <span>Theme</span>
+            </button>
+          </li>
           <li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
           <li><button id="logoutBtn"><i class="bx bx-log-out"></i>&nbsp;Sign Out</button></li>
         </ul>
@@ -101,63 +120,44 @@
     <!-- Article -->
     <article class="my-article move-right">
       <div class="row g-3">
-        <div class="col-sm-6">
+        <div class="col-md-6">
           <label for="email" class="form-label">Elektron pochtangiz</label>
           <input type="text" class="form-control" id="email" disabled>
         </div>
 
+        <div class="col-md-6">
+          <label for="email" class="form-label">Telefon raqamingiz</label>
+          <div class="input-group mb-3">
+            <input type="tel" class="form-control z-1" id="phone" name="phone" placeholder="Telefon raqamingiz"
+              aria-label="Telefon raqamingiz" aria-describedby="basic-addon4">
+            <button type="submit" id="updatePhone"
+              class="btn btn-primary position-absolute end-0 top-0 z-2 input-group-text"
+              id="basic-addon4">Yangilash</button>
+          </div>
+        </div>
+
         <!-- Ism familya -->
-        <div class="row mt-3">
-          <hr>
-          <label for="email" class="form-label">Ism Familyangiz</label>
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" name="firstName" id="firstName" placeholder="Ismingiz"
-                aria-label="Ismingiz" aria-describedby="basic-addon2">
-              <button type="button" class="btn btn-primary input-group-text" id="updateFirstName">Yangilash</button>
-            </div>
+
+        <hr>
+        <div class="col-md-6">
+          <label for="firstName" class="form-label">Ismingiz</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control z-1" name="firstName" id="firstName" placeholder="Ismingiz"
+              aria-label="Ismingiz" aria-describedby="basic-addon2">
+            <button type="button" class="btn btn-primary input-group-text  position-absolute end-0 top-0 z-2"
+              id="updateFirstName">Yangilash</button>
           </div>
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Familyangiz"
-                aria-label="Familyangiz" aria-describedby="basic-addon3">
-              <button type="button" class="btn btn-primary input-group-text" id="updateLastName">Yangilash</button>
-            </div>
+        </div>
+        <div class="col-md-6">
+          <label for="lastName" class="form-label">Familyangiz</label>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control z-1" name="lastName" id="lastName" placeholder="Familyangiz"
+              aria-label="Familyangiz" aria-describedby="basic-addon3">
+            <button type="button" class="btn btn-primary input-group-text position-absolute end-0 top-0 z-2 "
+              id="updateLastName">Yangilash</button>
           </div>
         </div>
 
-        <div class="row mt-3">
-          <hr>
-          <label class="form-label text-secondary mb-3">
-            Kafe yoki Restaraningiz nomlari takrorlanmas bo'lishi kerak,
-            telefon raqamingiz ham.
-          </label>
-          <div class="col-sm-6">
-            <form id="addPhone">
-              <div class="input-group mb-3">
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Telefon raqamingiz"
-                  aria-label="Telefon raqamingiz" aria-describedby="basic-addon4">
-                <button type="submit" class="btn btn-primary input-group-text" id="basic-addon4">Qo'shish</button>
-              </div>
-            </form>
-
-            <ul class="list-group mt-3" id="phones">
-            </ul>
-          </div>
-          <div class="col-sm-6">
-            <form id="addKafe">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control" id="kafeName" name="kafeName"
-                  placeholder="Kafe yoki Restaraningiz nomi" aria-label="Kafe yoki Restaraningiz nomi"
-                  aria-describedby="basic-addon4">
-                <button type="submit" class="btn btn-primary input-group-text" id="basic-addon4">Qo'shish</button>
-              </div>
-            </form>
-
-            <ul class="list-group mt-3" id="kafeNames">
-            </ul>
-          </div>
-        </div>
       </div>
     </article>
     <div class="maodals">
@@ -165,13 +165,15 @@
   </main>
   <!-- JavaScript -->
   <script type="module" src="js/api-url.js"></script>
+  <script type="module" src="components/loading.js"></script>
   <script src="js/index.js"></script>
   <script type="module" src="js/verify-token.js"></script>
   <script type="module" src="js/logout.js"></script>
   <script type="module" src="js/edit-profile.js"></script>
   <script type="module" src="js/add-kafe.js"></script>
   <script type="module" src="js/update-name.js"></script>
-  <script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
+  <script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

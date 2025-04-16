@@ -1,5 +1,4 @@
 // import { showAlert } from '../components/alert.js'
-// import { API_URL } from './api-url.js'
 import { API_URL } from './api-url.js'
 import { logout } from './logout.js'
 import { verify } from './verify-token.js'
@@ -15,30 +14,72 @@ if (!token) {
 const logoutBtn = document.querySelector('#logoutBtn')
 logoutBtn.addEventListener('click', logout)
 
-const kafeList = document.querySelector('#kafeList')
+const cards = document.querySelector('#cards')
 const modalContainer = document.querySelector('.maodals')
 console.log(modalContainer);
 
-kafeList.innerHTML = ''
+cards.innerHTML = ''
+
+console.log(userData);
+
 
 if(userData.userDto.kafeName){
 	await userData.userDto.kafeName.forEach((item, index)=>{
-		kafeList.innerHTML += `
-			<li class="list-group-item d-flex justify-content-between align-items-center">
-				${item}
-				<div>
-					<button type="button" class="btn btn-primary d-inline-block" data-bs-toggle="modal" data-bs-target="#kafeInfo${index}">
-						<i class="bx bx-info-circle"></i> Malumotlar
-					</button>
-					<button type="button" s overflow: hidden;" class="kafe" class="btn btn-primary">
-						<i class="bx bx-send"></i> Login Parol olsih
-						<div class="containerBtn d-none">
-						<div class="bar"></div>
-					</div>
-					</button>
+		cards.innerHTML += `
+			<div class="card px-0 kafeCard mt-3">
+				<div class="card-header fw-bolder">
+					Kafelar
 				</div>
-			</li>
 
+				<div class="card-body">
+
+					<div class="d-flex justify-content-between mb-3 card-top">
+						<div class="kafe-data">
+							<h5 class="card-title fs-3 fw-bold text-primary">${item.name}</h5>
+							<span class="card-text fs-6 fw-medium text-bg-warning">${userData.userDto.phone}</span>
+						</div>
+
+						<div class="account">
+							<div class="border-primary d-inline-block bg-light text-primary kafeRound">${userData.userDto.firstName[0]+userData.userDto.lastName[0] }</div>
+							<div class="d-flex flex-column">
+								<div class="text-secondary fs-6 fw-bold">${userData.userDto.firstName} ${userData.userDto.lastName}</div>
+								<div class="text-secondary fs-6 fw-bold">${userData.userDto.email}</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="list-item-section">
+						<ul class="list-group list-group-horizontal">
+							<li class="list-group-item list-group-item-action bg-light text-dark fw-bold">Login</li>
+							<li class="list-group-item bg-secondary-subtle text-dark fw-bold">${userData.userDto.email.split("@")[0]}</li>
+						</ul>
+						<ul class="list-group list-group-horizontal mt-3">
+							<li class="list-group-item list-group-item-action bg-light text-dark fw-bold">Parol</li>
+							<li class="list-group-item bg-secondary-subtle text-dark fw-bold">1111</li>
+						</ul>
+						<ul class="list-group list-group-horizontal mt-3">
+							<li class="list-group-item list-group-item-action bg-light text-dark fw-bold">Status</li>
+							<li class="list-group-item bg-success text-light fw-bold">${item.status === 'inactive' ? 'No&nbsp;faol' : (item.status ?? 'active')}
+							</li>
+						</ul>
+						<ul class="list-group list-group-horizontal mt-3">
+							<li class="list-group-item list-group-item-action bg-light text-dark fw-bold">Balance</li>
+							<li class="list-group-item bg-success text-light fw-bold">${item.balance}&nbsp;som</li>
+						</ul>
+						<ul class="list-group list-group-horizontal mt-3">
+							<li class="list-group-item list-group-item-action bg-light text-dark fw-bold">Tarif</li>
+							<li class="list-group-item bg-primary text-light fw-bold">${item.tariff || 'Tanlanmagan'}
+							</li>
+						</ul>
+					</div>
+
+					<div class="buttons d-flex flex-row-reverse gap-2 mt-3">
+						<button class="btn btn-primary">Ochish</button>
+						<button class="btn btn-warning">Tahrirlash</button>
+						<button class="btn btn-danger">O'chirish</button>
+					</div>
+				</div>
+			</div>
 		`
 		const modalElement = document.createElement('div')
 		modalElement.className = 'modal fade'
@@ -119,60 +160,41 @@ async function getKafeUsers(kafeId){
 	
 }
 
-
-
 let btnArr = document.querySelectorAll(`.kafe`)
 const kafesArr = await getKafes(adminId)
 kafesArr.forEach((item, index)=>{
-	
-	console.log(item._id);
-	// let button = document.createElement('button')
-	// button.setAttribute('data-kafe-id', item._id)
-	// button.setAttribute('class', 'nav_link sublink')
-	// button.innerText = item.name
-	btnArr[index].innerText = item.name
+
 	btnArr[index].addEventListener("click", async () => {
 		let {data} = await getKafeUsers(item._id);
 		console.log('sss',data);
-
+		console.log(data);
+		
 		let emailSplit = data.email.split("@")[0];
 
-		// let a = document.createElement('a')
-		// a.href = `http://172.20.169.105:8080/A1Kafe_war/main.do?action=add_web_use&name=${data.firstName}%20${data.lastName}&login=${emailSplit}&password=1111&kafeId=${data.kafe_id}&tarifId=${data.tarif_id}`
-		// a.innerText = 'gettik'
-
-		// console.log(a);
-
-		// btnArr[index].append(a)
-
-		const response = await fetch(`http://172.20.169.105:8080/A1Kafe_war/login.do?mode=add_web_user`, {
+		const response = await fetch(`${API_URL}/proxy/login`, {
 			method: 'POST',
 			headers: {
+				Authorization: `Bearer ${token}`,
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({ 
-				name: `${data.firstName}%20${data.lastName}`,
+				name: `${data.firstName} ${data.lastName}`,
 				login: emailSplit,
 				password: '1111',
 				kafeId: data.kafe_id,
 				tarifId: data.tarif_id,
 			}),
+		})
+		.then(res => res.json())
+		.then(data => {
+			if (data.redirect) {
+				window.location.href = data.redirect; // ✅ Brauzerni Java backend yuborgan manzilga yo'naltiramiz
+			} else {
+				console.log('Javob:', data);
+			}
+		})
+		.catch(err => console.error(err));
+			const data1 = await response.json()
+			console.log(data1);
 		});
-		const data1 = await response.json()
-		console.log(data1);
-		
-
-
-		
-	});
-	// btnArr.append(button)
-	// console.log('sss',item);
-
-
-
 });
-
-
-
-// <a href="http://172.20.169.105:8080/A1Kafe_war/main.do?action=add_web_use&login=${userData.userDto.email}&password=1212&telNumber=${userData.userDto.phone[index]}&lastName=${userData.userDto.lastName}&tarifId=3&firstName=${userData.userDto.firstName}" class="btn btn-primary">Ochish</a>
-// http://localhost:8082/kafe/login.do?mode=login&login=admin&password=1111

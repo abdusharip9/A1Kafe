@@ -35,7 +35,7 @@ body.dark {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 15px 30px;
+	padding: 10px 20px;
 	z-index: 1000;
 	box-shadow: 0 0 2px var(--grey-color-light);
 }
@@ -250,7 +250,14 @@ main {
 	text-align: center;
 }
 @media screen and (max-width: 576px) {
-	.my-article {
+	.my-navbar {
+		padding: 10px 15px;
+	}
+	.logo_item {
+		display: flex;
+		align-items: center;
+		column-gap: 0px;
+		font-size: 16px;
 	}
 }
 @media screen and (max-width: 768px) {
@@ -278,6 +285,10 @@ main {
 	}
 	.logo_item {
 		font-size: 18px;
+	}
+	.card-top{
+		flex-direction: column-reverse;
+		gap: 20px;
 	}
 }
 /* for account menu */

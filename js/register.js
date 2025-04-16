@@ -34,13 +34,16 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 	containerBtn.classList.remove('d-none')
 	submitBtn.setAttribute('disabled', '')
 
+	const firstName = document.getElementById('firstName').value
+	const lastName = document.getElementById('lastName').value
+	const phone = document.getElementById('phone').value
 	const email = document.getElementById('email').value
 	const password = document.getElementById('password').value
 
 	const response = await fetch(`${API_URL}/api/auth/register`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email, password }),
+		body: JSON.stringify({ firstName, lastName, phone, email, password }),
 	})
 
 	const data = await response.json()

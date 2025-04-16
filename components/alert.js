@@ -36,3 +36,4 @@ function showAlert(message, type = 'info', duration = 3000) {
 }
 
 export { Alert, showAlert }
+
