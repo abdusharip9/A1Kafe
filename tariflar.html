@@ -11,6 +11,104 @@
 	<link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
 	<link rel="stylesheet" href="/plugins/bootstrap-5.3.3-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/admin-paga.css" />
+	<style>
+		.tariff-card {
+			transition: all 0.3s ease;
+			border: 2px solid transparent;
+		}
+
+		.tariff-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+		}
+
+		.tariff-card.selected {
+			border-color: #0d6efd;
+			background-color: rgba(13, 110, 253, 0.05);
+		}
+
+		.feature-list {
+			list-style: none;
+			padding: 0;
+		}
+
+		.feature-list li {
+			margin-bottom: 0.5rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.feature-list li i {
+			margin-right: 0.5rem;
+			color: #198754;
+		}
+
+		.price {
+			font-size: 2rem;
+			font-weight: bold;
+			color: #0d6efd;
+		}
+
+		.price-period {
+			font-size: 1rem;
+			color: #6c757d;
+		}
+
+		.free-trial-badge {
+			position: absolute;
+			top: 1rem;
+			right: 1rem;
+			background-color: #198754;
+			color: white;
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.25rem;
+			font-size: 0.875rem;
+		}
+
+		.billing-options {
+			display: flex;
+			gap: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.billing-option {
+			flex: 1;
+			padding: 1rem;
+			border: 1px solid #dee2e6;
+			border-radius: 0.375rem;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.billing-option:hover {
+			background-color: #f8f9fa;
+		}
+
+		.billing-option.selected {
+			border-color: #0d6efd;
+			background-color: rgba(13, 110, 253, 0.05);
+		}
+
+		.billing-option input[type="radio"] {
+			display: none;
+		}
+
+		.billing-option label {
+			display: block;
+			text-align: center;
+			cursor: pointer;
+		}
+
+		.billing-option .price {
+			font-size: 1.5rem;
+			margin: 0.5rem 0;
+		}
+
+		.billing-option .duration {
+			color: #6c757d;
+			font-size: 0.875rem;
+		}
+	</style>
 </head>
 
 <body>
@@ -29,35 +127,22 @@
 			<i class="bx bx-menu" id="sidebarOpen"></i>
 			<img src="img/logo.PNG" style="object-fit: contain;" id="logo" width="40px" alt=""></i>Shaxsiy kabinet
 		</div>
-		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				Kafe
-			</button>
-			<ul class="dropdown-menu dropdown-menu-dark">
-				<li><a class="dropdown-item active" href="#">Kafe 1</a></li>
-				<li><a class="dropdown-item" href="#">Another action</a></li>
-				<li><a class="dropdown-item" href="#">Something else here</a></li>
-				<li>
-					<hr class="dropdown-divider">
-				</li>
-				<li><a class="dropdown-item" href="#">Demo Kafe</a></li>
-			</ul>
-		</div>
+
 		<div class="navbar_content">
 			<img src="img/user-icon.png" alt="" class="profile" width="25px" />
 			<div class="menu">
 				<ul>
 					<li><a href="edit-profile.html"><i class="bx bx-user"></i>&nbsp;Profile</a></li>
-					<li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
-					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
-					<li><a href="#"><i class='bx bx-bell'></i></i>&nbsp;Notifications</a></li>
+					<!-- <li><a href="#"><i class="bx bx-cog"></i>&nbsp;Settings</a></li>
+          <li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
+          <li><a href="#"><i class='bx bx-bell'></i></i>&nbsp;Notifications</a></li>-->
 					<li>
 						<button class='bx bx-sun text-start' id="darkLight">
 							<span>Theme</span>
 						</button>
 					</li>
-					<li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li>
-					<li><button id="logoutBtn"><i class="bx bx-log-out"></i>&nbsp;Sign Out</button></li>
+					<!-- <li><a href="#"><i class="bx bx-help-circle"></i>&nbsp;Help</a></li> -->
+					<li><button id="logoutBtn"><i class="bx bx-log-out"></i>&nbsp;Chiqish</button></li>
 				</ul>
 			</div>
 		</div>
@@ -70,14 +155,14 @@
 					<div class="menu_title menu_dahsboard"></div>
 					<!-- duplicate or remove this li tag if you want to add or remove navlink with submenu -->
 					<!-- start -->
-					<li class="item">
+					<!-- <li class="item">
 						<a href="admin-page.html" class="nav_link">
 							<span class="navlink_icon">
 								<i class="bx bx-home-alt"></i>
 							</span>
 							<span class="navlink">Bosh Sahifa</span>
 						</a>
-					</li>
+					</li> -->
 					<!-- end -->
 					<!-- duplicate this li tag if you want to add or remove  navlink with submenu -->
 					<!-- start -->
@@ -115,86 +200,74 @@
 
 		<!-- Article -->
 		<article id="admin" class="move-right my-article">
-			<div id="pricing" class="section">
-				<div class="pricing-header p-5 pb-md-4 mx-auto text-center">
-					<h2 class="display-4 fw-normal">Xizmatlar narxlari</h2>
-					<p class="fs-5">Bizning xizmatlarimizga obuna bo‘ling va biznesingizni yanada samarali boshqaring!</p>
+			<!-- Active Tariff Progress Bar -->
+			<div id="activeTariffProgress" class="card mb-4" style="display: none;">
+				<div class="card-body">
+					<div class="d-flex justify-content-between align-items-center mb-2">
+						<h5 class="card-title mb-0">
+							<span id="activeTariffName"></span>
+							<span id="activeTariffType" class="badge bg-primary ms-2"></span>
+						</h5>
+						<div class="text-end">
+							<small class="text-muted">Ends in</small>
+							<div id="activeTariffEndDateHeader" class="fw-bold"></div>
+						</div>
+					</div>
+					<div class="progress mb-2" style="height: 20px;">
+						<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">
+						</div>
+					</div>
+					<div class="d-flex justify-content-between">
+						<small class="text-muted">Start: <span id="activeTariffStartDate"></span></small>
+						<small class="text-muted">End: <span id="activeTariffEndDate"></span></small>
+					</div>
 				</div>
-				<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
-					<div class="col mb-2">
-						<div class="card mb-4 rounded-3 shadow-sm">
-							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">Standart</h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title">100 000 so'm<small
-										class="text-body-secondary fw-light">/oy</small>
-								</h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Bronzlash xizmati <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Inventariya <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-								</ul>
-								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
-									bog‘laning</a>
-							</div>
+			</div>
+
+			<!-- Free Trial Progress Bar
+			<div id="freeTrialProgress" class="card mb-4" style="display: none;">
+				<div class="card-body">
+					<h5 class="card-title">14-Day Free Trial</h5>
+					<div class="progress mb-2" style="height: 20px;">
+						<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">
 						</div>
 					</div>
-					<div class="col mb-2">
-						<div class="card mb-4 rounded-3 shadow-sm">
-							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">Pro</h4>
+					<p class="card-text mb-0">
+						<span id="daysRemaining">14</span> days remaining
+					</p>
+				</div>
+			</div> -->
+
+			<!-- Tariffs Section -->
+			<div class="container">
+				<h2 class="mb-4">Available Tariffs</h2>
+				<div class="row" id="tariffsContainer">
+					<!-- Tariffs will be populated here -->
+				</div>
+			</div>
+
+			<!-- Selected Tariff Modal -->
+			<div class="modal fade" id="selectedTariffModal" tabindex="-1">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Select Billing Period</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div class="modal-body">
+							<div class="text-center mb-4">
+								<h4 id="selectedTariffName"></h4>
 							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title">150,000 so'm<small
-										class="text-body-secondary fw-light">/oy</small></h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Fiskal To'lov <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Xodimlar Xioboti <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-									<li> Kompleks Menu <i class="fa-solid fa-xmark" style="color: #ff0000;"></i></li>
-								</ul>
-								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
-									bog‘laning</a>
+							<div class="billing-options" id="billingOptions">
+								<!-- Billing options will be populated here -->
+							</div>
+							<div class="alert alert-info" id="freeTrialInfo" style="display: none;">
+								<i class="bx bx-info-circle"></i> This is a 14-day free trial. You can only use it once.
 							</div>
 						</div>
-					</div>
-					<div class="col mb-2">
-						<div class="card mb-4 rounded-3 shadow-sm">
-							<div class="card-header py-3">
-								<h4 class="my-0 fw-normal">VIP</h4>
-							</div>
-							<div class="card-body">
-								<h1 class="card-title pricing-card-title">300,000 so'm<small
-										class="text-body-secondary fw-light">/oy</small></h1>
-								<ul class="list-unstyled mt-3 mb-4">
-									<li> Stollar boshqaruvi <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Menyular tuzish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulotlar hisoboti<i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kassa hisoboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Bronzlash xizmati <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Maxsulot Kirim Qilish <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Inventariya <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Fiskal To'lov <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Xodimlar Xioboti <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-									<li> Kompleks Menu <i class="fa-solid fa-check" style="color: #63E6BE;"></i></li>
-								</ul>
-								<a href="#contact" class="w-100 btn btn-lg btn-outline-primary">Biz bilan
-									bog‘laning</a>
-							</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary" id="confirmSelectionBtn">Confirm Selection</button>
 						</div>
 					</div>
 				</div>
@@ -205,6 +278,7 @@
 	<script type="module" src="js/api-url.js"></script>
 	<script type="module" src="js/verify-token.js"></script>
 	<script type="module" src="js/logout.js"></script>
+	<script type="module" src="js/tariflar.js"></script>
 	<script src="js/index.js"></script>
 	<script src="plugins/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 

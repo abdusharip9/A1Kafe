@@ -23,19 +23,19 @@ async function renderKafeList(kafeList, id) {
 
 	kafeList.forEach((item, index) => {
 		const listItem = document.createElement('li')
-		listItem.className = 'list-group-item d-flex justify-content-between align-items-center'
-		listItem.innerHTML = `
-			<div class="d-inline-block">
-				<span class="fw-bold">${index + 1}. </span>
-				<span>${item.name}</span>
-			</div>
-			<div class="d-inline-block">
-				<button type="button" class='btn btn-danger delete-kafe' data-name="${item.name}" title="Delete">
-					<i class="bx bx-trash"></i>
-				</button>
-			</div>
-		`
-		listElement.appendChild(listItem)
+		// listItem.className = 'list-group-item d-flex justify-content-between align-items-center'
+		// listItem.innerHTML = `
+		// 	<div class="d-inline-block">
+		// 		<span class="fw-bold">${index + 1}. </span>
+		// 		<span>${item.name}</span>
+		// 	</div>
+		// 	<div class="d-inline-block">
+		// 		<button type="button" class='btn btn-danger delete-kafe' data-name="${item.name}" title="Delete">
+		// 			<i class="bx bx-trash"></i>
+		// 		</button>
+		// 	</div>
+		// `
+		// listElement.appendChild(listItem)
 	})
 
 	document.querySelectorAll('.delete-kafe').forEach(btn => {

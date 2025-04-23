@@ -39,11 +39,12 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 	const phone = document.getElementById('phone').value
 	const email = document.getElementById('email').value
 	const password = document.getElementById('password').value
+	const kafeName = document.getElementById('kafeName').value
 
 	const response = await fetch(`${API_URL}/api/auth/register`, {
 		method: 'POST',
 		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ firstName, lastName, phone, email, password }),
+		body: JSON.stringify({ firstName, lastName, phone, email, password, kafeName }),
 	})
 
 	const data = await response.json()

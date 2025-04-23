@@ -26,7 +26,7 @@
 
   <div id="alert-container"></div>
 
-  <main class="form-signin p-5 m-auto w-50" id="main">
+  <main class="form-signin p-5 m-auto w-75" id="main">
     <form id="loginForm">
       <a href="index.html" class="d-inline-flex justify-content-between">
         <img class="mb-4 mx-auto" src="img/logo.png" alt="A1TechGroup" width="100">
@@ -36,40 +36,56 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form-floating mb-3">
-            <input type="firstName" name="firstName" class="form-control" id="firstName" required>
+            <input type="firstName" name="firstName" class="form-control" id="firstName" placeholder="Izmingiz"
+              required>
             <label for="firstName">Izmingiz
             </label>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-floating mb-3">
-            <input type="lastName" name="lastName" class="form-control" id="lastName" required>
+            <input type="lastName" name="lastName" class="form-control" id="lastName" placeholder="Familyangiz"
+              required>
             <label for="lastName">Familyangiz
             </label>
           </div>
         </div>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="phone" name="phone" class="form-control" id="phone" placeholder="name@example.com" required>
-        <label for="phone">Telefon raqamingiz
-        </label>
-      </div>
-      <div class="form-floating mb-3">
-        <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
-        <label for="email">Elektron pochta
-        </label>
-      </div>
 
-      <div class="form-floating mb-3">
-        <input type="text" name="password" class="form-control pass" id="password" placeholder="Parol yarating" required
-          min="4" max="30">
-        <label for="password">Parol yarating</label>
-      </div>
-
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control pass" id="confirmPassword" placeholder="Parolni takrorlang" required
-          min="4" max="30">
-        <label for="confirmPassword">Parolni takrorlang</label>
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="phone" name="phone" class="form-control" id="phone" placeholder="+998901234567" required>
+            <label for="phone">Telefon raqamingiz
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="kafeName" name="kafeName" class="form-control" id="kafeName" placeholder="A1Kafe" required>
+            <label for="kafeName">Kafe nomi
+            </label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-floating mb-3">
+            <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
+            <label for="email">Elektron pochta
+            </label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-floating mb-3">
+            <input type="text" name="password" class="form-control pass" id="password" placeholder="Parol yarating"
+              required min="4" max="30">
+            <label for="password">Parol yarating</label>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control pass" id="confirmPassword" placeholder="Parolni takrorlang" required
+              min="4" max="30">
+            <label for="confirmPassword">Parolni takrorlang</label>
+          </div>
+        </div>
       </div>
 
       <span id="error-message" class="error"></span><br><br>

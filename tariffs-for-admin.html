@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tariff Management</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"
+		rel="stylesheet">
+	<style>
+		.select2-container--bootstrap-5 .select2-selection {
+			min-height: 38px;
+			border: 1px solid #ced4da;
+			border-radius: 0.375rem;
+		}
+
+		.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__rendered {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.25rem;
+			padding: 0.375rem 0.75rem;
+		}
+
+		.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice {
+			background-color: #e9ecef;
+			border: 1px solid #dee2e6;
+			border-radius: 0.25rem;
+			padding: 0.25rem 0.5rem;
+			margin: 0;
+			display: flex;
+			align-items: center;
+		}
+
+		.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove {
+			color: #6c757d;
+			margin-right: 0.5rem;
+			border: none;
+			background: none;
+			padding: 0;
+			font-size: 1.2em;
+		}
+
+		.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__choice__remove:hover {
+			color: #dc3545;
+			background: none;
+		}
+
+		.select2-container--bootstrap-5 .select2-dropdown {
+			border: 1px solid #ced4da;
+			border-radius: 0.375rem;
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+		}
+
+		.select2-container--bootstrap-5 .select2-search--dropdown .select2-search__field {
+			padding: 0.375rem 0.75rem;
+			border: 1px solid #ced4da;
+			border-radius: 0.375rem;
+		}
+
+		.select2-container--bootstrap-5 .select2-results__option {
+			padding: 0.375rem 0.75rem;
+		}
+
+		.select2-container--bootstrap-5 .select2-results__option--highlighted {
+			background-color: #0d6efd;
+			color: white;
+		}
+
+		.select2-container--bootstrap-5 .select2-results__option[aria-selected=true] {
+			background-color: #0d6efd;
+			color: white;
+		}
+
+		.features-select-container {
+			margin-bottom: 1rem;
+		}
+
+		.features-select-container label {
+			font-weight: 500;
+			margin-bottom: 0.5rem;
+			display: block;
+		}
+
+		.features-select-container .select2-container {
+			width: 100% !important;
+		}
+	</style>
+</head>
+
+<body class="bg-light">
+	<div class="container py-5">
+		<h1 class="mb-4">Tariff Management</h1>
+
+		<!-- Features Section -->
+		<div class="card mb-4">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="mb-0">Features</h5>
+				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFeatureModal">
+					<i class="bi bi-plus-lg"></i> Add Feature
+				</button>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Code</th>
+								<th>Description</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody id="featuresTableBody">
+							<!-- Features will be populated here -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- Tariffs Section -->
+		<div class="card">
+			<div class="card-header d-flex justify-content-between align-items-center">
+				<h5 class="mb-0">Tariffs</h5>
+				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTariffModal">
+					<i class="bi bi-plus-lg"></i> Add Tariff
+				</button>
+			</div>
+			<div class="card-body">
+				<div class="row" id="tariffsContainer">
+					<!-- Tariffs will be populated here -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Feature Modal -->
+	<div class="modal fade" id="addFeatureModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add New Feature</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<form id="addFeatureForm">
+						<div class="mb-3">
+							<label class="form-label">Name</label>
+							<input type="text" class="form-control" name="name" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Code</label>
+							<input type="text" class="form-control" name="code" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Description</label>
+							<textarea class="form-control" name="description" rows="3" required></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" onclick="createFeature()">Create</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Edit Feature Modal -->
+	<div class="modal fade" id="editFeatureModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit Feature</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<form id="editFeatureForm">
+						<input type="hidden" name="id">
+						<div class="mb-3">
+							<label class="form-label">Name</label>
+							<input type="text" class="form-control" name="name" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Code</label>
+							<input type="text" class="form-control" name="code" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Description</label>
+							<textarea class="form-control" name="description" rows="3" required></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" onclick="updateFeature()">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Tariff Modal -->
+	<div class="modal fade" id="addTariffModal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Add New Tariff</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<form id="addTariffForm">
+						<div class="mb-3">
+							<label class="form-label">Name</label>
+							<input type="text" class="form-control" name="name" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Description</label>
+							<textarea class="form-control" name="description" rows="3" required></textarea>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Billing Periods</label>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="enableDaily" id="enableDaily">
+								<label class="form-check-label" for="enableDaily">
+									Enable Daily Billing
+								</label>
+							</div>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="enableMonthly" id="enableMonthly">
+								<label class="form-check-label" for="enableMonthly">
+									Enable Monthly Billing
+								</label>
+							</div>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="enableAnnual" id="enableAnnual">
+								<label class="form-check-label" for="enableAnnual">
+									Enable Annual Billing
+								</label>
+							</div>
+						</div>
+						<div class="row mb-3 daily-billing" style="display: none;">
+							<div class="col">
+								<label class="form-label">Daily Price</label>
+								<input type="number" class="form-control" name="dailyPrice" required>
+							</div>
+							<div class="col">
+								<label class="form-label">Daily Duration (days)</label>
+								<input type="number" class="form-control" name="dailyDuration" required>
+							</div>
+						</div>
+						<div class="row mb-3 monthly-billing" style="display: none;">
+							<div class="col">
+								<label class="form-label">Monthly Price</label>
+								<input type="number" class="form-control" name="monthlyPrice" required>
+							</div>
+							<div class="col">
+								<label class="form-label">Monthly Duration (months)</label>
+								<input type="number" class="form-control" name="monthlyDuration" required>
+							</div>
+						</div>
+						<div class="row mb-3 annual-billing" style="display: none;">
+							<div class="col">
+								<label class="form-label">Annual Price</label>
+								<input type="number" class="form-control" name="annualPrice" required>
+							</div>
+							<div class="col">
+								<label class="form-label">Annual Duration (years)</label>
+								<input type="number" class="form-control" name="annualDuration" required>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Support Type</label>
+							<input type="text" class="form-control" name="support" required>
+						</div>
+						<div class="mb-3">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="isFreeTrial" id="isFreeTrial">
+								<label class="form-check-label" for="isFreeTrial">
+									Is Free Trial (14 days)
+								</label>
+							</div>
+						</div>
+						<div class="mb-3 features-select-container">
+							<label class="form-label">Features</label>
+							<select class="form-select features-select" name="features" multiple required>
+								<!-- Features will be populated here -->
+							</select>
+							<small class="form-text text-muted">Select one or more features for this tariff</small>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" onclick="createTariff()">Create</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Edit Tariff Modal -->
+	<div class="modal fade" id="editTariffModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Edit Tariff</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<form id="editTariffForm">
+						<input type="hidden" name="id">
+						<div class="mb-3">
+							<label class="form-label">Name</label>
+							<input type="text" class="form-control" name="name" required>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Description</label>
+							<textarea class="form-control" name="description" rows="3" required></textarea>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Billing Periods</label>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="enableDaily" id="enableDaily">
+								<label class="form-check-label" for="enableDaily">
+									Enable Daily Billing
+								</label>
+							</div>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="enableMonthly" id="enableMonthly">
+								<label class="form-check-label" for="enableMonthly">
+									Enable Monthly Billing
+								</label>
+							</div>
+							<div class="form-check mb-2">
+								<input class="form-check-input" type="checkbox" name="enableAnnual" id="enableAnnual">
+								<label class="form-check-label" for="enableAnnual">
+									Enable Annual Billing
+								</label>
+							</div>
+						</div>
+						<div class="row mb-3 daily-billing" style="display: none;">
+							<div class="col">
+								<label class="form-label">Daily Price</label>
+								<input type="number" class="form-control" name="dailyPrice" required>
+							</div>
+							<div class="col">
+								<label class="form-label">Daily Duration (days)</label>
+								<input type="number" class="form-control" name="dailyDuration" required>
+							</div>
+						</div>
+						<div class="row mb-3 monthly-billing" style="display: none;">
+							<div class="col">
+								<label class="form-label">Monthly Price</label>
+								<input type="number" class="form-control" name="monthlyPrice" required>
+							</div>
+							<div class="col">
+								<label class="form-label">Monthly Duration (months)</label>
+								<input type="number" class="form-control" name="monthlyDuration" required>
+							</div>
+						</div>
+						<div class="row mb-3 annual-billing" style="display: none;">
+							<div class="col">
+								<label class="form-label">Annual Price</label>
+								<input type="number" class="form-control" name="annualPrice" required>
+							</div>
+							<div class="col">
+								<label class="form-label">Annual Duration (years)</label>
+								<input type="number" class="form-control" name="annualDuration" required>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">Support Type</label>
+							<input type="text" class="form-control" name="support" required>
+						</div>
+						<div class="mb-3">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="isFreeTrial" id="editIsFreeTrial">
+								<label class="form-check-label" for="editIsFreeTrial">
+									Is Free Trial (14 days)
+								</label>
+							</div>
+						</div>
+						<div class="mb-3 features-select-container">
+							<label class="form-label">Features</label>
+							<select class="form-select features-select" name="features" multiple required>
+								<!-- Features will be populated here -->
+							</select>
+							<small class="form-text text-muted">Select one or more features for this tariff</small>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" onclick="updateTariff()">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete Confirmation Modal -->
+	<div class="modal fade" id="deleteConfirmationModal" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Confirm Delete</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<p>Are you sure you want to delete this item? This action cannot be undone.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script type="module" src="js/api-url.js"></script>
+	<script type="module" src="js/verify-token.js"></script>
+	<script type="module" src="js/tariffs-for-admin.js"></script>
+</body>
+
+</html>

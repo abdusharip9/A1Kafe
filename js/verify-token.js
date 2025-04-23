@@ -23,3 +23,23 @@ export async function verify() {
 
 	return data
 }
+
+export function getToken() {
+	return localStorage.getItem('accessToken');
+}
+
+export function isAuthenticated() {
+	const token = getToken();
+	return token !== null && token !== undefined;
+}
+
+export function getAuthHeaders() {
+	const token = getToken();
+	if (!token) {
+		throw new Error('No access token found');
+	}
+	return {
+		'Content-Type': 'application/json',
+		'Authorization': `Bearer ${token}`
+	};
+}
