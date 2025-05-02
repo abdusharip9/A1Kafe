@@ -13,6 +13,18 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
   <link rel="stylesheet" href="css/admin-paga.css" />
   <link rel="stylesheet" href="/css/alert.css">
+  <style>
+    /* Hide number input spinners */
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  </style>
 </head>
 
 <body>
@@ -136,12 +148,13 @@
 
         <div class="col-md-6">
           <label for="email" class="form-label">Telefon raqamingiz</label>
-          <div class="input-group mb-3">
-            <input type="tel" class="form-control z-1" id="phone" name="phone" placeholder="Telefon raqamingiz"
-              aria-label="Telefon raqamingiz" aria-describedby="basic-addon4">
-            <button type="submit" id="updatePhone"
-              class="btn btn-primary position-absolute end-0 top-0 z-2 input-group-text"
-              id="basic-addon4">Yangilash</button>
+          <div class="input-group mb-3 position-relative">
+            <span class="input-group-text">+998</span>
+            <input type="number" class="form-control rounded-end-0" id="phone" name="phone"
+              placeholder="Telefon raqamingiz" aria-label="Telefon raqamingiz">
+            <button type="button" class="btn btn-primary rounded-start-0 px-4" id="updatePhone">
+              <i class="fas fa-save me-2"></i>Yangilash
+            </button>
           </div>
         </div>
 
@@ -150,20 +163,22 @@
         <hr>
         <div class="col-md-6">
           <label for="firstName" class="form-label">Ismingiz</label>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control z-1" name="firstName" id="firstName" placeholder="Ismingiz"
-              aria-label="Ismingiz" aria-describedby="basic-addon2">
-            <button type="button" class="btn btn-primary input-group-text  position-absolute end-0 top-0 z-2"
-              id="updateFirstName">Yangilash</button>
+          <div class="input-group mb-3 position-relative">
+            <input type="text" class="form-control rounded-end-0" name="firstName" id="firstName" placeholder="Ismingiz"
+              aria-label="Ismingiz">
+            <button type="button" class="btn btn-primary rounded-start-0 px-4" id="updateFirstName">
+              <i class="fas fa-save me-2"></i>Yangilash
+            </button>
           </div>
         </div>
         <div class="col-md-6">
           <label for="lastName" class="form-label">Familyangiz</label>
-          <div class="input-group mb-3">
-            <input type="text" class="form-control z-1" name="lastName" id="lastName" placeholder="Familyangiz"
-              aria-label="Familyangiz" aria-describedby="basic-addon3">
-            <button type="button" class="btn btn-primary input-group-text position-absolute end-0 top-0 z-2 "
-              id="updateLastName">Yangilash</button>
+          <div class="input-group mb-3 position-relative">
+            <input type="text" class="form-control rounded-end-0" name="lastName" id="lastName"
+              placeholder="Familyangiz" aria-label="Familyangiz">
+            <button type="button" class="btn btn-primary rounded-start-0 px-4" id="updateLastName">
+              <i class="fas fa-save me-2"></i>Yangilash
+            </button>
           </div>
         </div>
 

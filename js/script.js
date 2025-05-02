@@ -30,7 +30,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({
 				chat_id: chatId,
-				text: `Ismi: ${object.name}\nTelefon: ${object.phone}\nIzoh: ${object.comment}`,
+				text: `Ismi: ${object.name}\nTelefon: +998${object.phone}\nIzoh: ${object.comment}`,
 			}),
 		})
 			.then(() => {

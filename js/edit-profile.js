@@ -13,11 +13,22 @@ const id = userData.userDto.id
 // Logout
 document.querySelector('#logoutBtn').addEventListener('click', logout)
 
-// User static ma’lumotlar
+// User static ma'lumotlar
 const email = document.querySelector('#email')
 const firstName = document.querySelector('#firstName')
 const lastName = document.querySelector('#lastName')
 const phone = document.querySelector('#phone')
+
+// Telefon raqami uchun validatsiya
+phone.addEventListener('input', function(e) {
+    // Faqat raqamlarni qoldirish
+    this.value = this.value.replace(/[^0-9]/g, '');
+    
+    // Maksimal uzunlikni 9 ta raqam bilan cheklash
+    if (this.value.length > 9) {
+        this.value = this.value.slice(0, 9);
+    }
+});
 
 const userDataArr = [
 	userData.userDto?.email || '',
