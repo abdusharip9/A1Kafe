@@ -18,8 +18,6 @@ document.querySelector('#logoutBtn').addEventListener('click', logout)
 // KAFE RO‘YXATINI CHIZISH
 async function renderKafeList(kafeList, id) {
 	if (!kafeList) return
-	const listElement = document.getElementById('kafeNames')
-	listElement.innerHTML = ''
 
 	kafeList.forEach((item, index) => {
 		const listItem = document.createElement('li')

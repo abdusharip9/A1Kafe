@@ -93,7 +93,7 @@ document.getElementById('sendBtn').onclick = async function () {
 	if (response.status == 200) {
 		localStorage.setItem('accessToken', data.data.accessToken)
 		localStorage.setItem('id', data.data.user.id)
-		window.location.href = '../../admin-page.html'
+		window.location.href = '../../tariflar.html'
 	} else if (response.status == 400) {
 		showAlert('Kod mos kelmadi', 'danger', 3000)
 	}

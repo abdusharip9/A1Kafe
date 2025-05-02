@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Create tariff cards
         tariffs.forEach(tariff => {
             const card = document.createElement('div');
-            card.className = 'col mb-2 d-flex';
+            card.className = 'col-md-6 col-lg-4';
             
             // Get the price and duration
             const duration = tariff.durations.monthly || tariff.durations.daily;
@@ -32,32 +32,30 @@ document.addEventListener('DOMContentLoaded', async () => {
             const featuresList = features.map(feature => {
                 const hasFeature = tariff.features.some(tf => tf._id === feature._id);
                 return `
-                    <li>${feature.name} 
-                        <i class="fa-solid fa-${hasFeature ? 'check' : 'xmark'}" 
-                           style="color: ${hasFeature ? '#63E6BE' : '#ff0000'};"></i>
+                    <li>
+                        <i class="fa-solid fa-${hasFeature ? 'check' : 'xmark'}"></i>
+                        ${feature.name}
                     </li>
                 `;
             }).join('');
 
             card.innerHTML = `
-                <div class="card mb-4 rounded-3 shadow-sm w-100 d-flex flex-column">
-                    <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                        <h4 class="my-0 fw-normal">${tariff.name}</h4>
-                        ${tariff.is_free_trial ? '<span class="badge bg-success">Bepul sinov</span>' : ''}
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h1 class="card-title pricing-card-title">
+                <div class="pricing-card ${tariff.is_popular ? 'popular' : ''}">
+                    ${tariff.is_free_trial ? '<span class="pricing-badge">Bepul sinov</span>' : ''}
+                    <div class="pricing-header">
+                        <h3 class="pricing-title">${tariff.name}</h3>
+                        <div class="pricing-price">
                             ${price.toLocaleString()} so'm
-                            <small class="text-body-secondary fw-light">/${durationText}</small>
-                        </h1>
+                            <small>/${durationText}</small>
+                        </div>
                         ${durationValue > 1 ? `<p class="text-muted">${durationValue} ${durationText} uchun</p>` : ''}
-                        <ul class="list-unstyled mt-3 mb-4 flex-grow-1">
-                            ${featuresList}
-                        </ul>
-                        <a href="./register.html" class="w-100 btn btn-lg btn-outline-primary mt-auto">
-                            Ro'yhatdan o'tish
-                        </a>
                     </div>
+                    <ul class="pricing-features">
+                        ${featuresList}
+                    </ul>
+                    <a href="./register.html" class="btn btn-primary pricing-button">
+                        Ro'yhatdan o'tish
+                    </a>
                 </div>
             `;
 
@@ -68,7 +66,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         const container = document.getElementById('tariffs-container');
         container.innerHTML = `
             <div class="col-12 text-center">
-                <p class="text-danger">Xizmatlar narxlari yuklanmadi. Iltimos, keyinroq qayta urinib ko'ring.</p>
+                <div class="pricing-card">
+                    <p class="text-danger">Xizmatlar narxlari yuklanmadi. Iltimos, keyinroq qayta urinib ko'ring.</p>
+                </div>
             </div>
         `;
     }
