@@ -1,9 +1,11 @@
+import { API_URL } from './api-url.js'
+
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         // Fetch features and tariffs data
         const [featuresResponse, tariffsResponse] = await Promise.all([
-            fetch('http://localhost:3000/api/features/get-all'),
-            fetch('http://localhost:3000/api/tariffs/get-all')
+            fetch(`${API_URL}/api/features/get-all`),
+            fetch(`${API_URL}/api/tariffs/get-all`)
         ]);
 
         const features = await featuresResponse.json();
