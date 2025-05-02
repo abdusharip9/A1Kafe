@@ -1,21 +1,18 @@
 window.addEventListener('DOMContentLoaded', () => {
 	const form = document.querySelector('#messageForm'),
-		successModal = document.querySelector('#alertStatus'),
+		alertStatus = document.querySelector('#alertStatus'),
+		alertMessage = document.querySelector('#alertMessage'),
 		submitBtn = document.querySelector('#submitBtn')
 
 	const openModal = (text, className) => {
-		successModal.innerHTML = `
-		<div class="alert alert-${className} alert-dismissible fade show" role="alert">
-		${text}
-		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-		`
+		alertStatus.className = `alert alert-${className} alert-dismissible fade show`
+		alertMessage.textContent = text
+		alertStatus.classList.remove('d-none')
 	}
 
 	form.addEventListener('submit', event => {
 		event.preventDefault()
 
-		
 		submitBtn.disabled = true
 		submitBtn.innerText = 'Yuborilmoqda...'
 
@@ -49,8 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			})
 			.finally(() => {
 				setTimeout(() => {
-					successModal.classList.remove('show')
-					successModal.classList.add('hide')
+					alertStatus.classList.add('d-none')
 					submitBtn.disabled = false
 					submitBtn.innerText = 'Yuborish'
 					submitBtn.classList.remove('btn-success', 'btn-danger')
