@@ -343,6 +343,7 @@ async function updateTariff() {
 
 	const form = document.getElementById('editTariffForm');
 	const selectedFeatures = $(form.features).val();
+	const description = form.description.value;
 	
 	const durations = {};
 	
@@ -371,6 +372,7 @@ async function updateTariff() {
 		name: form.name.value,
 		durations: durations,
 		features: selectedFeatures,
+		description: description,
 		is_free_trial: document.getElementById('editIsFreeTrial').checked
 	};
 

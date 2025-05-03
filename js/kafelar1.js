@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         body: JSON.stringify({
                             name: `${userData.userDto.firstName} ${userData.userDto.lastName}`,
                             login: userData.userDto.email.split('@')[0],
-                            password: '1111',
+                            password: userData.userDto.password,
                             kafeId: item._id,
                             tarifId: 1
                         })

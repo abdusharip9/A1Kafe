@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             ${featuresList}
                         </ul>
                         <a href="./register.html" class="btn btn-primary pricing-button">
-                            Ro'yhatdan o'tish
+                            Tanlash
                         </a>
                     </div>
                 `;
