@@ -39,12 +39,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <i class="fa-solid fa-${hasFeature ? 'check' : 'xmark'}"></i>
                             ${feature.name}
                         </li>
+                        <hr>
                     `;
                 }).join('');
                 card.innerHTML = `
                     <div class="pricing-card ${tariff.is_popular ? 'popular' : ''}">
                         <div class="pricing-header">
-                            <h3 class="pricing-title">${tariff.name}</h3>
+                            <div class="text-start">
+                                <h2 class="pricing-title mb-2 px-3 py-1 text-primary rounded-4 border-2 border-primary fw-bold border d-inline-block">${tariff.name}</h2>
+                                <p class="text-muted mb-3" style="font-size: 0.95rem; line-height: 1.4;">${tariff.description}</p>
+                            </div>
                             <div class="pricing-price">
                                 ${price.toLocaleString()} so'm
                                 <small>/${durationText}</small>

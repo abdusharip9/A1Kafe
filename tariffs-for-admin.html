@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tariff Management</title>
+	<title>Tariflar Boshqaruvi</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
@@ -92,14 +92,14 @@
 
 <body class="bg-light">
 	<div class="container py-5">
-		<h1 class="mb-4">Tariff Management</h1>
+		<h1 class="mb-4">Tariflar Boshqaruvi</h1>
 
 		<!-- Features Section -->
 		<div class="card mb-4">
 			<div class="card-header d-flex justify-content-between align-items-center">
-				<h5 class="mb-0">Features</h5>
+				<h5 class="mb-0">Imkoniyatlar</h5>
 				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFeatureModal">
-					<i class="bi bi-plus-lg"></i> Add Feature
+					<i class="bi bi-plus-lg"></i> Imkoniyat Qo'shish
 				</button>
 			</div>
 			<div class="card-body">
@@ -107,14 +107,14 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Code</th>
-								<th>Description</th>
-								<th>Actions</th>
+								<th>Nomi</th>
+								<th>Kodi</th>
+								<th>Tavsifi</th>
+								<th>Amallar</th>
 							</tr>
 						</thead>
 						<tbody id="featuresTableBody">
-							<!-- Features will be populated here -->
+							<!-- Imkoniyatlar shu yerda ko'rsatiladi -->
 						</tbody>
 					</table>
 				</div>
@@ -124,14 +124,14 @@
 		<!-- Tariffs Section -->
 		<div class="card">
 			<div class="card-header d-flex justify-content-between align-items-center">
-				<h5 class="mb-0">Tariffs</h5>
+				<h5 class="mb-0">Tariflar</h5>
 				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTariffModal">
-					<i class="bi bi-plus-lg"></i> Add Tariff
+					<i class="bi bi-plus-lg"></i> Tarif Qo'shish
 				</button>
 			</div>
 			<div class="card-body">
 				<div class="row" id="tariffsContainer">
-					<!-- Tariffs will be populated here -->
+					<!-- Tariflar shu yerda ko'rsatiladi -->
 				</div>
 			</div>
 		</div>
@@ -142,28 +142,28 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Add New Feature</h5>
+					<h5 class="modal-title">Yangi Imkoniyat Qo'shish</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
 					<form id="addFeatureForm">
 						<div class="mb-3">
-							<label class="form-label">Name</label>
+							<label class="form-label">Nomi</label>
 							<input type="text" class="form-control" name="name" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Code</label>
+							<label class="form-label">Kodi</label>
 							<input type="text" class="form-control" name="code" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Description</label>
+							<label class="form-label">Tavsifi</label>
 							<textarea class="form-control" name="description" rows="3" required></textarea>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="createFeature()">Create</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+					<button type="button" class="btn btn-primary" onclick="createFeature()">Yaratish</button>
 				</div>
 			</div>
 		</div>
@@ -174,29 +174,29 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Edit Feature</h5>
+					<h5 class="modal-title">Imkoniyatni Tahrirlash</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
 					<form id="editFeatureForm">
 						<input type="hidden" name="id">
 						<div class="mb-3">
-							<label class="form-label">Name</label>
+							<label class="form-label">Nomi</label>
 							<input type="text" class="form-control" name="name" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Code</label>
+							<label class="form-label">Kodi</label>
 							<input type="text" class="form-control" name="code" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Description</label>
+							<label class="form-label">Tavsifi</label>
 							<textarea class="form-control" name="description" rows="3" required></textarea>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="updateFeature()">Update</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+					<button type="button" class="btn btn-primary" onclick="updateFeature()">Yangilash</button>
 				</div>
 			</div>
 		</div>
@@ -207,94 +207,94 @@
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Add New Tariff</h5>
+					<h5 class="modal-title">Yangi Tarif Qo'shish</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
 					<form id="addTariffForm">
 						<div class="mb-3">
-							<label class="form-label">Name</label>
+							<label class="form-label">Nomi</label>
 							<input type="text" class="form-control" name="name" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Description</label>
+							<label class="form-label">Tavsifi</label>
 							<textarea class="form-control" name="description" rows="3" required></textarea>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Billing Periods</label>
+							<label class="form-label">To'lov Davrlari</label>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" name="enableDaily" id="enableDaily">
 								<label class="form-check-label" for="enableDaily">
-									Enable Daily Billing
+									Kunlik To'lovni Yoqish
 								</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" name="enableMonthly" id="enableMonthly">
 								<label class="form-check-label" for="enableMonthly">
-									Enable Monthly Billing
+									Oylik To'lovni Yoqish
 								</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" name="enableAnnual" id="enableAnnual">
 								<label class="form-check-label" for="enableAnnual">
-									Enable Annual Billing
+									Yillik To'lovni Yoqish
 								</label>
 							</div>
 						</div>
 						<div class="row mb-3 daily-billing" style="display: none;">
 							<div class="col">
-								<label class="form-label">Daily Price</label>
+								<label class="form-label">Kunlik Narxi</label>
 								<input type="number" class="form-control" name="dailyPrice" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Daily Duration (days)</label>
+								<label class="form-label">Kunlik Davomiyligi (kunlar)</label>
 								<input type="number" class="form-control" name="dailyDuration" required>
 							</div>
 						</div>
 						<div class="row mb-3 monthly-billing" style="display: none;">
 							<div class="col">
-								<label class="form-label">Monthly Price</label>
+								<label class="form-label">Oylik Narxi</label>
 								<input type="number" class="form-control" name="monthlyPrice" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Monthly Duration (months)</label>
+								<label class="form-label">Oylik Davomiyligi (oylar)</label>
 								<input type="number" class="form-control" name="monthlyDuration" required>
 							</div>
 						</div>
 						<div class="row mb-3 annual-billing" style="display: none;">
 							<div class="col">
-								<label class="form-label">Annual Price</label>
+								<label class="form-label">Yillik Narxi</label>
 								<input type="number" class="form-control" name="annualPrice" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Annual Duration (years)</label>
+								<label class="form-label">Yillik Davomiyligi (yillar)</label>
 								<input type="number" class="form-control" name="annualDuration" required>
 							</div>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Support Type</label>
+							<label class="form-label">Qo'llab-quvvatlash Turi</label>
 							<input type="text" class="form-control" name="support" required>
 						</div>
 						<div class="mb-3">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" name="isFreeTrial" id="isFreeTrial">
 								<label class="form-check-label" for="isFreeTrial">
-									Is Free Trial (14 days)
+									Bepul Sinov (14 kun)
 								</label>
 							</div>
 						</div>
 						<div class="mb-3 features-select-container">
-							<label class="form-label">Features</label>
+							<label class="form-label">Imkoniyatlar</label>
 							<select class="form-select features-select" name="features" multiple required>
-								<!-- Features will be populated here -->
+								<!-- Imkoniyatlar shu yerda ko'rsatiladi -->
 							</select>
-							<small class="form-text text-muted">Select one or more features for this tariff</small>
+							<small class="form-text text-muted">Bu tarif uchun bir yoki bir nechta imkoniyatlarni tanlang</small>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="createTariff()">Create</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+					<button type="button" class="btn btn-primary" onclick="createTariff()">Yaratish</button>
 				</div>
 			</div>
 		</div>
@@ -305,95 +305,95 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Edit Tariff</h5>
+					<h5 class="modal-title">Tarifni Tahrirlash</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
 					<form id="editTariffForm">
 						<input type="hidden" name="id">
 						<div class="mb-3">
-							<label class="form-label">Name</label>
+							<label class="form-label">Nomi</label>
 							<input type="text" class="form-control" name="name" required>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Description</label>
+							<label class="form-label">Tavsifi</label>
 							<textarea class="form-control" name="description" rows="3" required></textarea>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Billing Periods</label>
+							<label class="form-label">To'lov Davrlari</label>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" name="enableDaily" id="enableDaily">
 								<label class="form-check-label" for="enableDaily">
-									Enable Daily Billing
+									Kunlik To'lovni Yoqish
 								</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" name="enableMonthly" id="enableMonthly">
 								<label class="form-check-label" for="enableMonthly">
-									Enable Monthly Billing
+									Oylik To'lovni Yoqish
 								</label>
 							</div>
 							<div class="form-check mb-2">
 								<input class="form-check-input" type="checkbox" name="enableAnnual" id="enableAnnual">
 								<label class="form-check-label" for="enableAnnual">
-									Enable Annual Billing
+									Yillik To'lovni Yoqish
 								</label>
 							</div>
 						</div>
 						<div class="row mb-3 daily-billing" style="display: none;">
 							<div class="col">
-								<label class="form-label">Daily Price</label>
+								<label class="form-label">Kunlik Narxi</label>
 								<input type="number" class="form-control" name="dailyPrice" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Daily Duration (days)</label>
+								<label class="form-label">Kunlik Davomiyligi (kunlar)</label>
 								<input type="number" class="form-control" name="dailyDuration" required>
 							</div>
 						</div>
 						<div class="row mb-3 monthly-billing" style="display: none;">
 							<div class="col">
-								<label class="form-label">Monthly Price</label>
+								<label class="form-label">Oylik Narxi</label>
 								<input type="number" class="form-control" name="monthlyPrice" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Monthly Duration (months)</label>
+								<label class="form-label">Oylik Davomiyligi (oylar)</label>
 								<input type="number" class="form-control" name="monthlyDuration" required>
 							</div>
 						</div>
 						<div class="row mb-3 annual-billing" style="display: none;">
 							<div class="col">
-								<label class="form-label">Annual Price</label>
+								<label class="form-label">Yillik Narxi</label>
 								<input type="number" class="form-control" name="annualPrice" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Annual Duration (years)</label>
+								<label class="form-label">Yillik Davomiyligi (yillar)</label>
 								<input type="number" class="form-control" name="annualDuration" required>
 							</div>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">Support Type</label>
+							<label class="form-label">Qo'llab-quvvatlash Turi</label>
 							<input type="text" class="form-control" name="support" required>
 						</div>
 						<div class="mb-3">
 							<div class="form-check">
 								<input class="form-check-input" type="checkbox" name="isFreeTrial" id="editIsFreeTrial">
 								<label class="form-check-label" for="editIsFreeTrial">
-									Is Free Trial (14 days)
+									Bepul Sinov (14 kun)
 								</label>
 							</div>
 						</div>
 						<div class="mb-3 features-select-container">
-							<label class="form-label">Features</label>
+							<label class="form-label">Imkoniyatlar</label>
 							<select class="form-select features-select" name="features" multiple required>
-								<!-- Features will be populated here -->
+								<!-- Imkoniyatlar shu yerda ko'rsatiladi -->
 							</select>
-							<small class="form-text text-muted">Select one or more features for this tariff</small>
+							<small class="form-text text-muted">Bu tarif uchun bir yoki bir nechta imkoniyatlarni tanlang</small>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary" onclick="updateTariff()">Update</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+					<button type="button" class="btn btn-primary" onclick="updateTariff()">Yangilash</button>
 				</div>
 			</div>
 		</div>
@@ -404,15 +404,15 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Confirm Delete</h5>
+					<h5 class="modal-title">O'chirishni Tasdiqlash</h5>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 				</div>
 				<div class="modal-body">
-					<p>Are you sure you want to delete this item? This action cannot be undone.</p>
+					<p>Haqiqatan ham bu elementni o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.</p>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-					<button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-danger" id="confirmDeleteBtn">O'chirish</button>
 				</div>
 			</div>
 		</div>

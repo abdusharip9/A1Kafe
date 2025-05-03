@@ -147,7 +147,10 @@ async function loadTariffs() {
 				<div class="card h-100">
 					<div class="card-body">
 						<div class="d-flex justify-content-between align-items-start">
-							<h5 class="card-title">${tariff.name}</h5>
+							<div>
+								<h5 class="card-title">${tariff.name}</h5>
+								<p class="text-muted mb-3">${tariff.description}</p>
+							</div>
 							<div class="btn-group">
 								<button class="btn btn-primary btn-sm" onclick="showEditTariffModal('${tariff._id}')">
 									<i class="bi bi-pencil"></i>
@@ -158,26 +161,26 @@ async function loadTariffs() {
 							</div>
 						</div>
 						<div class="mb-3">
-							<h6>Pricing:</h6>
+							<h6>Narxlar:</h6>
 							${tariff.durations.daily ? `
-								<p>Daily: ${tariff.durations.daily.price.toLocaleString()} UZS for ${tariff.durations.daily.duration} days</p>
+								<p>Kunlik: ${tariff.durations.daily.price.toLocaleString()} UZS - ${tariff.durations.daily.duration} kun</p>
 							` : ''}
 							${tariff.durations.monthly ? `
-								<p>Monthly: ${tariff.durations.monthly.price.toLocaleString()} UZS for ${tariff.durations.monthly.duration} months</p>
+								<p>Oylik: ${tariff.durations.monthly.price.toLocaleString()} UZS - ${tariff.durations.monthly.duration} oy</p>
 							` : ''}
 							${tariff.durations.annual ? `
-								<p>Annual: ${tariff.durations.annual.price.toLocaleString()} UZS for ${tariff.durations.annual.duration} years</p>
+								<p>Yillik: ${tariff.durations.annual.price.toLocaleString()} UZS - ${tariff.durations.annual.duration} yil</p>
 							` : ''}
 						</div>
 						<div class="mb-3">
-							<h6>Features:</h6>
+							<h6>Imkoniyatlar:</h6>
 							<ul class="list-unstyled">
 								${tariff.features.map(feature => `
 									<li><i class="bi bi-check-circle-fill text-success"></i> ${feature.name}</li>
 								`).join('')}
 							</ul>
 						</div>
-						${tariff.is_free_trial ? '<span class="badge bg-success">Free Trial Available</span>' : ''}
+						${tariff.is_free_trial ? '<span class="badge bg-success">Bepul Sinov Mavjud</span>' : ''}
 					</div>
 				</div>
 			</div>
