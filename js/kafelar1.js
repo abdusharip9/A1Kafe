@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             login: userData.userDto.email.split('@')[0],
                             password: '1111',
                             kafeId: item._id,
-                            tarifId: item.tariff
+                            tarifId: 1
                         })
                     });
 
