@@ -254,7 +254,112 @@ async function loadAllTariffs() {
             .feature-description {
                 font-size: 0.8rem;
                 color: #6c757d;
-                margin-left: 1.7rem;
+            }
+            .feature-toggle {
+                color: #6c757d;
+                transition: transform 0.2s;
+            }
+            .feature-toggle:hover {
+                color: #198754;
+            }
+            .feature-toggle[aria-expanded="true"] {
+                transform: rotate(180deg);
+            }
+            .feature-toggle[aria-expanded="true"] i {
+                color: #198754;
+            }
+            .collapse {
+                transition: all 0.2s ease-in-out;
+            }
+            .card-title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #212529;
+            }
+            .card-body > p {
+                font-size: 0.9rem;
+                line-height: 1.5;
+            }
+            .tariff-card {
+                border: none;
+                border-radius: 15px;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                background: linear-gradient(145deg, #ffffff, #f8f9fa);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            .tariff-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            }
+            .tariff-card.active {
+                border: none !important;
+                background: linear-gradient(145deg, #ffffff, #e8f5e9);
+                box-shadow: 0 10px 20px rgba(25, 135, 84, 0.1);
+            }
+            .pricing-option {
+                background: #fff;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+                border: 1px solid rgba(0,0,0,0.05);
+            }
+            .pricing-option:hover {
+                background: #f8f9fa;
+                transform: scale(1.02);
+            }
+            .price-amount {
+                color: #198754;
+                font-weight: 700;
+            }
+            .price-period {
+                font-size: 0.9rem;
+            }
+            .card-ribbon {
+                position: absolute;
+                top: 35px;
+                right: -35px;
+                transform: rotate(45deg);
+                background: #198754;
+                color: white;
+                padding: 5px 40px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .select-tariff-btn {
+                border-radius: 10px;
+                padding: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                transition: all 0.3s ease;
+            }
+            .select-tariff-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(25, 135, 84, 0.2);
+            }
+            .active-badge {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                z-index: 2;
+                background: linear-gradient(45deg, #198754, #28a745);
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 10px;
+                font-size: 0.875rem;
+                font-weight: 600;
+                box-shadow: 0 2px 4px rgba(25, 135, 84, 0.2);
+            }
+            .card-body {
+                padding: 2rem;
+            }
+            .features-section {
+                background: #fff;
+                border-radius: 12px;
+                padding: 1.5rem;
+                margin: 1rem 0;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             }
         `;
         document.head.appendChild(style);
@@ -267,24 +372,36 @@ async function loadAllTariffs() {
             const featuresHtml = allFeatures.map(feature => {
                 const isIncluded = tariffFeatureCodes.includes(feature.code);
                 return `
-                    <li class="mb-2 ${isIncluded ? '' : 'unavailable'}">
-                        <i class="bx ${isIncluded ? 'bx-check-circle text-success' : 'bx-x-circle text-danger'} me-2"></i>
-                        ${feature.name}
-                        <div class="feature-description">${feature.description}</div>
+                    <li class="mb-2 justify-content-between ${isIncluded ? '' : 'unavailable'}">
+                        <div class="d-flex align-items-center">
+                            <i class="bx ${isIncluded ? 'bx-check-circle text-success' : 'bx-x-circle text-danger'} me-2"></i>
+                            <span>${feature.name}</span>
+                        </div>
+                        <div class="text-end mt-1">
+                            <button class="btn btn-link btn-sm p-0 feature-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#feature-${tariff._id}-${feature.code}">
+                                <i class="bx bx-chevron-down"></i>
+                            </button>
+                        </div>
                     </li>
+                    <div class="collapse" id="feature-${tariff._id}-${feature.code}">
+                        <div class="feature-description mt-2 ps-4">
+                            ${feature.description}
+                        </div>
+                    </div>
                 `;
             }).join('');
 
             return `
                 <div class="col-md-4 col-lg-4 mb-5">
-                    <div class="card tariff-card h-100 shadow-sm ${tariff.is_free_trial ? 'border-success' : ''}" 
+                    <div class="card tariff-card h-100 ${tariff.is_free_trial ? 'border-success' : ''}" 
                          data-tariff-id="${tariff._id}">
-                        ${tariff.is_free_trial ? '<div class="card-ribbon"><span class="badge bg-success">14-Kunlik Bepul</span></div>' : ''}
+                        ${tariff.is_free_trial ? '<div class="card-ribbon pl-1">14-Kunlik Bepul</div>' : ''}
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-center mb-4">${tariff.name}</h5>
+                            <h5 class="card-title mb-2 px-2 py-1 text-primary rounded-4 border-2 border-primary fw-bold border">${tariff.name}</h5>
+                            <p class="text-muted mb-4">${tariff.description || ''}</p>
                             <div class="pricing-section mb-4">
                                 ${tariff.durations.daily ? `
-                                    <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
+                                    <div class="pricing-option text-center mb-3 p-3">
                                         <div class="price-amount">
                                             <span class="display-6">${tariff.durations.daily.price.toLocaleString()}</span>
                                             <small class="text-muted"> UZS</small>
@@ -295,7 +412,7 @@ async function loadAllTariffs() {
                                     </div>
                                 ` : ''}
                                 ${tariff.durations.monthly ? `
-                                    <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
+                                    <div class="pricing-option text-center mb-3 p-3">
                                         <div class="price-amount">
                                             <span class="display-6">${tariff.durations.monthly.price.toLocaleString()}</span>
                                             <small class="text-muted"> UZS</small>
@@ -306,7 +423,7 @@ async function loadAllTariffs() {
                                     </div>
                                 ` : ''}
                                 ${tariff.durations.annual ? `
-                                    <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
+                                    <div class="pricing-option text-center mb-3 p-3">
                                         <div class="price-amount">
                                             <span class="display-6">${tariff.durations.annual.price.toLocaleString()}</span>
                                             <small class="text-muted"> UZS</small>
@@ -318,7 +435,6 @@ async function loadAllTariffs() {
                                 ` : ''}
                             </div>
                             <div class="features-section flex-grow-1">
-                                <h6 class="text-center mb-3">Imkoniyatlar:</h6>
                                 <ul class="feature-list list-unstyled">
                                     ${featuresHtml}
                                 </ul>
@@ -430,22 +546,38 @@ async function loadTariffs(cafeId) {
             .feature-description {
                 font-size: 0.8rem;
                 color: #6c757d;
-                margin-left: 1.7rem;
+                border-left: 2px solid #e9ecef;
+                padding-left: 1rem;
+                margin-left: 1.5rem;
+            }
+            .feature-toggle {
+                color: #6c757d;
+                transition: transform 0.2s;
+            }
+            .feature-toggle:hover {
+                color: #198754;
+            }
+            .feature-toggle[aria-expanded="true"] {
+                transform: rotate(180deg);
+            }
+            .feature-toggle[aria-expanded="true"] i {
+                color: #198754;
+            }
+            .collapse {
+                transition: all 0.2s ease-in-out;
+            }
+            .card-title {
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: #212529;
+            }
+            .card-body > p {
+                font-size: 0.9rem;
+                line-height: 1.5;
             }
             .tariff-card.active {
                 border: 2px solid #198754 !important;
                 background-color: rgba(25, 135, 84, 0.05);
-            }
-            .active-badge {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-                z-index: 2;
-                background-color: #198754;
-                color: white;
-                padding: 0.5rem 1rem;
-                border-radius: 0.25rem;
-                font-size: 0.875rem;
             }
         `;
         document.head.appendChild(style);
@@ -465,22 +597,34 @@ async function loadTariffs(cafeId) {
             const featuresHtml = allFeatures.map(feature => {
                 const isIncluded = tariffFeatureCodes.includes(feature.code);
                 return `
-                    <li class="mb-2 ${isIncluded ? '' : 'unavailable'}">
-                        <i class="bx ${isIncluded ? 'bx-check-circle text-success' : 'bx-x-circle text-danger'} me-2"></i>
-                        ${feature.name}
-                        <div class="feature-description">${feature.description}</div>
+                    <li class="mb-2 justify-content-around ${isIncluded ? '' : 'unavailable'}">
+                        <div class="d-flex align-items-center">
+                            <i class="bx ${isIncluded ? 'bx-check-circle text-success' : 'bx-x-circle text-danger'} me-2"></i>
+                            <span>${feature.name}</span>
+                        </div>
+                        <div class="text-end mt-1">
+                            <button class="btn btn-link btn-sm p-0 feature-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#feature-${tariff._id}-${feature.code}">
+                            <i class="bx bx-chevron-down"></i>
+                            </button>
+                        </div>
                     </li>
+                    <div class="collapse" id="feature-${tariff._id}-${feature.code}">
+                        <div class="feature-description mt-2 ps-4">
+                            ${feature.description}
+                        </div>
+                    </div>
                 `;
             }).join('');
             
             return `
                 <div class="col-md-4 col-lg-4 mb-5">
-                    <div class="card tariff-card h-100 shadow-sm ${isActive ? 'active' : ''} ${tariff.is_free_trial ? 'border-success' : ''}" 
+                    <div class="card tariff-card h-100 ${isActive ? 'active' : ''} ${tariff.is_free_trial ? 'border-success' : ''}" 
                          data-tariff-id="${tariff._id}">
                         ${isActive ? `<div class="active-badge">Faol tarif (${endDate} gacha)</div>` : ''}
                         ${(!isActive && tariff.is_free_trial) ? '<div class="card-ribbon"><span class="badge bg-success">14-Kunlik Bepul</span></div>' : ''}
                         <div class="card-body d-flex flex-column">
-                            <h5 class="card-title text-center mb-4">${tariff.name}</h5>
+                            <h5 class="card-title mb-2 px-2 py-1 text-primary rounded-4 border-2 border-primary fw-bold border">${tariff.name}</h5>
+                            <p class="text-muted mb-4">${tariff.description || ''}</p>
                             <div class="pricing-section mb-4">
                                 ${tariff.durations.daily ? `
                                     <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
@@ -517,7 +661,6 @@ async function loadTariffs(cafeId) {
                                 ` : ''}
                             </div>
                             <div class="features-section flex-grow-1">
-                                <h6 class="text-center mb-3">Imkoniyatlar:</h6>
                                 <ul class="feature-list list-unstyled">
                                     ${featuresHtml}
                                 </ul>
