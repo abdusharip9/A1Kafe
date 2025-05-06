@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>A1Kafe | A1Tech</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/alert.css">
   <link href="plugins/fontawesome/css/fontawesome.css" rel="stylesheet" />
@@ -14,73 +13,230 @@
   <link href="plugins/fontawesome/css/solid.css" rel="stylesheet" />
   <link rel="shortcut icon" href="img/favicon.gif" type="image/x-icon">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #308aff 0%, #9ed8ff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .register-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 600px;
+      transform: translateY(0);
+      transition: all 0.3s ease;
+    }
+
+    .register-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo-container {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-container img {
+      width: 90px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-container img:hover {
+      transform: scale(1.05);
+    }
+
+    .form-title {
+      color: #333;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+
+    .form-floating {
+      margin-bottom: 1rem;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      border: 1.5px solid #e0e0e0;
+      padding: 0.8rem 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: #308aff;
+      box-shadow: 0 0 0 0.2rem rgba(48, 138, 255, 0.15);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #9ed8ff 0%, #308aff 100%);
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(48, 138, 255, 0.3);
+    }
+
+    .links-container {
+      margin-top: 1.2rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    .links-container a {
+      color: #006eff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .links-container a:hover {
+      color: #0040ff;
+      text-decoration: underline;
+    }
+
+    .form-floating label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
     .error {
-      color: red;
-      font-size: 14px;
-      font-weight: bold;
+      color: #dc3545;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+
+    #alert-container {
+      z-index: 1000;
+      top: 20px;
+    }
+
+    .containerBtn {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(2px);
+    }
+
+    .bar {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg) scale(1);
+      }
+
+      50% {
+        transform: rotate(180deg) scale(1.1);
+      }
+
+      100% {
+        transform: rotate(360deg) scale(1);
+      }
+    }
+
+    .row {
+      margin: 0 -0.5rem;
+    }
+
+    .col-md-6,
+    .col-md-12 {
+      padding: 0 0.5rem;
     }
   </style>
 </head>
 
-<body class="py-4 bg-body-tertiary">
-
+<body>
   <div id="alert-container"></div>
 
-  <main class="form-signin p-5 m-auto w-75" id="main">
+  <main class="register-container">
     <form id="loginForm">
-      <a href="index.html" class="d-inline-flex justify-content-between">
-        <img class="mb-4 mx-auto" src="img/logo.png" alt="A1TechGroup" width="100">
-      </a>
-      <h1 class="h3 mb-3 fw-normal">Ro‘yxatdan o‘tish</h1>
+      <div class="logo-container">
+        <a href="index.html">
+          <img src="img/logo.png" alt="A1TechGroup">
+        </a>
+      </div>
+      <h1 class="form-title">Ro'yxatdan o'tish</h1>
 
       <div class="row">
         <div class="col-md-6">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="firstName" name="firstName" class="form-control" id="firstName" placeholder="Izmingiz"
               required>
-            <label for="firstName">Izmingiz
-            </label>
+            <label for="firstName">Izmingiz</label>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="lastName" name="lastName" class="form-control" id="lastName" placeholder="Familyangiz"
               required>
-            <label for="lastName">Familyangiz
-            </label>
+            <label for="lastName">Familyangiz</label>
           </div>
         </div>
 
         <div class="col-md-6">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="phone" name="phone" class="form-control" id="phone" placeholder="+998901234567" required>
-            <label for="phone">Telefon raqamingiz
-            </label>
+            <label for="phone">Telefon raqamingiz</label>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="kafeName" name="kafeName" class="form-control" id="kafeName" placeholder="A1Kafe" required>
-            <label for="kafeName">Kafe nomi
-            </label>
+            <label for="kafeName">Kafe nomi</label>
           </div>
         </div>
         <div class="col-md-12">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="email" name="email" class="form-control" id="email" placeholder="name@example.com" required>
-            <label for="email">Elektron pochta
-            </label>
+            <label for="email">Elektron pochta</label>
           </div>
         </div>
         <div class="col-md-12">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="text" name="password" class="form-control pass" id="password" placeholder="Parol yarating"
               required min="4" max="30">
             <label for="password">Parol yarating</label>
           </div>
         </div>
         <div class="col-md-12">
-          <div class="form-floating mb-3">
+          <div class="form-floating">
             <input type="text" class="form-control pass" id="confirmPassword" placeholder="Parolni takrorlang" required
               min="4" max="30">
             <label for="confirmPassword">Parolni takrorlang</label>
@@ -88,33 +244,25 @@
         </div>
       </div>
 
-      <span id="error-message" class="error"></span><br><br>
+      <span id="error-message" class="error"></span>
 
-      <button class="btn btn-primary w-100 py-2" id="submitBtn" type="submit"
-        style="position: relative; overflow: hidden;">
+      <button class="btn btn-primary w-100 mt-3" id="submitBtn" type="submit">
         <div class="containerBtn d-none">
           <div class="bar"></div>
-        </div>Ro'yhatdan o'tish
+        </div>
+        Ro'yhatdan o'tish
       </button>
 
-
-      <div class="form-check p-0 my-3">
-        Allaqachon hisobingiz bormi? <a href="/login.html">Kirish</a>
+      <div class="links-container">
+        <p>Allaqachon hisobingiz bormi? <a href="/login.html">Kirish</a></p>
       </div>
-
     </form>
   </main>
 
-
   <script type="module" src="js/api-url.js"></script>
   <script type="module" src="js/register.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
-    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
-    crossorigin="anonymous"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"></script>
 </body>
 
 </html>

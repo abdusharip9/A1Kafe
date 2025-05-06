@@ -79,10 +79,12 @@ let menu = document.querySelector('.menu')
 
 profile.onclick = function (e) {
 	menu.classList.toggle('active')
+	profile.style.boxShadow = '0 0 5px var(--blue-color)'
 }
 
 document.addEventListener('click', e => {
 	if (!menu.contains(e.target) && e.target !== profile) {
 		menu.classList.remove('active')
+		profile.style.boxShadow = 'none'
 	}
 })

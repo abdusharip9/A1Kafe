@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const logoutBtn = document.querySelector('#logoutBtn');
   const copyPasswordBtn = document.getElementById('copy-password-btn');
   const viewPasswordModal = new bootstrap.Modal(document.getElementById('viewPasswordModal'));
-	const deleteCafeModal = new bootstrap.Modal(document.getElementById('deleteCafeModal'));
-	const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+  const deleteCafeModal = new bootstrap.Modal(document.getElementById('deleteCafeModal'));
+  const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
 
 
 	confirmDeleteBtn.addEventListener('click', handleDeleteCafe);

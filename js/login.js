@@ -25,10 +25,10 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 		window.location.href = '/kafelar.html'
 	} else {
 		data.errors.forEach(error => {
-			showAlert('Xatolik: ' + error.msg, 'danger', 30000)
+			showAlert('Xatolik: ' + error.msg, 'danger', 3000)
 		})
 		if (data.message) {
-			showAlert('Xatolik: ' + data.message, 'danger', 30000)
+			showAlert('Xatolik: ' + data.message, 'danger', 3000)
 		}
 	}
 	containerBtn.classList.add('d-none')

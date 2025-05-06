@@ -70,6 +70,17 @@ body.dark {
 	display: flex;
 	align-items: center;
 	column-gap: 25px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border-radius: 50%;
+	box-shadow: 0 0 1px var(--grey-color-light);
+	border: 1px solid var(--grey-color-light);
+}
+.navbar_content:hover {
+	border-radius: 50%;
+	box-shadow: 0 0 5px var(--blue-color);
+	transition: all 0.3s ease;
+	border: 1px solid var(--blue-color);
 }
 .navbar_content i {
 	cursor: pointer;
