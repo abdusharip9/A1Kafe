@@ -39,6 +39,26 @@ document.head.appendChild(style);
 // Fetch and display users
 async function fetchUsers() {
     try {
+        // Show loader first
+        const adminArticle = document.querySelector('#admin');
+        adminArticle.innerHTML = `
+            <div class="container-fluid px-4 mt-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="mb-0 text-primary">Foydalanuvchilar ro'yxati</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center align-items-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Then fetch data
         const response = await fetch(`${API_URL}/api/crud/getUsers`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -48,6 +68,13 @@ async function fetchUsers() {
         displayUsers(allUsers);
     } catch (error) {
         console.error('Error fetching users:', error);
+        // Show error message in card-body
+        const cardBody = document.querySelector('.card-body');
+        cardBody.innerHTML = `
+            <div class="text-center py-3 text-danger">
+                Xatolik yuz berdi. Qaytadan urinib ko'ring.
+            </div>
+        `;
     }
 }
 
@@ -115,14 +142,6 @@ function sortUsers(column) {
 
 function displayUsers(users) {
     const adminArticle = document.querySelector('#admin');
-    
-    // Debug log to check cafes data
-    console.log('Users with cafes:', users.map(user => ({
-        name: `${user.firstName} ${user.lastName}`,
-        cafesCount: user.cafes.length,
-        cafes: user.cafes
-    })));
-
     adminArticle.innerHTML = `
         <div class="container-fluid px-4 mt-4">
             <div class="card shadow-sm">
@@ -130,82 +149,88 @@ function displayUsers(users) {
                     <h5 class="mb-0 text-primary">Foydalanuvchilar ro'yxati</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="bg-light">
-                                <tr>
-                                    <th class="fw-bold sortable" data-column="id">
-                                        ID
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="firstName">
-                                        Ism
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="lastName">
-                                        Familiya
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="email">
-                                        Email
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="phone">
-                                        Telefon
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="role">
-                                        Rol
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="isActivated">
-                                        Faol
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold sortable" data-column="createdAt">
-                                        Yaratilgan
-                                        <i class='bx bx-sort-alt-2 ms-1'></i>
-                                    </th>
-                                    <th class="fw-bold">Kafelar</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${users.map(user => `
+                    ${users && users.length > 0 ? `
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="bg-light">
                                     <tr>
-                                        <td>
-                                            <span class="truncated-id text-primary" style="cursor: pointer;" 
-                                                  data-full-id="${user._id}" 
-                                                  title="Click to expand">
-                                                ${truncateId(user._id)}
-                                            </span>
-                                        </td>
-                                        <td>${user.firstName}</td>
-                                        <td>${user.lastName}</td>
-                                        <td>${user.email}</td>
-                                        <td>${user.phone}</td>
-                                        <td>
-                                            <span class="badge ${user.role === 'admin' ? 'bg-danger' : 'bg-primary'}">
-                                                ${user.role}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <span class="badge ${user.isActivated ? 'bg-success' : 'bg-secondary'}">
-                                                ${user.isActivated ? 'Ha' : 'Yo\'q'}
-                                            </span>
-                                        </td>
-                                        <td>${new Date(user.createdAt).toLocaleDateString()}</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-outline-primary" 
-                                                    data-bs-toggle="modal" 
-                                                    data-bs-target="#cafeModal${user._id}">
-                                                ${user.cafes ? user.cafes.length : 0} ta
-                                            </button>
-                                        </td>
+                                        <th class="fw-bold sortable" data-column="id">
+                                            ID
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="firstName">
+                                            Ism
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="lastName">
+                                            Familiya
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="email">
+                                            Email
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="phone">
+                                            Telefon
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="role">
+                                            Rol
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="isActivated">
+                                            Faol
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold sortable" data-column="createdAt">
+                                            Yaratilgan
+                                            <i class='bx bx-sort-alt-2 ms-1'></i>
+                                        </th>
+                                        <th class="fw-bold">Kafelar</th>
                                     </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody>
+                                    ${users.map(user => `
+                                        <tr>
+                                            <td>
+                                                <span class="truncated-id text-primary" style="cursor: pointer;" 
+                                                      data-full-id="${user._id}" 
+                                                      title="Click to expand">
+                                                    ${truncateId(user._id)}
+                                                </span>
+                                            </td>
+                                            <td>${user.firstName}</td>
+                                            <td>${user.lastName}</td>
+                                            <td>${user.email}</td>
+                                            <td>${user.phone}</td>
+                                            <td>
+                                                <span class="badge ${user.role === 'admin' ? 'bg-danger' : 'bg-primary'}">
+                                                    ${user.role}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge ${user.isActivated ? 'bg-success' : 'bg-secondary'}">
+                                                    ${user.isActivated ? 'Ha' : 'Yo\'q'}
+                                                </span>
+                                            </td>
+                                            <td>${new Date(user.createdAt).toLocaleDateString()}</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary" 
+                                                        data-bs-toggle="modal" 
+                                                        data-bs-target="#cafeModal${user._id}">
+                                                    ${user.cafes ? user.cafes.length : 0} ta
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    ` : `
+                        <div class="text-center py-3">
+                            Foydalanuvchilar topilmadi
+                        </div>
+                    `}
                 </div>
             </div>
         </div>
