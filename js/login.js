@@ -22,7 +22,12 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 	if (response.ok) {
 		localStorage.setItem('accessToken', data.data.accessToken)
 		localStorage.setItem('id', data.data.user.id)
-		window.location.href = '/kafelar.html'
+
+		if (data.data.user.role === 'admin') {
+			window.location.href = '/admin-page.html'
+		} else {
+			window.location.href = '/kafelar.html'
+		}
 	} else {
 		data.errors.forEach(error => {
 			showAlert('Xatolik: ' + error.msg, 'danger', 3000)

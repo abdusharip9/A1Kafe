@@ -32,7 +32,7 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 	const containerBtn = document.querySelector('.containerBtn')
 	const submitBtn = document.querySelector('#submitBtn')
 	containerBtn.classList.remove('d-none')
-	submitBtn.setAttribute('disabled', '')
+	submitBtn.setAttribute('disabled', 'disabled')
 
 	const firstName = document.getElementById('firstName').value
 	const lastName = document.getElementById('lastName').value
