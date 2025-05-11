@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <i class="bx bx-low-vision"></i>
             </button>
         </td>
-        <td class="d-flex gap-2">
+        <td>
             ${item.status === 'active' ? `
                 <button class="btn btn-sm btn-success open-app" data-id="${item._id}" data-name="${item.name}">
                     <i class="bi bi-box-arrow-up-right"></i> Ilovani ochish
@@ -310,38 +310,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         modalContent.innerHTML = `
             <h4 class="mb-4">${tariff.tariff_name || 'Noma\'lum tarif'}</h4>
             <div class="pricing-section mb-4">
-                ${tariff.tariff_durations?.daily ? `
+                ${tariff.tariff_duration ? `
                     <div class="pricing-option mb-3 p-3 border rounded">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <h5 class="mb-0">${tariff.tariff_durations.daily.duration || 0} kun</h5>
+                                <h5 class="mb-0">${tariff.tariff_duration_count || 0} ${tariff.tariff_duration}</h5>
                             </div>
                             <div>
-                                <span class="h5 mb-0">${(tariff.tariff_durations.daily.price || 0).toLocaleString()} UZS</span>
-                            </div>
-                        </div>
-                    </div>
-                ` : ''}
-                ${tariff.tariff_durations?.monthly ? `
-                    <div class="pricing-option mb-3 p-3 border rounded">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="mb-0">${tariff.tariff_durations.monthly.duration || 0} oy</h5>
-                            </div>
-                            <div>
-                                <span class="h5 mb-0">${(tariff.tariff_durations.monthly.price || 0).toLocaleString()} UZS</span>
-                            </div>
-                        </div>
-                    </div>
-                ` : ''}
-                ${tariff.tariff_durations?.yearly ? `
-                    <div class="pricing-option mb-3 p-3 border rounded">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="mb-0">${tariff.tariff_durations.yearly.duration || 0} yil</h5>
-                            </div>
-                            <div>
-                                <span class="h5 mb-0">${(tariff.tariff_durations.yearly.price || 0).toLocaleString()} UZS</span>
+                                <span class="h5 mb-0">${(tariff.tariff_price || 0).toLocaleString()} UZS</span>
                             </div>
                         </div>
                     </div>
@@ -351,12 +327,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="alert alert-success">
                     <i class="bx bx-info-circle me-2"></i>
                     Bu tarif 14 kunlik bepul sinov muddatini o'z ichiga oladi
-                </div>
-            ` : ''}
-            ${!tariff.tariff_durations?.daily && !tariff.tariff_durations?.monthly && !tariff.tariff_durations?.yearly ? `
-                <div class="alert alert-warning">
-                    <i class="bx bx-info-circle me-2"></i>
-                    Bu tarif uchun narxlar belgilanmagan
                 </div>
             ` : ''}
         `;

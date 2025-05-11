@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Standart",
+        "durationType": "month",
+        "durationCount": 1,
+        "price": 50000,
+        "features": ["5 GB saqlash hajmi", "10 foydalanuvchi", "Asosiy funksiyalar"]
+    },
+    {
+        "id": 2,
+        "name": "Premium",
+        "durationType": "month",
+        "durationCount": 3,
+        "price": 120000,
+        "features": ["20 GB saqlash hajmi", "Cheksiz foydalanuvchilar", "Barcha funksiyalar", "24/7 qo'llab-quvvatlash"]
+    },
+    {
+        "id": 3,
+        "name": "Enterprise",
+        "durationType": "year",
+        "durationCount": 1,
+        "price": 500000,
+        "features": [
+            "100 GB saqlash hajmi",
+            "Cheksiz foydalanuvchilar",
+            "Barcha funksiyalar",
+            "24/7 qo'llab-quvvatlash",
+            "Maxsus funksiyalar"
+        ]
+    }
+] 

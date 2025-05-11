@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="uz" data-bs-theme="light">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tizimga kirish</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="bg-light">
+	<div class="container">
+		<div class="row justify-content-center mt-5">
+			<div class="col-md-6 col-lg-5">
+				<div class="card shadow-sm border-0">
+					<div class="card-body p-4">
+						<div class="text-center mb-4">
+							<i class="bi bi-cup-hot display-1 text-primary"></i>
+							<h2 class="mt-3">Tariflar Boshqaruvi</h2>
+							<p class="text-muted">Tizimga kirish uchun ma'lumotlaringizni kiriting</p>
+						</div>
+
+						<form id="loginForm">
+							<div class="mb-3">
+								<label for="loginUsername" class="form-label">Login</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="bi bi-person"></i></span>
+									<input type="text" class="form-control" id="loginUsername" placeholder="Loginingizni kiriting"
+										required>
+								</div>
+							</div>
+
+							<div class="mb-3">
+								<label for="loginPassword" class="form-label">Parol</label>
+								<div class="input-group">
+									<span class="input-group-text"><i class="bi bi-lock"></i></span>
+									<input type="password" class="form-control" id="loginPassword" placeholder="Parolingizni kiriting"
+										required>
+									<button class="btn btn-outline-secondary toggle-password" type="button" data-target="loginPassword">
+										<i class="bi bi-eye"></i>
+									</button>
+								</div>
+							</div>
+
+							<div class="mb-3 form-check">
+								<input type="checkbox" class="form-check-input" id="rememberMe">
+								<label class="form-check-label" for="rememberMe">Meni eslab qolish</label>
+							</div>
+
+							<div class="d-grid gap-2">
+								<button type="submit" class="btn btn-primary py-2">Kirish</button>
+							</div>
+						</form>
+
+						<div class="text-center mt-3">
+							<p>Hisobingiz yo'qmi? <a href="register.html" class="text-decoration-none">Ro'yxatdan o'tish</a></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="text-center mt-3 text-muted">
+					<small>&copy; 2023 Tariflar Boshqaruvi. Barcha huquqlar himoyalangan.</small>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Error Alert -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-exclamation-triangle me-2"></i>
+					<span id="errorToastMessage">Xatolik yuz berdi!</span>
+				</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/auth.js"></script>
+</body>
+
+</html>

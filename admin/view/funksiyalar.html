@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="uz" data-bs-theme="light">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Funksiyalar Boshqaruvi</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="../styles.css">
+	<style>
+		:root {
+			--sidebar-width: 250px;
+			--header-height: 60px;
+		}
+
+		[data-bs-theme="dark"] {
+			--bs-body-bg: #212529;
+			--bs-body-color: #f8f9fa;
+		}
+
+		.sidebar {
+			width: var(--sidebar-width);
+			height: 100vh;
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 1000;
+			transition: all 0.3s ease;
+		}
+
+		.main-content {
+			margin-left: var(--sidebar-width);
+			transition: all 0.3s ease;
+		}
+
+		.theme-toggle {
+			position: fixed;
+			top: 1rem;
+			right: 1rem;
+			z-index: 1001;
+		}
+
+		@media (max-width: 768px) {
+			.sidebar {
+				transform: translateX(-100%);
+			}
+
+			.sidebar.show {
+				transform: translateX(0);
+			}
+
+			.main-content {
+				margin-left: 0;
+			}
+
+			.navbar-toggler {
+				display: block;
+			}
+		}
+
+		.card {
+			transition: all 0.3s ease;
+		}
+
+		[data-bs-theme="dark"] .card {
+			background-color: #2c3034;
+			border-color: #373b3e;
+		}
+
+		[data-bs-theme="dark"] .card-header {
+			background-color: #343a40;
+			border-bottom-color: #373b3e;
+		}
+
+		/* Theme-aware h2 styles */
+		[data-bs-theme="dark"] h2 {
+			color: #f8f9fa;
+		}
+
+		[data-bs-theme="light"] h2 {
+			color: #212529;
+		}
+
+		/* Improved navbar toggle button */
+		.navbar-toggler {
+			background-color: transparent;
+			border: 2px solid var(--bs-primary);
+			border-radius: 8px;
+			padding: 8px;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-toggler:hover {
+			background-color: var(--bs-primary);
+			color: white;
+		}
+
+		[data-bs-theme="dark"] .navbar-toggler {
+			border-color: #6c757d;
+			color: #f8f9fa;
+		}
+
+		[data-bs-theme="dark"] .navbar-toggler:hover {
+			background-color: #6c757d;
+			color: white;
+		}
+
+		.navbar-toggler i {
+			font-size: 1.5rem;
+			transition: transform 0.3s ease;
+		}
+
+		.navbar-toggler:hover i {
+			transform: scale(1.1);
+		}
+	</style>
+</head>
+
+<body class="bg-body-tertiary">
+	<!-- Theme Toggle Button -->
+	<button class="btn btn-outline-primary theme-toggle" id="themeToggle">
+		<i class="bi bi-moon-stars"></i>
+	</button>
+
+	<!-- Mobile Navbar Toggle -->
+	<button class="navbar-toggler d-md-none position-fixed top-0 start-0 m-3" type="button" id="sidebarToggle"
+		style="z-index: 1001;">
+		<i class="bi bi-list"></i>
+	</button>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar -->
+			<div class="col-md-2 bg-dark text-white sidebar p-0">
+				<div class="d-flex flex-column p-3 h-100">
+					<h3 class="text-center mb-4">Admin Panel</h3>
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li class="nav-item">
+							<a href="../index.html" class="nav-link text-white" id="dashboard-tab">
+								<i class="bi bi-speedometer2 me-2"></i>
+								Boshqaruv paneli
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="tariflar2.html" class="nav-link text-white" id="tariffs-tab">
+								<i class="bi bi-tag me-2"></i>
+								Tariflar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="funksiyalar2.html" class="nav-link active text-white" id="features-tab">
+								<i class="bi bi-list-check me-2"></i>
+								Funksiyalar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="kafelar.html" class="nav-link text-white" id="cafes-tab">
+								<i class="bi bi-cup-hot me-2"></i>
+								Kafelar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="foydalanuvchilar.html" class="nav-link text-white" id="users-tab">
+								<i class="bi bi-people me-2"></i>
+								Foydalanuvchilar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="rollar.html" class="nav-link text-white" id="roles-tab">
+								<i class="bi bi-person-badge me-2"></i>
+								Ro'llar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="sozlamalar.html" class="nav-link text-white" id="settings-tab">
+								<i class="bi bi-gear me-2"></i>
+								Sozlamalar
+							</a>
+						</li>
+					</ul>
+
+					<!-- Foydalanuvchi ma'lumotlari -->
+					<div class="mt-auto border-top pt-3">
+						<div class="d-flex align-items-center">
+							<div class="user-avatar bg-primary rounded-circle d-flex align-items-center justify-content-center me-2"
+								style="width: 40px; height: 40px;">
+								<span id="userInitials">AA</span>
+							</div>
+							<div>
+								<div id="currentUserName" class="fw-bold">Adminbek Adminov</div>
+								<small id="currentUserRole" class="text-muted">Administrator</small>
+							</div>
+						</div>
+						<div class="mt-2">
+							<button id="logoutBtn" class="btn btn-sm btn-outline-light w-100">
+								<i class="bi bi-box-arrow-right me-2"></i>Chiqish
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main content -->
+			<div class="col-md-10 main-content p-4">
+
+				<!-- Funksiyalar sahifasi -->
+				<div id="features-page">
+					<h2 class="mt-5 mb-4 text-body">Funksiyalar Boshqaruvi</h2>
+
+					<div class="row mb-4">
+						<div class="col-md-12">
+							<div class="card">
+								<div class="card-header d-flex justify-content-between align-items-center">
+									<h5 class="mb-0">Funksiyalar</h5>
+									<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addFeatureModal">
+										<i class="bi bi-plus-circle me-2"></i>Yangi funksiya qo'shish
+									</button>
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-striped table-hover">
+											<thead>
+												<tr>
+													<th>ID</th>
+													<th>Funksiya nomi</th>
+													<th>Tavsif</th>
+													<th>Funksiya kodi</th>
+													<th>Qo'shilgan sana</th>
+													<th>Amallar</th>
+												</tr>
+											</thead>
+											<tbody id="featureTableBody">
+												<!-- Funksiyalar ro'yxati JavaScript orqali to'ldiriladi -->
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Add Feature Modal -->
+	<div class="modal fade" id="addFeatureModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="featureModalTitle">Yangi funksiya qo'shish</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="addFeatureForm">
+						<div class="mb-3">
+							<label for="featureName" class="form-label">Funksiya nomi</label>
+							<input type="text" class="form-control" id="featureName" required>
+						</div>
+						<div class="mb-3">
+							<label for="featureDescription" class="form-label">Funksiya tavsifi</label>
+							<textarea class="form-control" id="featureDescription" rows="3"></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="featureCode" class="form-label">Funksiya kodi</label>
+							<input type="text" class="form-control" id="featureCode" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-primary" id="saveFeatureBtn">Saqlash</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Edit Feature Modal -->
+	<div class="modal fade" id="editFeatureModal" tabindex="-1" aria-labelledby="editFeatureModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="editFeatureModalLabel">Funksiya tahrirlash</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="editFeatureForm">
+						<div class="mb-3">
+							<label for="featureNameEdit" class="form-label">Funksiya nomi</label>
+							<input type="text" class="form-control" id="featureNameEdit" required>
+						</div>
+						<div class="mb-3">
+							<label for="featureDescriptionEdit" class="form-label">Funksiya tavsifi</label>
+							<textarea class="form-control" id="featureDescriptionEdit" rows="3"></textarea>
+						</div>
+						<div class="mb-3">
+							<label for="featureCodeEdit" class="form-label">Funksiya kodi</label>
+							<input type="text" class="form-control" id="featureCodeEdit" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-primary" id="updateFeatureBtn">Tahrirlash</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete Confirmation Modal -->
+	<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteModalTitle">O'chirish</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p id="deleteConfirmText">Siz rostdan ham buni o'chirmoqchimisiz?</p>
+					<div id="deleteFeatureWarning" class="alert alert-warning" style="display: none;">
+						<i class="bi bi-exclamation-triangle me-2"></i>
+						<span>Diqqat! Bu funksiya ba'zi tariflarda ishlatilmoqda. O'chirilsa, u barcha tariflardan ham
+							o'chiriladi.</span>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-danger" id="confirmDeleteBtn">O'chirish</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Success Alert -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-check-circle me-2"></i>
+					<span id="successToastMessage">Muvaffaqiyatli saqlandi!</span>
+				</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Error Alert -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-exclamation-triangle me-2"></i>
+					<span id="errorToastMessage">Xatolik yuz berdi!</span>
+				</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../script.js"></script>
+	<script type="module" src="./js/funksiyalar2.js"></script>
+	<script>
+		// Theme toggle functionality
+		const themeToggle = document.getElementById('themeToggle')
+		const html = document.documentElement
+		const icon = themeToggle.querySelector('i')
+
+		// Check for saved theme preference
+		const savedTheme = localStorage.getItem('theme') || 'light'
+		html.setAttribute('data-bs-theme', savedTheme)
+		updateThemeIcon(savedTheme)
+
+		themeToggle.addEventListener('click', () => {
+			const currentTheme = html.getAttribute('data-bs-theme')
+			const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+
+			html.setAttribute('data-bs-theme', newTheme)
+			localStorage.setItem('theme', newTheme)
+			updateThemeIcon(newTheme)
+		})
+
+		function updateThemeIcon(theme) {
+			icon.className = theme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun'
+		}
+
+		// Mobile sidebar toggle
+		const sidebarToggle = document.getElementById('sidebarToggle')
+		const sidebar = document.querySelector('.sidebar')
+
+		sidebarToggle.addEventListener('click', () => {
+			sidebar.classList.toggle('show')
+		})
+
+		// Close sidebar when clicking outside on mobile
+		document.addEventListener('click', (e) => {
+			if (window.innerWidth <= 768 &&
+				!sidebar.contains(e.target) &&
+				!sidebarToggle.contains(e.target) &&
+				sidebar.classList.contains('show')) {
+				sidebar.classList.remove('show')
+			}
+		});
+	</script>
+</body>
+
+</html>

@@ -55,10 +55,10 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 		window.location.href = '/view/activate/otp.html'
 	} else if (response.status === 400) {
 		data.errors.forEach(error => {
-			showAlert('Xatolik: ' + error.msg, 'danger', 300000)
+			showAlert('Xatolik: ' + error.msg, 'danger', 3000)
 		})
 		if (data.message) {
-			showAlert('Xatolik: ' + data.message, 'danger', 300000)
+			showAlert('Xatolik: ' + data.message, 'danger', 3000)
 		}
 	}
 	containerBtn.classList.add('d-none')

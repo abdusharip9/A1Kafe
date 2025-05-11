@@ -1,0 +1,125 @@
+body {
+  background-color: #f8f9fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.sidebar {
+  min-height: 100vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav-link {
+  border-radius: 0;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .nav-link.active {
+  background-color: #0d6efd;
+}
+
+.main-content {
+  padding: 20px;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.feature-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.feature-item:hover {
+  background-color: #f8f9fa;
+}
+
+.feature-item .btn-danger {
+  opacity: 0.7;
+}
+
+.feature-item:hover .btn-danger {
+  opacity: 1;
+}
+
+.table th {
+  font-weight: 600;
+}
+
+.btn-action {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+}
+
+.form-check-input {
+  margin-right: 10px;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+#featuresList {
+  border-radius: 0;
+}
+
+#featuresList .list-group-item {
+  border-left: none;
+  border-right: none;
+}
+
+#featuresList .list-group-item:first-child {
+  border-top: none;
+}
+
+#featuresList .list-group-item:last-child {
+  border-bottom: none;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.form-check-label small {
+  font-size: 0.85em;
+  margin-top: 2px;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    min-height: auto;
+  }
+
+  .btn-action {
+    padding: 0.2rem 0.4rem;
+    font-size: 0.8rem;
+  }
+}

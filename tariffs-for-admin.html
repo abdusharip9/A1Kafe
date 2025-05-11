@@ -221,54 +221,22 @@
 							<textarea class="form-control" name="description" rows="3" required></textarea>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">To'lov Davrlari</label>
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="enableDaily" id="enableDaily">
-								<label class="form-check-label" for="enableDaily">
-									Kunlik To'lovni Yoqish
-								</label>
-							</div>
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="enableMonthly" id="enableMonthly">
-								<label class="form-check-label" for="enableMonthly">
-									Oylik To'lovni Yoqish
-								</label>
-							</div>
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="enableAnnual" id="enableAnnual">
-								<label class="form-check-label" for="enableAnnual">
-									Yillik To'lovni Yoqish
-								</label>
-							</div>
+							<label class="form-label">To'lov Davri</label>
+							<select class="form-select" name="duration" required>
+								<option value="">To'lov davrini tanlang</option>
+								<option value="daily">Kunlik</option>
+								<option value="monthly">Oylik</option>
+								<option value="yearly">Yillik</option>
+							</select>
 						</div>
-						<div class="row mb-3 daily-billing" style="display: none;">
+						<div class="row mb-3">
 							<div class="col">
-								<label class="form-label">Kunlik Narxi</label>
-								<input type="number" class="form-control" name="dailyPrice" required>
+								<label class="form-label">Narxi</label>
+								<input type="number" class="form-control" name="price" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Kunlik Davomiyligi (kunlar)</label>
-								<input type="number" class="form-control" name="dailyDuration" required>
-							</div>
-						</div>
-						<div class="row mb-3 monthly-billing" style="display: none;">
-							<div class="col">
-								<label class="form-label">Oylik Narxi</label>
-								<input type="number" class="form-control" name="monthlyPrice" required>
-							</div>
-							<div class="col">
-								<label class="form-label">Oylik Davomiyligi (oylar)</label>
-								<input type="number" class="form-control" name="monthlyDuration" required>
-							</div>
-						</div>
-						<div class="row mb-3 annual-billing" style="display: none;">
-							<div class="col">
-								<label class="form-label">Yillik Narxi</label>
-								<input type="number" class="form-control" name="annualPrice" required>
-							</div>
-							<div class="col">
-								<label class="form-label">Yillik Davomiyligi (yillar)</label>
-								<input type="number" class="form-control" name="annualDuration" required>
+								<label class="form-label">Davomiyligi</label>
+								<input type="number" class="form-control" name="duration_count" required>
 							</div>
 						</div>
 						<div class="mb-3">
@@ -320,54 +288,22 @@
 							<textarea class="form-control" name="description" rows="3" required></textarea>
 						</div>
 						<div class="mb-3">
-							<label class="form-label">To'lov Davrlari</label>
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="enableDaily" id="enableDaily">
-								<label class="form-check-label" for="enableDaily">
-									Kunlik To'lovni Yoqish
-								</label>
-							</div>
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="enableMonthly" id="enableMonthly">
-								<label class="form-check-label" for="enableMonthly">
-									Oylik To'lovni Yoqish
-								</label>
-							</div>
-							<div class="form-check mb-2">
-								<input class="form-check-input" type="checkbox" name="enableAnnual" id="enableAnnual">
-								<label class="form-check-label" for="enableAnnual">
-									Yillik To'lovni Yoqish
-								</label>
-							</div>
+							<label class="form-label">To'lov Davri</label>
+							<select class="form-select" name="duration" required>
+								<option value="">To'lov davrini tanlang</option>
+								<option value="daily">Kunlik</option>
+								<option value="monthly">Oylik</option>
+								<option value="yearly">Yillik</option>
+							</select>
 						</div>
-						<div class="row mb-3 daily-billing" style="display: none;">
+						<div class="row mb-3">
 							<div class="col">
-								<label class="form-label">Kunlik Narxi</label>
-								<input type="number" class="form-control" name="dailyPrice" required>
+								<label class="form-label">Narxi</label>
+								<input type="number" class="form-control" name="price" required>
 							</div>
 							<div class="col">
-								<label class="form-label">Kunlik Davomiyligi (kunlar)</label>
-								<input type="number" class="form-control" name="dailyDuration" required>
-							</div>
-						</div>
-						<div class="row mb-3 monthly-billing" style="display: none;">
-							<div class="col">
-								<label class="form-label">Oylik Narxi</label>
-								<input type="number" class="form-control" name="monthlyPrice" required>
-							</div>
-							<div class="col">
-								<label class="form-label">Oylik Davomiyligi (oylar)</label>
-								<input type="number" class="form-control" name="monthlyDuration" required>
-							</div>
-						</div>
-						<div class="row mb-3 annual-billing" style="display: none;">
-							<div class="col">
-								<label class="form-label">Yillik Narxi</label>
-								<input type="number" class="form-control" name="annualPrice" required>
-							</div>
-							<div class="col">
-								<label class="form-label">Yillik Davomiyligi (yillar)</label>
-								<input type="number" class="form-control" name="annualDuration" required>
+								<label class="form-label">Davomiyligi</label>
+								<input type="number" class="form-control" name="duration_count" required>
 							</div>
 						</div>
 						<div class="mb-3">

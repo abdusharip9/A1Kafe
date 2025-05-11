@@ -162,14 +162,8 @@ async function loadTariffs() {
 						</div>
 						<div class="mb-3">
 							<h6>Narxlar:</h6>
-							${tariff.durations.daily ? `
-								<p>Kunlik: ${tariff.durations.daily.price.toLocaleString()} UZS - ${tariff.durations.daily.duration} kun</p>
-							` : ''}
-							${tariff.durations.monthly ? `
-								<p>Oylik: ${tariff.durations.monthly.price.toLocaleString()} UZS - ${tariff.durations.monthly.duration} oy</p>
-							` : ''}
-							${tariff.durations.annual ? `
-								<p>Yillik: ${tariff.durations.annual.price.toLocaleString()} UZS - ${tariff.durations.annual.duration} yil</p>
+							${tariff.price ? `
+								<p>Kunlik: ${tariff.price.toLocaleString()} UZS - ${tariff.duration_count} ${tariff.duration}</p>
 							` : ''}
 						</div>
 						<div class="mb-3">
@@ -255,27 +249,16 @@ async function showEditTariffModal(tariffId) {
 			const form = document.getElementById('editTariffForm');
 			form.id.value = tariff._id;
 			form.name.value = tariff.name;
+			form.price.value = tariff.price;
+			form.duration.value = tariff.duration;
+			form.duration_count.value = tariff.duration_count;
 			
+
 			// Set billing period checkboxes and values
-			if (tariff.durations.daily) {
-				form.enableDaily.checked = true;
-				form.dailyPrice.value = tariff.durations.daily.price;
-				form.dailyDuration.value = tariff.durations.daily.duration;
-				document.querySelector('.daily-billing').style.display = 'flex';
-			}
-			
-			if (tariff.durations.monthly) {
-				form.enableMonthly.checked = true;
-				form.monthlyPrice.value = tariff.durations.monthly.price;
-				form.monthlyDuration.value = tariff.durations.monthly.duration;
-				document.querySelector('.monthly-billing').style.display = 'flex';
-			}
-			
-			if (tariff.durations.annual) {
-				form.enableAnnual.checked = true;
-				form.annualPrice.value = tariff.durations.annual.price;
-				form.annualDuration.value = tariff.durations.annual.duration;
-				document.querySelector('.annual-billing').style.display = 'flex';
+			if (tariff.price) {
+				form.duration.value = tariff.duration;
+				form.price.value = tariff.price;
+				form.duration_count.value = tariff.duration_count;
 			}
 			
 			document.getElementById('editIsFreeTrial').checked = tariff.is_free_trial;
@@ -343,36 +326,14 @@ async function updateTariff() {
 
 	const form = document.getElementById('editTariffForm');
 	const selectedFeatures = $(form.features).val();
-	const description = form.description.value;
-	
-	const durations = {};
-	
-	if (form.enableDaily.checked) {
-		durations.daily = {
-			duration: parseInt(form.dailyDuration.value),
-			price: parseInt(form.dailyPrice.value)
-		};
-	}
-	
-	if (form.enableMonthly.checked) {
-		durations.monthly = {
-			duration: parseInt(form.monthlyDuration.value),
-			price: parseInt(form.monthlyPrice.value)
-		};
-	}
-	
-	if (form.enableAnnual.checked) {
-		durations.annual = {
-			duration: parseInt(form.annualDuration.value),
-			price: parseInt(form.annualPrice.value)
-		};
-	}
 	
 	const formData = {
 		name: form.name.value,
-		durations: durations,
+		duration: form.duration.value,
+		price: form.price.value,
+		duration_count: form.duration_count.value,
 		features: selectedFeatures,
-		description: description,
+		description: form.description.value,
 		is_free_trial: document.getElementById('editIsFreeTrial').checked
 	};
 
@@ -515,33 +476,13 @@ async function createTariff() {
 	const form = document.getElementById('addTariffForm');
 	const selectedFeatures = $(form.features).val();
 	
-	const durations = {};
-	
-	if (form.enableDaily.checked) {
-		durations.daily = {
-			duration: parseInt(form.dailyDuration.value),
-			price: parseInt(form.dailyPrice.value)
-		};
-	}
-	
-	if (form.enableMonthly.checked) {
-		durations.monthly = {
-			duration: parseInt(form.monthlyDuration.value),
-			price: parseInt(form.monthlyPrice.value)
-		};
-	}
-	
-	if (form.enableAnnual.checked) {
-		durations.annual = {
-			duration: parseInt(form.annualDuration.value),
-			price: parseInt(form.annualPrice.value)
-		};
-	}
-	
 	const formData = {
 		name: form.name.value,
-		durations: durations,
+		duration: form.duration.value,
+		price: form.price.value,
+		duration_count: form.duration_count.value,
 		features: selectedFeatures,
+		description: form.description.value,
 		is_free_trial: document.getElementById('isFreeTrial').checked
 	};
 
@@ -610,30 +551,45 @@ async function createTariff() {
 	}
 }
 
-// Initialize billing period toggles
-function initializeBillingPeriodToggles() {
-	const dailyCheckbox = document.getElementById('enableDaily');
-	const monthlyCheckbox = document.getElementById('enableMonthly');
-	const annualCheckbox = document.getElementById('enableAnnual');
+// // Initialize billing period toggles
+// function initializeBillingPeriodToggles() {
+// 	const dailyRadio = document.getElementById('enableDaily');
+// 	const monthlyRadio = document.getElementById('enableMonthly');
+// 	const annualRadio = document.getElementById('enableYearly');
 
-	dailyCheckbox.addEventListener('change', function() {
-		document.querySelector('.daily-billing').style.display = this.checked ? 'flex' : 'none';
-		document.querySelector('input[name="dailyPrice"]').required = this.checked;
-		document.querySelector('input[name="dailyDuration"]').required = this.checked;
-	});
+// 	function updateBillingDisplay() {
+// 		// Hide all billing sections first
+// 		document.querySelector('.daily-billing').style.display = 'none';
+// 		document.querySelector('.monthly-billing').style.display = 'none';
+// 		document.querySelector('.annual-billing').style.display = 'none';
 
-	monthlyCheckbox.addEventListener('change', function() {
-		document.querySelector('.monthly-billing').style.display = this.checked ? 'flex' : 'none';
-		document.querySelector('input[name="monthlyPrice"]').required = this.checked;
-		document.querySelector('input[name="monthlyDuration"]').required = this.checked;
-	});
+// 		// Show the selected billing section
+// 		if (dailyRadio.checked) {
+// 			document.querySelector('.daily-billing').style.display = 'flex';
+// 		} else if (monthlyRadio.checked) {
+// 			document.querySelector('.monthly-billing').style.display = 'flex';
+// 		} else if (annualRadio.checked) {
+// 			document.querySelector('.annual-billing').style.display = 'flex';
+// 		}
 
-	annualCheckbox.addEventListener('change', function() {
-		document.querySelector('.annual-billing').style.display = this.checked ? 'flex' : 'none';
-		document.querySelector('input[name="annualPrice"]').required = this.checked;
-		document.querySelector('input[name="annualDuration"]').required = this.checked;
-	});
-}
+// 		// Update required fields
+// 		const priceInput = document.querySelector('input[name="price"]');
+// 		const durationInput = document.querySelector('input[name="duration_count"]');
+		
+// 		if (dailyRadio.checked || monthlyRadio.checked || annualRadio.checked) {
+// 			priceInput.required = true;
+// 			durationInput.required = true;
+// 		} else {
+// 			priceInput.required = false;
+// 			durationInput.required = false;
+// 		}
+// 	}
+
+// 	// Add change event listeners to all radio buttons
+// 	dailyRadio.addEventListener('change', updateBillingDisplay);
+// 	monthlyRadio.addEventListener('change', updateBillingDisplay);
+// 	annualRadio.addEventListener('change', updateBillingDisplay);
+// }
 
 // Make functions available globally
 window.createFeature = createFeature;
@@ -650,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		window.location.href = '/login.html';
 		return;
 	}
-	initializeBillingPeriodToggles();
+	// initializeBillingPeriodToggles();
 	loadFeatures();
 	loadTariffs();
 });

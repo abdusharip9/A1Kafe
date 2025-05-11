@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="uz" data-bs-theme="light">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tariflar Boshqaruvi</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+	<link rel="stylesheet" href="../styles.css">
+	<style>
+		:root {
+			--sidebar-width: 250px;
+			--header-height: 60px;
+		}
+
+		[data-bs-theme="dark"] {
+			--bs-body-bg: #212529;
+			--bs-body-color: #f8f9fa;
+		}
+
+		.sidebar {
+			width: var(--sidebar-width);
+			height: 100vh;
+			position: fixed;
+			left: 0;
+			top: 0;
+			z-index: 1000;
+			transition: all 0.3s ease;
+			overflow-y: auto;
+		}
+
+		.main-content {
+			margin-left: var(--sidebar-width);
+			transition: all 0.3s ease;
+			min-height: 100vh;
+		}
+
+		.theme-toggle {
+			position: fixed;
+			top: 1rem;
+			right: 1rem;
+			z-index: 1001;
+		}
+
+		@media (max-width: 768px) {
+			.sidebar {
+				transform: translateX(-100%);
+			}
+
+			.sidebar.show {
+				transform: translateX(0);
+			}
+
+			.main-content {
+				margin-left: 0;
+			}
+
+			.table-responsive {
+				display: none;
+			}
+
+			.tariff-cards {
+				display: block;
+			}
+
+			.header-row {
+				flex-direction: column;
+				gap: 1rem;
+			}
+
+			.header-row .col-md-6 {
+				width: 100%;
+				text-align: left !important;
+			}
+		}
+
+		@media (min-width: 769px) {
+			.tariff-cards {
+				display: none;
+			}
+		}
+
+		.table-container {
+			background-color: var(--bs-body-bg);
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			overflow: hidden;
+		}
+
+		.table {
+			margin-bottom: 0;
+		}
+
+		.table th {
+			background-color: var(--bs-tertiary-bg);
+			border-bottom: 2px solid var(--bs-border-color);
+			white-space: nowrap;
+		}
+
+		.table-actions {
+			width: 120px;
+			text-align: center;
+		}
+
+		.loading-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 9999;
+			color: white;
+		}
+
+		.header-row {
+			background-color: var(--bs-tertiary-bg);
+			border-bottom: 1px solid var(--bs-border-color);
+			padding: 15px;
+			margin-bottom: 0;
+		}
+
+		[data-bs-theme="dark"] .card {
+			background-color: #2c3034;
+			border-color: #373b3e;
+		}
+
+		[data-bs-theme="dark"] .card-header {
+			background-color: #343a40;
+			border-bottom-color: #373b3e;
+		}
+
+		.navbar-toggler {
+			background-color: transparent;
+			border: 2px solid var(--bs-primary);
+			border-radius: 8px;
+			padding: 8px;
+			transition: all 0.3s ease;
+		}
+
+		.navbar-toggler:hover {
+			background-color: var(--bs-primary);
+			color: white;
+		}
+
+		[data-bs-theme="dark"] .navbar-toggler {
+			border-color: #6c757d;
+			color: #f8f9fa;
+		}
+
+		[data-bs-theme="dark"] .navbar-toggler:hover {
+			background-color: #6c757d;
+			color: white;
+		}
+
+		.feature-badge {
+			margin-right: 5px;
+			margin-bottom: 5px;
+			display: inline-block;
+		}
+
+		.feature-badges-container {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		@media (max-width: 576px) {
+			.modal-dialog {
+				margin: 0.5rem;
+			}
+
+			.toast {
+				width: calc(100% - 1rem);
+				margin: 0.5rem;
+			}
+
+			.feature-badges-container {
+				max-width: 150px;
+			}
+		}
+
+		.tariff-card {
+			background-color: var(--bs-body-bg);
+			border-radius: 8px;
+			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+			margin-bottom: 1rem;
+			padding: 1rem;
+			margin-bottom: 2rem;
+		}
+
+		.tariff-card-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 1rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 1px solid var(--bs-border-color);
+		}
+
+		.tariff-card-title {
+			margin: 0;
+			font-size: 1.25rem;
+			font-weight: 600;
+		}
+
+		.tariff-card-price {
+			font-size: 1.5rem;
+			font-weight: 600;
+			color: var(--bs-primary);
+		}
+
+		.tariff-card-info {
+			margin-bottom: 1rem;
+		}
+
+		.tariff-card-info-item {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 0.5rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 1px dashed var(--bs-border-color);
+		}
+
+		.tariff-card-info-label {
+			color: var(--bs-secondary);
+			font-weight: 500;
+		}
+
+		.tariff-card-features {
+			margin-bottom: 1rem;
+		}
+
+		.tariff-card-actions {
+			display: flex;
+			gap: 0.5rem;
+			justify-content: flex-end;
+		}
+	</style>
+</head>
+
+<body class="bg-body-tertiary">
+	<!-- Theme Toggle Button -->
+	<button class="btn btn-outline-primary theme-toggle" id="themeToggle">
+		<i class="bi bi-moon-stars"></i>
+	</button>
+
+	<!-- Mobile Navbar Toggle -->
+	<button class="navbar-toggler d-md-none position-fixed top-0 start-0 m-3" type="button" id="sidebarToggle"
+		style="z-index: 1001;">
+		<i class="bi bi-list"></i>
+	</button>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar -->
+			<div class="col-md-2 bg-dark text-white sidebar p-0">
+				<div class="d-flex flex-column p-3 h-100">
+					<h3 class="text-center mb-4">Admin Panel</h3>
+					<ul class="nav nav-pills flex-column mb-auto">
+						<li class="nav-item">
+							<a href="../index.html" class="nav-link text-white" id="dashboard-tab">
+								<i class="bi bi-speedometer2 me-2"></i>
+								Boshqaruv paneli
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="tariflar2.html" class="nav-link active text-white" id="tariffs-tab">
+								<i class="bi bi-tag me-2"></i>
+								Tariflar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="funksiyalar2.html" class="nav-link text-white" id="features-tab">
+								<i class="bi bi-list-check me-2"></i>
+								Funksiyalar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="kafelar.html" class="nav-link text-white" id="cafes-tab">
+								<i class="bi bi-cup-hot me-2"></i>
+								Kafelar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="foydalanuvchilar.html" class="nav-link text-white" id="users-tab">
+								<i class="bi bi-people me-2"></i>
+								Foydalanuvchilar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="rollar.html" class="nav-link text-white" id="roles-tab">
+								<i class="bi bi-person-badge me-2"></i>
+								Ro'llar
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="sozlamalar.html" class="nav-link text-white" id="settings-tab">
+								<i class="bi bi-gear me-2"></i>
+								Sozlamalar
+							</a>
+						</li>
+					</ul>
+
+					<!-- Foydalanuvchi ma'lumotlari -->
+					<div class="mt-auto border-top pt-3">
+						<div class="d-flex align-items-center">
+							<div class="user-avatar bg-primary rounded-circle d-flex align-items-center justify-content-center me-2"
+								style="width: 40px; height: 40px;">
+								<span id="userInitials">AA</span>
+							</div>
+							<div>
+								<div id="currentUserName" class="fw-bold">Adminbek Adminov</div>
+								<small id="currentUserRole" class="text-muted">Administrator</small>
+							</div>
+						</div>
+						<div class="mt-2">
+							<button id="logoutBtn" class="btn btn-sm btn-outline-light w-100">
+								<i class="bi bi-box-arrow-right me-2"></i>Chiqish
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main content -->
+			<div class="col-md-10 main-content p-4">
+				<div class="row header-row align-items-center mb-3">
+					<div class="col-md-6">
+						<h2 class="mb-0 mt-4">Tariflar Boshqaruvi</h2>
+					</div>
+					<div class="col-md-6 text-md-end">
+						<button id="createTariffBtn" class="btn btn-primary">
+							<i class="bi bi-plus-circle me-2"></i>Yangi tarif qo'shish
+						</button>
+					</div>
+				</div>
+
+				<div class="table-container">
+					<div class="table-responsive">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Tarif nomi</th>
+									<th>Narxi</th>
+									<th>Davomiyligi</th>
+									<th>Soni</th>
+									<th>Bepul sinov</th>
+									<th>Funksiyalar</th>
+									<th class="table-actions">Amallar</th>
+								</tr>
+							</thead>
+							<tbody id="tariffsTableBody">
+								<!-- Tariflar ro'yxati JavaScript orqali to'ldiriladi -->
+							</tbody>
+						</table>
+					</div>
+					<div id="tariffCards" class="tariff-cards bg-body-tertiary">
+						<!-- Tariflar cardlari JavaScript orqali to'ldiriladi -->
+					</div>
+					<div id="emptyState" class="text-center py-5 d-none">
+						<i class="bi bi-inbox fs-1 text-muted"></i>
+						<p class="mt-3 text-muted">Tariflar topilmadi. Yangi tarif qo'shish uchun "Yangi tarif qo'shish"
+							tugmasini bosing.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Tariff Modal -->
+	<div class="modal fade" id="tariffModal" tabindex="-1" aria-labelledby="tariffModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="tariffModalLabel">Yangi tarif qo'shish</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="tariffForm">
+						<input type="hidden" id="tariffId">
+						<div class="mb-3">
+							<label for="tariffName" class="form-label">Tarif nomi</label>
+							<input type="text" class="form-control" id="tariffName" required>
+						</div>
+						<div class="mb-3">
+							<label for="tariffPrice" class="form-label">Narxi</label>
+							<div class="input-group">
+								<span class="input-group-text">$</span>
+								<input type="number" class="form-control" id="tariffPrice" min="0" step="0.01" required>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 mb-3">
+								<label for="tariffDuration" class="form-label">Davomiyligi</label>
+								<select class="form-select" id="tariffDuration" required>
+									<option value="">Davomiylik turini tanlang</option>
+									<option value="daily">Kunlik</option>
+									<option value="monthly">Oylik</option>
+									<option value="yearly">Yillik</option>
+								</select>
+							</div>
+							<div class="col-md-6 mb-3">
+								<label for="tariffDurationCount" class="form-label">Soni</label>
+								<input type="number" class="form-control" id="tariffDurationCount" min="1" required>
+							</div>
+						</div>
+						<div class="mb-3 form-check">
+							<input type="checkbox" class="form-check-input" id="isFreeTrial">
+							<label class="form-check-label" for="isFreeTrial">Bepul sinov</label>
+						</div>
+						<div class="mb-3">
+							<label for="tariffFeatures" class="form-label">Funksiyalar</label>
+							<div id="tariffFeatures" class="border rounded p-3">
+								<!-- Funksiyalar JavaScript orqali to'ldiriladi -->
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="tariffDescription" class="form-label">Tavsif</label>
+							<textarea class="form-control" id="tariffDescription" rows="3"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-primary" id="saveTariffBtn">Saqlash</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Delete Confirmation Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteModalLabel">O'chirishni tasdiqlash</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<p>Siz rostdan ham bu tarifni o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.</p>
+					<p><strong>Tarif: </strong><span id="deleteTariffName"></span></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-danger" id="confirmDeleteBtn">O'chirish</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Loading Overlay -->
+	<div id="loadingOverlay" class="loading-overlay d-none">
+		<div class="spinner-border text-light me-3" role="status"></div>
+		<span>Yuklanmoqda...</span>
+	</div>
+
+	<!-- Toast Notifications -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-check-circle me-2"></i>
+					<span id="successToastMessage">Muvaffaqiyatli saqlandi!</span>
+				</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="errorToast" class="toast align-items-center text-white bg-danger border-0" role="alert"
+			aria-live="assertive" aria-atomic="true">
+			<div class="d-flex">
+				<div class="toast-body">
+					<i class="bi bi-exclamation-triangle me-2"></i>
+					<span id="errorToastMessage">Xatolik yuz berdi!</span>
+				</div>
+				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+					aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="../script.js"></script>
+	<script type="module" src="./js/tariflar2.js"></script>
+	<script>
+		// Theme toggle functionality
+		const themeToggle = document.getElementById('themeToggle')
+		const html = document.documentElement
+		const icon = themeToggle.querySelector('i')
+
+		// Check for saved theme preference
+		const savedTheme = localStorage.getItem('theme') || 'light'
+		html.setAttribute('data-bs-theme', savedTheme)
+		updateThemeIcon(savedTheme)
+
+		themeToggle.addEventListener('click', () => {
+			const currentTheme = html.getAttribute('data-bs-theme')
+			const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+
+			html.setAttribute('data-bs-theme', newTheme)
+			localStorage.setItem('theme', newTheme)
+			updateThemeIcon(newTheme)
+		})
+
+		function updateThemeIcon(theme) {
+			icon.className = theme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun'
+		}
+
+		// Mobile sidebar toggle
+		const sidebarToggle = document.getElementById('sidebarToggle')
+		const sidebar = document.querySelector('.sidebar')
+
+		sidebarToggle.addEventListener('click', () => {
+			sidebar.classList.toggle('show')
+		})
+
+		// Close sidebar when clicking outside on mobile
+		document.addEventListener('click', (e) => {
+			if (window.innerWidth <= 768 &&
+				!sidebar.contains(e.target) &&
+				!sidebarToggle.contains(e.target) &&
+				sidebar.classList.contains('show')) {
+				sidebar.classList.remove('show')
+			}
+		})
+
+		// Close sidebar when window is resized to desktop view
+		window.addEventListener('resize', () => {
+			if (window.innerWidth > 768) {
+				sidebar.classList.remove('show')
+			}
+		});
+	</script>
+</body>
+
+</html>

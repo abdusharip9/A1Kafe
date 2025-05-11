@@ -400,39 +400,16 @@ async function loadAllTariffs() {
                             <h5 class="card-title mb-2 px-2 py-1 text-primary rounded-4 border-2 border-primary fw-bold border">${tariff.name}</h5>
                             <p class="text-muted mb-4">${tariff.description || ''}</p>
                             <div class="pricing-section mb-4">
-                                ${tariff.durations.daily ? `
                                     <div class="pricing-option text-center mb-3 p-3">
                                         <div class="price-amount">
-                                            <span class="display-6">${tariff.durations.daily.price.toLocaleString()}</span>
+                                            <span class="display-6">${tariff.price.toLocaleString()}</span>
                                             <small class="text-muted"> UZS</small>
                                         </div>
                                         <div class="price-period text-muted">
-                                            ${tariff.durations.daily.duration} kun
+                                            ${tariff.duration_count}
+                                            ${tariff.duration === 'daily' ? 'Kun' : tariff.duration === 'monthly' ? 'Oy' : 'Yil'}
                                         </div>
                                     </div>
-                                ` : ''}
-                                ${tariff.durations.monthly ? `
-                                    <div class="pricing-option text-center mb-3 p-3">
-                                        <div class="price-amount">
-                                            <span class="display-6">${tariff.durations.monthly.price.toLocaleString()}</span>
-                                            <small class="text-muted"> UZS</small>
-                                        </div>
-                                        <div class="price-period text-muted">
-                                            ${tariff.durations.monthly.duration} oy
-                                        </div>
-                                    </div>
-                                ` : ''}
-                                ${tariff.durations.annual ? `
-                                    <div class="pricing-option text-center mb-3 p-3">
-                                        <div class="price-amount">
-                                            <span class="display-6">${tariff.durations.annual.price.toLocaleString()}</span>
-                                            <small class="text-muted"> UZS</small>
-                                        </div>
-                                        <div class="price-period text-muted">
-                                            ${tariff.durations.annual.duration} yil
-                                        </div>
-                                    </div>
-                                ` : ''}
                             </div>
                             <div class="features-section flex-grow-1">
                                 <ul class="feature-list list-unstyled">
@@ -597,7 +574,7 @@ async function loadTariffs(cafeId) {
             const featuresHtml = allFeatures.map(feature => {
                 const isIncluded = tariffFeatureCodes.includes(feature.code);
                 return `
-                    <li class="mb-2 justify-content-around ${isIncluded ? '' : 'unavailable'}">
+                    <li class="mb-2 justify-content-between ${isIncluded ? '' : 'unavailable'}">
                         <div class="d-flex align-items-center">
                             <i class="bx ${isIncluded ? 'bx-check-circle text-success' : 'bx-x-circle text-danger'} me-2"></i>
                             <span>${feature.name}</span>
@@ -626,39 +603,16 @@ async function loadTariffs(cafeId) {
                             <h5 class="card-title mb-2 px-2 py-1 text-primary rounded-4 border-2 border-primary fw-bold border">${tariff.name}</h5>
                             <p class="text-muted mb-4">${tariff.description || ''}</p>
                             <div class="pricing-section mb-4">
-                                ${tariff.durations.daily ? `
-                                    <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
-                                        <div class="price-amount">
-                                            <span class="display-6">${tariff.durations.daily.price.toLocaleString()}</span>
-                                            <small class="text-muted"> UZS</small>
-                                        </div>
-                                        <div class="price-period text-muted">
-                                            ${tariff.durations.daily.duration} kun
-                                        </div>
+                                <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
+                                    <div class="price-amount">
+                                        <span class="display-6">${tariff.price.toLocaleString()}</span>
+                                        <small class="text-muted"> UZS</small>
                                     </div>
-                                ` : ''}
-                                ${tariff.durations.monthly ? `
-                                    <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
-                                        <div class="price-amount">
-                                            <span class="display-6">${tariff.durations.monthly.price.toLocaleString()}</span>
-                                            <small class="text-muted"> UZS</small>
-                                        </div>
-                                        <div class="price-period text-muted">
-                                            ${tariff.durations.monthly.duration} oy
-                                        </div>
+                                    <div class="price-period text-muted">
+                                        ${tariff.duration_count}
+                                        ${tariff.duration === 'daily' ? 'Kun' : tariff.duration === 'monthly' ? 'Oy' : 'Yil'}
                                     </div>
-                                ` : ''}
-                                ${tariff.durations.annual ? `
-                                    <div class="pricing-option text-center mb-3 p-2 rounded hover-highlight">
-                                        <div class="price-amount">
-                                            <span class="display-6">${tariff.durations.annual.price.toLocaleString()}</span>
-                                            <small class="text-muted"> UZS</small>
-                                        </div>
-                                        <div class="price-period text-muted">
-                                            ${tariff.durations.annual.duration} yil
-                                        </div>
-                                    </div>
-                                ` : ''}
+                                </div>
                             </div>
                             <div class="features-section flex-grow-1">
                                 <ul class="feature-list list-unstyled">
@@ -793,41 +747,16 @@ async function selectTariff(tariffId, isFreeTrial, cafeId) {
         const billingOptions = document.getElementById('billingOptions');
         billingOptions.innerHTML = '';
         
-        if (tariff.durations.daily) {
-            billingOptions.innerHTML += `
-                <div class="billing-option">
-                    <input type="radio" name="billingPeriod" id="daily" value="daily">
-                    <label for="daily">
-                        <div class="price">${tariff.durations.daily.price.toLocaleString()} UZS</div>
-                    <div class="duration">${tariff.durations.daily.duration} kun</div>
-                    </label>
-                </div>
-            `;
-        }
+        billingOptions.innerHTML += `
+            <div class="billing-option">
+                <input type="radio" name="billingPeriod" id="daily" value="daily">
+                <label for="daily">
+                    <div class="price">${tariff.price.toLocaleString()} UZS</div>
+                <div class="duration">${tariff.duration_count} ${tariff.duration === 'daily' ? 'Kun' : tariff.duration === 'monthly' ? 'Oy' : 'Yil'}</div>
+                </label>
+            </div>
+        `;
         
-        if (tariff.durations.monthly) {
-            billingOptions.innerHTML += `
-                <div class="billing-option">
-                    <input type="radio" name="billingPeriod" id="monthly" value="monthly">
-                    <label for="monthly">
-                        <div class="price">${tariff.durations.monthly.price.toLocaleString()} UZS</div>
-                    <div class="duration">${tariff.durations.monthly.duration} oy</div>
-                    </label>
-                </div>
-            `;
-        }
-        
-        if (tariff.durations.annual) {
-            billingOptions.innerHTML += `
-                <div class="billing-option">
-                <input type="radio" name="billingPeriod" id="yearly" value="yearly">
-                <label for="yearly">
-                        <div class="price">${tariff.durations.annual.price.toLocaleString()} UZS</div>
-                    <div class="duration">${tariff.durations.annual.duration} yil</div>
-                    </label>
-                </div>
-            `;
-        }
 
         // Add event listeners to billing options
         document.querySelectorAll('.billing-option').forEach(option => {
