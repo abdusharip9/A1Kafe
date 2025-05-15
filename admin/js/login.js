@@ -1,3 +1,5 @@
+import { API_URL } from '../../js/api-url.js'
+
 // Login form elementlarini olish
 const loginForm = document.getElementById('loginForm');
 const loginUsername = document.getElementById('loginUsername');
@@ -30,7 +32,7 @@ loginForm.addEventListener('submit', async (e) => {
     
     try {
         // Login API ga so'rov yuborish
-        const response = await fetch('http://localhost:3000/api/admin/login', {
+        const response = await fetch(`${API_URL}/api/admin/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

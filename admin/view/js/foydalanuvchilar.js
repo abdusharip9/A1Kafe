@@ -1,5 +1,5 @@
+import { API_URL } from '../../../js/api-url.js'
 import { verify } from '../../js/verify-token.js'
-
 document.addEventListener('DOMContentLoaded', async () => {
     const userData = await verify()
     console.log(userData)
@@ -296,7 +296,7 @@ async function fetchUsers() {
     showTableLoader();
     
     try {
-        const response = await fetch('http://localhost:3000/api/crud/getUsers');
+        const response = await fetch(`${API_URL}/api/crud/getUsers`);
         const users = await response.json();
         displayUsers(users);
     } catch (error) {
