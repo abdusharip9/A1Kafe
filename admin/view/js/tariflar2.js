@@ -1,5 +1,5 @@
 import { API_URL } from '../../../js/api-url.js'
-import { getAuthHeaders, isAuthenticated } from '../../../js/verify-token.js'
+import { getAuthHeaders, isAuthenticated, verify } from '../../js/verify-token.js'
 
 // Check if user is authenticated
 if (!isAuthenticated()) {
@@ -478,6 +478,7 @@ async function handleConfirmDelete() {
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', async () => {
+    await verify()
     // Populate features select
     await populateFeaturesSelect()
 

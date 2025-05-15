@@ -1,10 +1,5 @@
 import { API_URL } from '../../../js/api-url.js'
-import { getAuthHeaders, isAuthenticated } from '../../../js/verify-token.js'
-
-// Check if user is authenticated
-if (!isAuthenticated()) {
-    window.location.href = '/login.html';
-}
+import { getAuthHeaders, verify } from '../../js/verify-token.js'
 
 // DOM Elements
 const featuresTableBody = document.getElementById('featuresTableBody')
@@ -310,7 +305,8 @@ async function handleConfirmDelete() {
 }
 
 // Event Listeners
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    await verify()
     // Fetch features on page load
     fetchFeatures()
 

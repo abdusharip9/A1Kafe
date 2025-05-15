@@ -213,9 +213,6 @@
 							<div class="card">
 								<div class="card-header d-flex justify-content-between align-items-center">
 									<h5 class="mb-0">Foydalanuvchilar</h5>
-									<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-										<i class="bi bi-plus-circle me-2"></i>Yangi foydalanuvchi qo'shish
-									</button>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -227,8 +224,9 @@
 													<th>Ro'li</th>
 													<th>Login</th>
 													<th>Parol</th>
-													<th>Xususiyatlari</th>
-													<th>Amallar</th>
+													<th>Kafe nomi</th>
+													<th>Holati</th>
+													<th>Tarifi</th>
 												</tr>
 											</thead>
 											<tbody id="userTableBody">
@@ -364,7 +362,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../script.js"></script>
-	<script src="./js/foydalanuvchilar.js"></script>
+	<script type="module" src="./js/foydalanuvchilar.js"></script>
 	<script>
 		// Theme toggle functionality
 		const themeToggle = document.getElementById('themeToggle')

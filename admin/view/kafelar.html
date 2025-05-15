@@ -203,6 +203,16 @@
 
 			<!-- Main content -->
 			<div class="col-md-10 main-content p-4">
+				<!-- Loader -->
+				<div id="loader" class="position-fixed top-0 start-0 w-100 h-100 d-none"
+					style="background: rgba(0,0,0,0.5); z-index: 9999;">
+					<div class="position-absolute top-50 start-50 translate-middle text-center">
+						<div class="spinner-border text-light" role="status" style="width: 3rem; height: 3rem;">
+							<span class="visually-hidden">Loading...</span>
+						</div>
+						<div class="text-light mt-2">Yuklanmoqda...</div>
+					</div>
+				</div>
 
 				<!-- Kafelar sahifasi -->
 				<div id="cafes-page">
@@ -213,7 +223,7 @@
 							<div class="card">
 								<div class="card-header d-flex justify-content-between align-items-center">
 									<h5 class="mb-0">Kafelar</h5>
-									<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addCafeModal">
+									<button class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#addCafeModal">
 										<i class="bi bi-plus-circle me-2"></i>Yangi kafe qo'shish
 									</button>
 								</div>
@@ -229,11 +239,18 @@
 													<th>Email</th>
 													<th>Telefon</th>
 													<th>Qo'shilgan sana</th>
-													<th>Amallar</th>
+													<th class="d-none">Amallar</th>
 												</tr>
 											</thead>
 											<tbody id="cafeTableBody">
-												<!-- Kafelar ro'yxati JavaScript orqali to'ldiriladi -->
+												<tr id="tableLoader">
+													<td colspan="8" class="text-center py-5">
+														<div class="spinner-border text-primary" role="status">
+															<span class="visually-hidden">Loading...</span>
+														</div>
+														<div class="mt-2">Yuklanmoqda...</div>
+													</td>
+												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -247,7 +264,7 @@
 		</div>
 	</div>
 
-	<!-- Add/Edit Cafe Modal -->
+	<!-- Add Cafe Modal -->
 	<div class="modal fade" id="addCafeModal" tabindex="-1" aria-labelledby="addCafeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -257,15 +274,15 @@
 				</div>
 				<div class="modal-body">
 					<form id="cafeForm">
-						<input type="hidden" id="cafeId" value="">
+						<input type="hidden" id="addCafeId" value="">
 						<div class="row mb-3">
 							<div class="col-md-6">
-								<label for="cafeName" class="form-label">Kafe nomi</label>
-								<input type="text" class="form-control" id="cafeName" required>
+								<label for="addCafeName" class="form-label">Kafe nomi</label>
+								<input type="text" class="form-control" id="addCafeName" required>
 							</div>
 							<div class="col-md-6">
-								<label for="cafeTariff" class="form-label">Tarifi</label>
-								<select class="form-select" id="cafeTariff" required>
+								<label for="addCafeTariff" class="form-label">Tarifi</label>
+								<select class="form-select" id="addCafeTariff" required>
 									<option value="">Tarifni tanlang</option>
 									<!-- Tariflar ro'yxati JavaScript orqali to'ldiriladi -->
 								</select>
@@ -273,23 +290,70 @@
 						</div>
 						<div class="row mb-3">
 							<div class="col-md-6">
-								<label for="cafeAddress" class="form-label">Egasining ismi</label>
-								<input type="text" class="form-control" id="cafeAddress" required>
+								<label for="addCafeAddress" class="form-label">Egasining ismi</label>
+								<input type="text" class="form-control" id="addCafeAddress" required>
 							</div>
 							<div class="col-md-6">
-								<label for="cafeEmail" class="form-label">Email</label>
-								<input type="email" class="form-control" id="cafeEmail" required>
+								<label for="addCafeEmail" class="form-label">Email</label>
+								<input type="email" class="form-control" id="addCafeEmail" required>
 							</div>
 						</div>
 						<div class="mb-3">
-							<label for="cafePhone" class="form-label">Telefon raqami</label>
-							<input type="tel" class="form-control" id="cafePhone" required>
+							<label for="addCafePhone" class="form-label">Telefon raqami</label>
+							<input type="tel" class="form-control" id="addCafePhone" required>
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
-					<button type="button" class="btn btn-primary" id="saveCafeBtn">Saqlash</button>
+					<button type="button" class="btn btn-primary" id="addCafeBtn">Saqlash</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Edit Cafe Modal -->
+	<div class="modal fade" id="editCafeModal" tabindex="-1" aria-labelledby="editCafeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="cafeModalTitle">Kafe ma'lumotlarini o'zgartirish</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="cafeForm">
+						<input type="hidden" id="editCafeId" value="">
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<label for="editCafeName" class="form-label">Kafe nomi</label>
+								<input type="text" class="form-control" id="editCafeName" required>
+							</div>
+							<div class="col-md-6">
+								<label for="editCafeTariff" class="form-label">Tarifi</label>
+								<select class="form-select" id="editCafeTariff" required>
+									<option value="">Tarifni tanlang</option>
+									<!-- Tariflar ro'yxati JavaScript orqali to'ldiriladi -->
+								</select>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<label for="editCafeAddress" class="form-label">Egasining ismi</label>
+								<input type="text" class="form-control" id="editCafeAddress" required>
+							</div>
+							<div class="col-md-6">
+								<label for="editCafeEmail" class="form-label">Email</label>
+								<input type="email" class="form-control" id="editCafeEmail" required>
+							</div>
+						</div>
+						<div class="mb-3">
+							<label for="editCafePhone" class="form-label">Telefon raqami</label>
+							<input type="tel" class="form-control" id="editCafePhone" required>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bekor qilish</button>
+					<button type="button" class="btn btn-primary" id="updateCafeBtn">O'zgartirish</button>
 				</div>
 			</div>
 		</div>
@@ -351,7 +415,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 	<script src="../script.js"></script>
-	<script src="./js/kafelar.js"></script>
+	<script type="module" src="./js/kafelar.js"></script>
 	<script>
 		// Theme toggle functionality
 		const themeToggle = document.getElementById('themeToggle')

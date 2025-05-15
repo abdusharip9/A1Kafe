@@ -143,7 +143,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="view/tariflar.html" class="nav-link text-white" id="tariffs-tab">
+                            <a href="view/tariflar2.html" class="nav-link text-white" id="tariffs-tab">
                                 <i class="bi bi-tag me-2"></i>
                                 Tariflar
                             </a>
@@ -213,7 +213,11 @@
                             <div class="card bg-primary text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Jami kafelar</h5>
-                                    <h2 class="card-text" id="totalCafes">0</h2>
+                                    <h2 class="card-text text-light" id="totalCafes">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </h2>
                                     <p class="card-text"><small>Faol kafelar soni</small></p>
                                 </div>
                             </div>
@@ -222,7 +226,11 @@
                             <div class="card bg-success text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Jami foydalanuvchilar</h5>
-                                    <h2 class="card-text" id="totalUsers">0</h2>
+                                    <h2 class="card-text text-light" id="totalUsers">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </h2>
                                     <p class="card-text"><small>Ro'yxatdan o'tgan foydalanuvchilar</small></p>
                                 </div>
                             </div>
@@ -231,7 +239,11 @@
                             <div class="card bg-info text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Faol tariflar</h5>
-                                    <h2 class="card-text" id="activeTariffs">0</h2>
+                                    <h2 class="card-text text-light" id="activeTariffs">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </h2>
                                     <p class="card-text"><small>Mavjud tariflar soni</small></p>
                                 </div>
                             </div>
@@ -240,60 +252,12 @@
                             <div class="card bg-warning text-white">
                                 <div class="card-body">
                                     <h5 class="card-title">Jami funksiyalar</h5>
-                                    <h2 class="card-text" id="totalFeatures">0</h2>
+                                    <h2 class="card-text text-light" id="totalFeatures">
+                                        <div class="spinner-border spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </h2>
                                     <p class="card-text"><small>Mavjud funksiyalar soni</small></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Grafiklar -->
-                    <div class="row mb-4">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Kafelar statistikasi</h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="cafesChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">Tariflar statistikasi</h5>
-                                </div>
-                                <div class="card-body">
-                                    <canvas id="tariffsChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- So'nggi faoliyatlar -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="mb-0">So'nggi faoliyatlar</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Vaqt</th>
-                                                    <th>Foydalanuvchi</th>
-                                                    <th>Amal</th>
-                                                    <th>Ma'lumot</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="recentActivities">
-                                                <!-- So'nggi faoliyatlar JavaScript orqali to'ldiriladi -->
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -360,140 +324,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('themeToggle')
-        const html = document.documentElement
-        const icon = themeToggle.querySelector('i')
-
-        // Check for saved theme preference
-        const savedTheme = localStorage.getItem('theme') || 'light'
-        html.setAttribute('data-bs-theme', savedTheme)
-        updateThemeIcon(savedTheme)
-
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-bs-theme')
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light'
-
-            html.setAttribute('data-bs-theme', newTheme)
-            localStorage.setItem('theme', newTheme)
-            updateThemeIcon(newTheme)
-        })
-
-        function updateThemeIcon(theme) {
-            icon.className = theme === 'light' ? 'bi bi-moon-stars' : 'bi bi-sun'
-        }
-
-        // Mobile sidebar toggle
-        const sidebarToggle = document.getElementById('sidebarToggle')
-        const sidebar = document.querySelector('.sidebar')
-
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('show')
-        })
-
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', (e) => {
-            if (window.innerWidth <= 768 &&
-                !sidebar.contains(e.target) &&
-                !sidebarToggle.contains(e.target) &&
-                sidebar.classList.contains('show')) {
-                sidebar.classList.remove('show')
-            }
-        })
-
-        // Dashboard data
-        const dashboardData = {
-            totalCafes: 15,
-            totalUsers: 120,
-            activeTariffs: 8,
-            totalFeatures: 25,
-            recentActivities: [
-                { time: '10:30', user: 'Admin Adminov', action: 'Yangi tarif qo\'shildi', details: 'Premium Tarif' },
-                { time: '09:45', user: 'Manager Managerov', action: 'Foydalanuvchi qo\'shildi', details: 'user@example.com' },
-                { time: '09:15', user: 'Admin Adminov', action: 'Funksiya o\'chirildi', details: 'WiFi' },
-                { time: '08:30', user: 'Manager Managerov', action: 'Kafe qo\'shildi', details: 'Coffee House' }
-            ]
-        }
-
-        // Update dashboard statistics
-        document.getElementById('totalCafes').textContent = dashboardData.totalCafes
-        document.getElementById('totalUsers').textContent = dashboardData.totalUsers
-        document.getElementById('activeTariffs').textContent = dashboardData.activeTariffs
-        document.getElementById('totalFeatures').textContent = dashboardData.totalFeatures
-
-        // Update recent activities
-        const recentActivitiesTable = document.getElementById('recentActivities')
-        dashboardData.recentActivities.forEach(activity => {
-            const row = document.createElement('tr')
-            row.innerHTML = `
-                <td>${activity.time}</td>
-                <td>${activity.user}</td>
-                <td>${activity.action}</td>
-                <td>${activity.details}</td>
-            `
-            recentActivitiesTable.appendChild(row)
-        })
-
-        // Initialize charts
-        const cafesCtx = document.getElementById('cafesChart').getContext('2d')
-        const tariffsCtx = document.getElementById('tariffsChart').getContext('2d')
-
-        // Cafes chart
-        new Chart(cafesCtx, {
-            type: 'line',
-            data: {
-                labels: ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun'],
-                datasets: [{
-                    label: 'Kafelar soni',
-                    data: [5, 7, 9, 11, 13, 15],
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    }
-                }
-            }
-        })
-
-        // Tariffs chart
-        new Chart(tariffsCtx, {
-            type: 'bar',
-            data: {
-                labels: ['Basic', 'Standard', 'Premium', 'VIP'],
-                datasets: [{
-                    label: 'Tariflar statistikasi',
-                    data: [30, 45, 20, 5],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(54, 162, 235, 0.5)',
-                        'rgba(255, 206, 86, 0.5)',
-                        'rgba(75, 192, 192, 0.5)'
-                    ],
-                    borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 206, 86)',
-                        'rgb(75, 192, 192)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    }
-                }
-            }
-        });
-    </script>
+    <script type="module" src="js/index.js"></script>
 </body>
 
 </html>

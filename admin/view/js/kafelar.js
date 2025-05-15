@@ -1,41 +1,15 @@
-// Tariflar ma'lumotlarini saqlash uchun massiv
-let tariffs = [];
-
-// Kafelar ma'lumotlarini saqlash uchun massiv
-let cafes = [
-    {
-        id: 1,
-        name: "Kafe 1",
-        ownerName: "Alisher Karimov",
-        phone: "+998 90 123 45 67",
-        email: "kafe1@example.com",
-        tariffId: 1,
-        createdAt: "2024-02-20",
-    },
-    {
-        id: 2,
-        name: "Kafe 2",
-        ownerName: "Dilshod Rahimov",
-        phone: "+998 90 123 45 68",
-        email: "kafe2@example.com",
-        tariffId: 2,
-        createdAt: "2024-02-20",
-    },
-    {
-        id: 3,
-        name: "Kafe 3",
-        ownerName: "Nodira Azizova",
-        phone: "+998 90 123 45 69",
-        email: "kafe3@example.com",
-        tariffId: 3,
-        createdAt: "2024-02-20",
-    },
-];
+// API endpoints
+import { API_URL } from '../../../js/api-url.js'
+import { getAuthHeaders, verify } from '../../js/verify-token.js'
 
 // DOM elementlarini olish
 const cafeTableBody = document.getElementById("cafeTableBody");
-const cafeForm = document.getElementById("cafeForm");
-const modalTitle = document.getElementById("cafeModalTitle");
+const tableLoader = document.getElementById("tableLoader");
+const addCafeForm = document.getElementById("cafeForm");
+const editCafeForm = document.getElementById("cafeForm");
+const addCafeModal = document.getElementById("addCafeModal");
+const editCafeModal = document.getElementById("editCafeModal");
+const deleteConfirmModal = document.getElementById("deleteConfirmModal");
 const cafeIdInput = document.getElementById("cafeId");
 const cafeNameInput = document.getElementById("cafeName");
 const cafeOwnerNameInput = document.getElementById("cafeAddress");
@@ -43,38 +17,75 @@ const cafePhoneInput = document.getElementById("cafePhone");
 const cafeEmailInput = document.getElementById("cafeEmail");
 const cafeTariffSelect = document.getElementById("cafeTariff");
 
-// Tariflar ro'yxatini select elementiga to'ldirish
-function populateTariffSelect() {
-    cafeTariffSelect.innerHTML = '<option value="">Tarifni tanlang</option>';
+// Loader funksiyalari
+function showLoader() {
+    tableLoader.style.display = 'table-row';
+    cafeTableBody.innerHTML = '';
+    cafeTableBody.appendChild(tableLoader);
+}
 
-    tariffs.forEach((tariff) => {
-        const option = document.createElement("option");
-        option.value = tariff.id;
-        option.textContent = tariff.name;
-        cafeTariffSelect.appendChild(option);
-    });
+function hideLoader() {
+    tableLoader.style.display = 'none';
+}
+
+// Kafelar ro'yxatini yuklash
+async function loadCafes() {
+    showLoader();
+    try {
+        const response = await fetch(`${API_URL}/api/crud/all-kafes`);
+        if (!response.ok) throw new Error('Kafelar yuklanmadi');
+        const data = await response.json();
+        updateCafesTable(data);
+    } catch (error) {
+        console.error('Xatolik:', error);
+        showErrorMessage('Kafelar yuklanmadi');
+    }
+}
+
+// Tariflar ro'yxatini yuklash
+async function loadTariffs() {
+    showLoader();
+    try {
+        const response = await fetch(`${API_URL}/api/tariffs/get-all`);
+        if (!response.ok) throw new Error('Tariflar yuklanmadi');
+        const data = await response.json();
+        populateTariffSelect(data);
+    } catch (error) {
+        console.error('Xatolik:', error);
+        showErrorMessage('Tariflar yuklanmadi');
+    } finally {
+        hideLoader();
+    }
+}
+
+// Tariflar ro'yxatini select elementiga to'ldirish
+function populateTariffSelect(tariffs) {
+    const addTariffSelect = document.getElementById("addCafeTariff");
+    const editTariffSelect = document.getElementById("editCafeTariff");
+    
+    const options = '<option value="">Tarifni tanlang</option>' + 
+        tariffs.map(tariff => `<option value="${tariff.id}">${tariff.name}</option>`).join('');
+    
+    addTariffSelect.innerHTML = options;
+    editTariffSelect.innerHTML = options;
 }
 
 // Kafelar jadvalini yangilash
-function updateCafesTable() {
+function updateCafesTable(cafes) {
+    hideLoader();
     cafeTableBody.innerHTML = "";
 
-    cafes.forEach((cafe) => {
+    cafes.forEach((cafe, index) => {
         const row = document.createElement("tr");
-
-        // Tarif nomini olish
-        const tariff = tariffs.find((t) => t.id === cafe.tariffId);
-        const tariffName = tariff ? tariff.name : "Belgilanmagan";
-
         row.innerHTML = `
-            <td>${cafe.id}</td>
+            <td>${index + 1}</td>
             <td>${cafe.name}</td>
-            <td>${tariffName}</td>
-            <td>${cafe.ownerName}</td>
-            <td>${cafe.email}</td>
-            <td>${cafe.phone}</td>
-            <td>${cafe.createdAt}</td>
-            <td>
+            <td>${cafe.tariff?.name || 'Belgilanmagan'}</td>
+            <td>${cafe.owner.firstName} ${cafe.owner.lastName}</td>
+            <td>${cafe.owner.phone}</td>
+            <td>${cafe.owner.email}</td>
+            <td>${new Date(cafe.createdAt).toLocaleDateString()}</td>
+            <td class="d-none">
                 <button class="btn btn-sm btn-primary btn-action edit-cafe-btn" data-id="${cafe.id}">
                     <i class="bi bi-pencil"></i>
                 </button>
@@ -89,137 +100,166 @@ function updateCafesTable() {
 
     // Edit tugmalariga hodisa qo'shish
     document.querySelectorAll(".edit-cafe-btn").forEach((btn) => {
-        btn.addEventListener("click", () => editCafe(Number.parseInt(btn.dataset.id)));
+        btn.addEventListener("click", () => editCafe(btn.dataset.id));
     });
 
     // Delete tugmalariga hodisa qo'shish
     document.querySelectorAll(".delete-cafe-btn").forEach((btn) => {
-        btn.addEventListener("click", () => showDeleteCafeConfirmation(Number.parseInt(btn.dataset.id)));
+        btn.addEventListener("click", () => showDeleteCafeConfirmation(btn.dataset.id));
     });
 }
 
 // Kafeni tahrirlash
-function editCafe(id) {
-    const cafe = cafes.find((c) => c.id === id);
-    if (!cafe) return;
+async function editCafe(id) {
+    showLoader();
+    try {
+        const response = await fetch(`${API_URL}/api/crud/kafes/${id}`, {
+            headers: getAuthHeaders()
+        });
+        if (!response.ok) throw new Error('Kafe ma\'lumotlari yuklanmadi');
+        const cafe = await response.json();
 
-    modalTitle.textContent = "Kafeni tahrirlash";
-    cafeIdInput.value = cafe.id;
-    cafeNameInput.value = cafe.name;
-    cafeOwnerNameInput.value = cafe.ownerName;
-    cafePhoneInput.value = cafe.phone;
-    cafeEmailInput.value = cafe.email;
-    cafeTariffSelect.value = cafe.tariffId || "";
+        document.getElementById("editCafeId").value = cafe.id;
+        document.getElementById("editCafeName").value = cafe.name;
+        document.getElementById("editCafeTariff").value = cafe.tariffId || "";
+        document.getElementById("editCafeAddress").value = cafe.ownerName;
+        document.getElementById("editCafeEmail").value = cafe.email;
+        document.getElementById("editCafePhone").value = cafe.phone;
 
-    // Modalni ochish
-    const modalElement = document.getElementById("addCafeModal");
-    const modal = new bootstrap.Modal(modalElement);
-    modal.show();
+        const modal = new bootstrap.Modal(editCafeModal);
+        modal.show();
+    } catch (error) {
+        console.error('Xatolik:', error);
+        showErrorMessage('Kafe ma\'lumotlari yuklanmadi');
+    } finally {
+        hideLoader();
+    }
 }
 
 // Kafeni o'chirish tasdiqlash modalni ko'rsatish
 function showDeleteCafeConfirmation(id) {
-    const cafe = cafes.find((c) => c.id === id);
-    if (!cafe) return;
+    const cafeName = document.querySelector(`[data-id="${id}"]`).closest('tr').querySelector('td:nth-child(2)').textContent;
+    
+    document.getElementById("deleteModalTitle").textContent = "Kafeni o'chirish";
+    document.getElementById("deleteConfirmText").textContent = `Siz rostdan ham "${cafeName}" kafesini o'chirmoqchimisiz?`;
+    document.getElementById("confirmDeleteBtn").dataset.id = id;
 
-    deleteModalTitle.textContent = "Kafeni o'chirish";
-    deleteConfirmText.textContent = `Siz rostdan ham "${cafe.name}" kafesini o'chirmoqchimisiz?`;
-
-    // O'chirish turi va ID ni saqlash
-    confirmDeleteBtn.dataset.type = "cafe";
-    confirmDeleteBtn.dataset.id = id;
-
-    // Modalni ochish
-    const modalElement = document.getElementById("deleteConfirmModal");
-    const modal = new bootstrap.Modal(modalElement);
+    const modal = new bootstrap.Modal(deleteConfirmModal);
     modal.show();
 }
 
-// Yangi kafe qo'shish modalni ochish
-document.querySelector('[data-bs-target="#addCafeModal"]').addEventListener("click", () => {
-    modalTitle.textContent = "Yangi kafe qo'shish";
-    cafeForm.reset();
-    cafeIdInput.value = "";
-});
+// Yangi kafe qo'shish
+async function addCafe(event) {
+    event.preventDefault();
+    showLoader();
+    
+    const cafeData = {
+        name: document.getElementById("addCafeName").value,
+        tariffId: document.getElementById("addCafeTariff").value,
+        ownerName: document.getElementById("addCafeAddress").value,
+        email: document.getElementById("addCafeEmail").value,
+        phone: document.getElementById("addCafePhone").value
+    };
 
-// Sahifa yuklanganda
-document.addEventListener("DOMContentLoaded", () => {
-    // Tariflar ro'yxatini yuklash
-    fetch('../data/tariffs.json')
-        .then(response => response.json())
-        .then(data => {
-            tariffs = data;
-            // Jadvallarni yangilash
-            updateCafesTable();
-            // Tariflar ro'yxatini to'ldirish
-            populateTariffSelect();
-        })
-        .catch(error => {
-            console.error('Tariflar yuklanmadi:', error);
-            showErrorMessage('Tariflar yuklanmadi');
+    try {
+        const response = await fetch(`${API_URL}/api/crud/kafes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeaders()
+            },
+            body: JSON.stringify(cafeData)
         });
 
-    // Saqlash tugmasi uchun hodisa qo'shish
-    document.getElementById("saveCafeBtn").addEventListener("click", () => {
-        const form = document.getElementById("cafeForm");
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
+        if (!response.ok) throw new Error('Kafe qo\'shilmadi');
 
-        const cafeId = Number.parseInt(cafeIdInput.value);
-        const cafeData = {
-            id: cafeId || cafes.length + 1,
-            name: cafeNameInput.value,
-            ownerName: cafeOwnerNameInput.value,
-            phone: cafePhoneInput.value,
-            email: cafeEmailInput.value,
-            tariffId: Number.parseInt(cafeTariffSelect.value),
-            createdAt: cafeId ? cafes.find(c => c.id === cafeId).createdAt : new Date().toISOString().split('T')[0]
-        };
-
-        if (cafeId) {
-            // Tahrirlash
-            const index = cafes.findIndex((c) => c.id === cafeId);
-            if (index !== -1) {
-                cafes[index] = { ...cafes[index], ...cafeData };
-            }
-        } else {
-            // Yangi qo'shish
-            cafes.push(cafeData);
-        }
-
-        // Jadvallarni yangilash
-        updateCafesTable();
-
-        // Modalni yopish
-        const modalElement = document.getElementById("addCafeModal");
-        const modal = bootstrap.Modal.getInstance(modalElement);
+        const modal = bootstrap.Modal.getInstance(addCafeModal);
         modal.hide();
+        showSuccessMessage("Kafe muvaffaqiyatli qo'shildi");
+        loadCafes();
+    } catch (error) {
+        console.error('Xatolik:', error);
+        showErrorMessage('Kafe qo\'shilmadi');
+    } finally {
+        hideLoader();
+    }
+}
 
-        // Muvaffaqiyatli xabar ko'rsatish
-        showSuccessMessage("Kafe muvaffaqiyatli saqlandi");
-    });
+// Kafeni yangilash
+async function updateCafe(event) {
+    event.preventDefault();
+    showLoader();
+    
+    const id = document.getElementById("editCafeId").value;
+    const cafeData = {
+        name: document.getElementById("editCafeName").value,
+        tariffId: document.getElementById("editCafeTariff").value,
+        ownerName: document.getElementById("editCafeAddress").value,
+        email: document.getElementById("editCafeEmail").value,
+        phone: document.getElementById("editCafePhone").value
+    };
 
-    // O'chirish tasdiqlash tugmasi uchun hodisa qo'shish
+    try {
+        const response = await fetch(`${API_URL}/api/crud/kafes/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                ...getAuthHeaders()
+            },
+            body: JSON.stringify(cafeData)
+        });
+
+        if (!response.ok) throw new Error('Kafe yangilanmadi');
+
+        const modal = bootstrap.Modal.getInstance(editCafeModal);
+        modal.hide();
+        showSuccessMessage("Kafe muvaffaqiyatli yangilandi");
+        loadCafes();
+    } catch (error) {
+        console.error('Xatolik:', error);
+        showErrorMessage('Kafe yangilanmadi');
+    } finally {
+        hideLoader();
+    }
+}
+
+// Kafeni o'chirish
+async function deleteCafe(id) {
+    showLoader();
+    try {
+        const response = await fetch(`${API_URL}/api/crud/kafes/${id}`, {
+            method: 'DELETE',
+            headers: getAuthHeaders()
+        });
+
+        if (!response.ok) throw new Error('Kafe o\'chirilmadi');
+
+        const modal = bootstrap.Modal.getInstance(deleteConfirmModal);
+        modal.hide();
+        showSuccessMessage("Kafe muvaffaqiyatli o'chirildi");
+        loadCafes();
+    } catch (error) {
+        console.error('Xatolik:', error);
+        showErrorMessage('Kafe o\'chirilmadi');
+    } finally {
+        hideLoader();
+    }
+}
+
+// Sahifa yuklanganda
+document.addEventListener("DOMContentLoaded", async () => {
+    await verify()
+    loadCafes();
+    loadTariffs();
+
+    // Form submit hodisalari
+    document.getElementById("addCafeBtn").addEventListener("click", addCafe);
+    document.getElementById("updateCafeBtn").addEventListener("click", updateCafe);
+    
+    // O'chirish tasdiqlash
     document.getElementById("confirmDeleteBtn").addEventListener("click", () => {
-        const type = confirmDeleteBtn.dataset.type;
-        const id = Number.parseInt(confirmDeleteBtn.dataset.id);
-
-        if (type === "cafe") {
-            // Kafeni o'chirish
-            const index = cafes.findIndex((c) => c.id === id);
-            if (index !== -1) {
-                cafes.splice(index, 1);
-                updateCafesTable();
-                showSuccessMessage("Kafe muvaffaqiyatli o'chirildi");
-            }
-        }
-
-        // Modalni yopish
-        const modalElement = document.getElementById("deleteConfirmModal");
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        modal.hide();
+        const id = document.getElementById("confirmDeleteBtn").dataset.id;
+        deleteCafe(id);
     });
 });
 

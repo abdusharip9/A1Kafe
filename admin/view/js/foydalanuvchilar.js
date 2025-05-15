@@ -1,33 +1,9 @@
-// Foydalanuvchilar ma'lumotlarini saqlash uchun massiv
-let users = [
-    {
-        id: 1,
-        fullName: "Admin Adminov",
-        email: "admin@example.com",
-        phone: "+998 90 123 45 67",
-        role: "admin",
-        createdAt: "2024-02-20",
-        permissions: ["view_tariffs", "edit_tariffs", "view_features", "edit_features"]
-    },
-    {
-        id: 2,
-        fullName: "Manager Managerov",
-        email: "manager@example.com",
-        phone: "+998 90 123 45 68",
-        role: "manager",
-        createdAt: "2024-02-20",
-        permissions: ["view_tariffs", "view_features"]
-    },
-    {
-        id: 3,
-        fullName: "User Userov",
-        email: "user@example.com",
-        phone: "+998 90 123 45 69",
-        role: "user",
-        createdAt: "2024-02-20",
-        permissions: ["view_tariffs"]
-    },
-];
+import { verify } from '../../js/verify-token.js'
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const userData = await verify()
+    console.log(userData)
+})
 
 // DOM elementlarini olish
 const userTableBody = document.getElementById("userTableBody");
@@ -100,80 +76,80 @@ function populatePermissions() {
     });
 }
 
-// Foydalanuvchilar jadvalini yangilash
-function updateUsersTable() {
-    userTableBody.innerHTML = "";
+// // Foydalanuvchilar jadvalini yangilash
+// function updateUsersTable() {
+//     userTableBody.innerHTML = "";
 
-    users.forEach((user) => {
-        const row = document.createElement("tr");
+//     users.forEach((user) => {
+//         const row = document.createElement("tr");
 
-        // Rol nomini o'zbekcha ko'rinishda olish
-        let roleText = "";
-        switch (user.role) {
-            case "admin":
-                roleText = "Administrator";
-                break;
-            case "manager":
-                roleText = "Menejer";
-                break;
-            case "user":
-                roleText = "Foydalanuvchi";
-                break;
-        }
+//         // Rol nomini o'zbekcha ko'rinishda olish
+//         let roleText = "";
+//         switch (user.role) {
+//             case "admin":
+//                 roleText = "Administrator";
+//                 break;
+//             case "manager":
+//                 roleText = "Menejer";
+//                 break;
+//             case "user":
+//                 roleText = "Foydalanuvchi";
+//                 break;
+//         }
 
-        row.innerHTML = `
-            <td>${user.id}</td>
-            <td>${user.fullName}</td>
-            <td>${roleText}</td>
-            <td>${user.email}</td>
-            <td>••••••••</td>
-            <td>${user.permissions.length} ta</td>
-            <td>
-                <button class="btn btn-sm btn-primary btn-action edit-user-btn" data-id="${user.id}">
-                    <i class="bi bi-pencil"></i>
-                </button>
-                <button class="btn btn-sm btn-danger btn-action delete-user-btn" data-id="${user.id}">
-                    <i class="bi bi-trash"></i>
-                </button>
-            </td>
-        `;
+//         row.innerHTML = `
+//             <td>${user.id}</td>
+//             <td>${user.fullName}</td>
+//             <td>${roleText}</td>
+//             <td>${user.email}</td>
+//             <td>••••••••</td>
+//             <td>${user.permissions.length} ta</td>
+//             <td>
+//                 <button class="btn btn-sm btn-primary btn-action edit-user-btn" data-id="${user.id}">
+//                     <i class="bi bi-pencil"></i>
+//                 </button>
+//                 <button class="btn btn-sm btn-danger btn-action delete-user-btn" data-id="${user.id}">
+//                     <i class="bi bi-trash"></i>
+//                 </button>
+//             </td>
+//         `;
 
-        userTableBody.appendChild(row);
-    });
+//         userTableBody.appendChild(row);
+//     });
 
-    // Edit tugmalariga hodisa qo'shish
-    document.querySelectorAll(".edit-user-btn").forEach((btn) => {
-        btn.addEventListener("click", () => editUser(Number.parseInt(btn.dataset.id)));
-    });
+//     // Edit tugmalariga hodisa qo'shish
+//     document.querySelectorAll(".edit-user-btn").forEach((btn) => {
+//         btn.addEventListener("click", () => editUser(Number.parseInt(btn.dataset.id)));
+//     });
 
-    // Delete tugmalariga hodisa qo'shish
-    document.querySelectorAll(".delete-user-btn").forEach((btn) => {
-        btn.addEventListener("click", () => showDeleteUserConfirmation(Number.parseInt(btn.dataset.id)));
-    });
-}
+//     // Delete tugmalariga hodisa qo'shish
+//     document.querySelectorAll(".delete-user-btn").forEach((btn) => {
+//         btn.addEventListener("click", () => showDeleteUserConfirmation(Number.parseInt(btn.dataset.id)));
+//     });
+// }
 
 // Foydalanuvchini tahrirlash
-function editUser(id) {
-    const user = users.find((u) => u.id === id);
-    if (!user) return;
+// function editUser(id) {
+//     const user = users.find((u) => u.id === id);
+//     if (!user) return;
 
-    modalTitle.textContent = "Foydalanuvchini tahrirlash";
-    userIdInput.value = user.id;
-    userFullNameInput.value = user.fullName;
-    userEmailInput.value = user.email;
-    userRoleSelect.value = user.role;
+//     modalTitle.textContent = "Foydalanuvchini tahrirlash";
+//     userIdInput.value = user.id;
+//     userFullNameInput.value = user.fullName;
+//     userEmailInput.value = user.email;
+//     userRoleSelect.value = user.role;
 
-    // Huquqlarni tanlash
-    const checkboxes = userPermissionsList.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = user.permissions.includes(checkbox.value);
-    });
+//     // Huquqlarni tanlash
+//     const checkboxes = userPermissionsList.querySelectorAll('input[type="checkbox"]');
+//     checkboxes.forEach(checkbox => {
+//         checkbox.checked = user.permissions.includes(checkbox.value);
+//     });
 
-    // Modalni ochish
-    const modalElement = document.getElementById("addUserModal");
-    const modal = new bootstrap.Modal(modalElement);
-    modal.show();
-}
+//     // Modalni ochish
+//     const modalElement = document.getElementById("addUserModal");
+//     const modal = new bootstrap.Modal(modalElement);
+//     modal.show();
+// }
 
 // Foydalanuvchini o'chirish tasdiqlash modalni ko'rsatish
 function showDeleteUserConfirmation(id) {
@@ -201,22 +177,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // Foydalanuvchi xususiyatlarini to'ldirish
     populatePermissions();
 
-    // Jadvallarni yangilash
-    updateUsersTable();
+    // // Yangi foydalanuvchi qo'shish modalni ochish
+    // document.querySelector('[data-bs-target="#addUserModal"]').addEventListener("click", () => {
+    //     modalTitle.textContent = "Yangi foydalanuvchi qo'shish";
+    //     userForm.reset();
+    //     userIdInput.value = "";
+    //     userRoleSelect.value = ""; // Ro'l tanlashni tozalash
 
-    // Yangi foydalanuvchi qo'shish modalni ochish
-    document.querySelector('[data-bs-target="#addUserModal"]').addEventListener("click", () => {
-        modalTitle.textContent = "Yangi foydalanuvchi qo'shish";
-        userForm.reset();
-        userIdInput.value = "";
-        userRoleSelect.value = ""; // Ro'l tanlashni tozalash
-
-        // Huquqlarni tozalash
-        const checkboxes = userPermissionsList.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false;
-        });
-    });
+    //     // Huquqlarni tozalash
+    //     const checkboxes = userPermissionsList.querySelectorAll('input[type="checkbox"]');
+    //     checkboxes.forEach(checkbox => {
+    //         checkbox.checked = false;
+    //     });
+    // });
 
     // Saqlash tugmasi uchun hodisa qo'shish
     document.getElementById("saveUserBtn").addEventListener("click", () => {
@@ -298,4 +271,206 @@ function showErrorMessage(message) {
     toastMessage.textContent = message;
     const bsToast = new bootstrap.Toast(toast);
     bsToast.show();
+}
+
+// Show loading state in table - colspan ni 8 ga o'zgartirish
+function showTableLoader() {
+    const tableBody = document.getElementById('userTableBody');
+    tableBody.innerHTML = `
+        <tr>
+            <td colspan="8" class="text-center py-4">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="spinner-border text-primary me-2" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span>Ma'lumotlar yuklanmoqda...</span>
+                </div>
+            </td>
+        </tr>
+    `;
+}
+
+// Fetch function da error state uchun ham colspan ni o'zgartirish
+async function fetchUsers() {
+    // Show loader first
+    showTableLoader();
+    
+    try {
+        const response = await fetch('http://localhost:3000/api/crud/getUsers');
+        const users = await response.json();
+        displayUsers(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        showError('Foydalanuvchilarni yuklashda xatolik yuz berdi!');
+        
+        // Show error state in table
+        const tableBody = document.getElementById('userTableBody');
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="8" class="text-center py-4 text-danger">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Xatolik yuz berdi. Ma'lumotlarni yuklab bo'lmadi.
+                </td>
+            </tr>
+        `;
+    }
+}
+
+function displayUsers(users) {
+    const tableBody = document.getElementById('userTableBody');
+    tableBody.innerHTML = ''; // Clear existing rows
+
+    // If no users found
+    if (!users || users.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="8" class="text-center py-4 text-muted">
+                    <i class="bi bi-info-circle me-2"></i>
+                    Hech qanday foydalanuvchi topilmadi.
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    users.forEach((user, index) => {
+        const row = document.createElement('tr');
+        
+        // Handle multiple cafes
+        const cafeNames = user.cafes && user.cafes.length > 0 ? 
+            user.cafes.map(cafe => cafe.name).join(', ') : '-';
+        
+        const cafeStatuses = user.cafes && user.cafes.length > 0 ? 
+            user.cafes.map(cafe => 
+                `<span class="badge ${cafe.status === 'active' ? 'bg-success' : 'bg-danger'} me-1">${cafe.status === 'active' ? 'Faol' : 'Faol emas'}</span>`
+            ).join('') : '-';
+
+        // Handle tariff information
+        const cafeTariffs = user.cafes && user.cafes.length > 0 ?
+            user.cafes.map(cafe => 
+                cafe.tariff ? 
+                    `<span class="badge bg-info text-dark me-1">${cafe.tariff.name}</span>` : 
+                    '<span class="badge bg-secondary me-1">Tanlanmagan</span>'
+            ).join('') : '-';
+
+        // Amallar ustunini olib tashlash
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${user.firstName} ${user.lastName}</td>
+            <td><span class="badge ${user.role === 'admin' ? 'bg-danger' : 'bg-primary'}">${user.role}</span></td>
+            <td>${user.email}</td>
+            <td>${user.password}</td>
+            <td>${cafeNames}</td>
+            <td>${cafeStatuses}</td>
+            <td>${cafeTariffs}</td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
+// Show success message
+function showSuccess(message) {
+    const successToast = document.getElementById('successToast');
+    const successToastMessage = document.getElementById('successToastMessage');
+    successToastMessage.textContent = message;
+    const bsSuccessToast = new bootstrap.Toast(successToast);
+    bsSuccessToast.show();
+}
+
+// Show error message
+function showError(message) {
+    const errorToast = document.getElementById('errorToast');
+    const errorToastMessage = document.getElementById('errorToastMessage');
+    errorToastMessage.textContent = message;
+    const bsErrorToast = new bootstrap.Toast(errorToast);
+    bsErrorToast.show();
+}
+
+// Edit user function
+function editUser(userId) {
+    // TODO: Implement edit functionality
+    console.log('Edit user:', userId);
+}
+
+// Delete user function
+function deleteUser(userId) {
+    const deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const deleteConfirmText = document.getElementById('deleteConfirmText');
+    
+    deleteConfirmText.textContent = 'Siz rostdan ham bu foydalanuvchini o\'chirmoqchimisiz?';
+    
+    confirmDeleteBtn.onclick = async () => {
+        try {
+            // TODO: Implement delete API call
+            // await fetch(`http://localhost:3000/api/users/${userId}`, { method: 'DELETE' });
+            deleteModal.hide();
+            showSuccess('Foydalanuvchi muvaffaqiyatli o\'chirildi!');
+            fetchUsers(); // This will now show the loader
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            showError('Foydalanuvchini o\'chirishda xatolik yuz berdi!');
+        }
+    };
+    
+    deleteModal.show();
+}
+
+// Initialize the page
+document.addEventListener('DOMContentLoaded', () => {
+    fetchUsers();
+});
+
+// Mobile card da action buttons ni yashirish
+function generateUserCard(user, index) {
+    // ... existing code for cafes and tariffs ...
+
+    return `
+        <div class="user-card">
+            <div class="user-card-header">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">${user.firstName} ${user.lastName}</h6>
+                    <span class="badge ${user.role === 'admin' ? 'bg-danger' : 'bg-primary'}">${user.role}</span>
+                </div>
+            </div>
+            <div class="user-card-body">
+                <div class="user-info-row">
+                    <span class="user-info-label">ID:</span>
+                    <span class="user-info-value">${index + 1}</span>
+                </div>
+                <div class="user-info-row">
+                    <span class="user-info-label">Login:</span>
+                    <span class="user-info-value">${user.email}</span>
+                </div>
+                <div class="user-info-row">
+                    <span class="user-info-label">Parol:</span>
+                    <span class="user-info-value">${user.password}</span>
+                </div>
+                <div class="user-info-row">
+                    <span class="user-info-label">Kafe:</span>
+                    <span class="user-info-value">${cafeNames}</span>
+                </div>
+                <div class="user-info-row">
+                    <span class="user-info-label">Holati:</span>
+                    <span class="user-info-value">${cafeStatuses}</span>
+                </div>
+                <div class="user-info-row">
+                    <span class="user-info-label">Tarifi:</span>
+                    <span class="user-info-value">${cafeTariffs}</span>
+                </div>
+                <!-- Action buttons ni yashirish -->
+                <!--
+                <div class="card-actions">
+                    <button class="btn btn-sm btn-primary me-2" onclick="editUser('${user._id}')">
+                        <i class="bi bi-pencil me-1"></i>Tahrirlash
+                    </button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteUser('${user._id}')">
+                        <i class="bi bi-trash me-1"></i>O'chirish
+                    </button>
+                </div>
+                -->
+            </div>
+        </div>
+    `;
 } 

@@ -23,10 +23,10 @@ document.getElementById('loginForm').onsubmit = async function (event) {
 		localStorage.setItem('accessToken', data.data.accessToken)
 		localStorage.setItem('id', data.data.user.id)
 
-		if (data.data.user.role === 'admin') {
-			window.location.href = '/admin-page.html'
-		} else {
+		if (data.data.user.role === 'user') {
 			window.location.href = '/kafelar.html'
+		} else if (data.data.user.role === 'admin') {
+			window.location.href = '/admin/login.html'
 		}
 	} else {
 		data.errors.forEach(error => {
