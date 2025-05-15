@@ -8,11 +8,11 @@ accusoft:
     - accusoft
   label: Accusoft
   url: 'https://www.accusoft.com'
-administrator-technology:
+Tizim administratori-technology:
   icons:
     - bars-staggered
-  label: Administrator Technology
-  url: 'https://administrator.de'
+  label: Tizim administratori Technology
+  url: 'https://Tizim administratori.de'
 adversal:
   icons:
     - adversal

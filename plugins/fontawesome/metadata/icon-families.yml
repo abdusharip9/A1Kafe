@@ -5025,7 +5025,7 @@ black-tie:
   label: Font Awesome Black Tie
   search:
     terms:
-      - administrator
+      - Tizim administratori
   unicode: f27e
   voted: false
 blackberry:
@@ -53533,7 +53533,7 @@ user-tie:
   label: User Tie
   search:
     terms:
-      - administrator
+      - Tizim administratori
       - avatar
       - business
       - clothing

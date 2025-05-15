@@ -2,7 +2,7 @@
 let roles = [
     {
         id: 1,
-        name: "Administrator",
+        name: "Tizim administratori",
         description: "Tizim boshqaruvchisi",
         permissions: ["all"],
         createdAt: "2024-02-20",
@@ -27,7 +27,7 @@ let roles = [
 let users = [
     {
       id: 1,
-      name: "Adminbek Adminov",
+      name: "Admin",
       role: "admin",
       login: "admin",
       password: "admin123",

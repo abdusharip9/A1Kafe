@@ -21,7 +21,7 @@ const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
 // Ro'llar ro'yxatini to'ldirish
 function populateRoles() {
     const roles = [
-        { value: "admin", label: "Administrator" },
+        { value: "admin", label: "Tizim administratori" },
         { value: "manager", label: "Menejer" },
         { value: "user", label: "Foydalanuvchi" }
     ];
@@ -87,7 +87,7 @@ function populatePermissions() {
 //         let roleText = "";
 //         switch (user.role) {
 //             case "admin":
-//                 roleText = "Administrator";
+//                 roleText = "Tizim administratori";
 //                 break;
 //             case "manager":
 //                 roleText = "Menejer";

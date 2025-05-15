@@ -4151,7 +4151,7 @@ black-tie:
   label: Font Awesome Black Tie
   search:
     terms:
-      - administrator
+      - Tizim administratori
   styles:
     - brands
   unicode: f27e
@@ -44183,7 +44183,7 @@ user-tie:
   label: User Tie
   search:
     terms:
-      - administrator
+      - Tizim administratori
       - avatar
       - business
       - clothing

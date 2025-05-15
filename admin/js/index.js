@@ -31,7 +31,7 @@ function updateUserInfo(user) {
 				let roleText = ''
 				switch (user.role.toLowerCase()) {
 						case 'admin':
-								roleText = 'Administrator'
+								roleText = 'Tizim administratori'
 								break
 						case 'manager':
 								roleText = 'Menejer'
