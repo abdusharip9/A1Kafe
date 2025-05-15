@@ -7,20 +7,6 @@ let roles = [
         permissions: ["all"],
         createdAt: "2024-02-20",
     },
-    {
-        id: 2,
-        name: "Menejer",
-        description: "Kafe menejeri",
-        permissions: ["view_cafes", "edit_cafes", "view_users", "edit_users"],
-        createdAt: "2024-02-20",
-    },
-    {
-        id: 3,
-        name: "Foydalanuvchi",
-        description: "Oddiy foydalanuvchi",
-        permissions: ["view_cafes"],
-        createdAt: "2024-02-20",
-    },
 ];
 
 // Foydalanuvchilar ma'lumotlarini saqlash uchun massiv
@@ -47,31 +33,7 @@ let users = [
       settings: {
         theme: "light",
       },
-    },
-    {
-      id: 2,
-      name: "Menejerbek Menejerov",
-      role: "manager",
-      login: "manager",
-      password: "manager123",
-      permissions: ["view_tariffs", "edit_tariffs", "view_features", "view_cafes", "edit_cafes", "view_reports"],
-      createdAt: "2023-02-15",
-      settings: {
-        theme: "light",
-      },
-    },
-    {
-      id: 3,
-      name: "Foydalanuvchiev Foydalanuvchi",
-      role: "user",
-      login: "user",
-      password: "user123",
-      permissions: ["view_tariffs", "view_cafes"],
-      createdAt: "2023-03-20",
-      settings: {
-        theme: "light",
-      },
-    },
+    }
   ]
 
 // DOM elementlarini olish

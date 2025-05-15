@@ -6,9 +6,9 @@ const changePasswordBtn = document.getElementById("changePasswordBtn");
 
 // Profil ma'lumotlarini saqlash
 let profile = {
-    fullName: "Admin Adminov",
-    email: "admin@example.com",
-    phone: "+998 90 123 45 67",
+    fullName: " ",
+    email: " ",
+    phone: " ",
 };
 
 // Profil ma'lumotlarini yangilash
